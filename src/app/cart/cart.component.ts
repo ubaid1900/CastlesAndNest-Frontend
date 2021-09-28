@@ -4,9 +4,7 @@ import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Book } from '../models/book';
 import { Cart, CartItem, CartItemType, Offer } from '../models/offer';
-import { BookService } from '../services/book.service';
 import { CartService } from '../services/cart.service';
-import { OfferService } from '../services/offer.service';
 import { ShippingService } from '../services/shipping.service';
 
 @Component({
