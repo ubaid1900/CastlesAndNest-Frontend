@@ -1,0 +1,58 @@
+<ng-template #loading><app-spinner></app-spinner></ng-template>
+<div *ngIf="user$ | async as user; else loading" class="container card bg-light" style="width: 36rem;">
+  <main>
+    <div class="row g-5">
+      <div class="col-md col-lg">
+        <h4 class="mb-3">Update your profile, <span class="text-success fs-3">{{user.email}}</span></h4>
+        <form class="needs-validation" [id]="user.email" novalidate="" [formGroup]="userFormGroup"
+          (ngSubmit)="save(user.email)">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">First name</label>
+              <input type="text" class="form-control" id="firstName" formControlName="firstname" placeholder="" value=""
+                required="">
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label">Last name</label>
+              <input type="text" class="form-control" id="lastName" formControlName="lastname" placeholder="" value=""
+                >
+            </div>
+
+            <div class="col-sm-6">
+              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <input type="phone" class="form-control" id="phoneNumber" formControlName="phoneNumber" placeholder=""
+                value="" required="">
+              <div class="invalid-feedback">
+                Valid phone number is required.
+              </div>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit" [disabled]="!userFormGroup.valid">Save</button>
+            </div>
+            <div class="col-12">
+              <button type="button" class="btn btn-secondary" (click)="showAddressDialog(0)">Add an address</button>
+            </div><br />
+            <ng-container *ngIf="user.addresses && user.addresses.length">
+              <hr class="my-4">
+              <ng-container *ngFor="let address of user.addresses; let i=index; let odd=odd; let evenIndex=even;">
+                <div class="col-12">
+                  <address>
+                    {{address.streetnumber}}<br>{{address.streetname}}<br>{{address.city}}<br>{{address.state}}<br>{{address.zip}}
+                  </address>
+                  <button type="button" class="btn btn-secondary" (click)="showAddressDialog(address.id)">Update
+                    address</button>
+                </div>
+              </ng-container>
+              <hr class="my-4">
+            </ng-container>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>

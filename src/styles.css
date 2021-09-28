@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  filter: invert(1);
+}
+
+carousel-control-next,
+carousel-control-prev {
+  filter: invert(1);
+}
+
+.text-logo-green {
+  color: #03a452 !important;
+  font-weight: 700 !important;
+}
+.text-logo-pink {
+  color: #eb008b !important;
+  font-weight: 700 !important;
+}
+.text-logo-blue {
+  color: #303092 !important;
+  font-weight: 700 !important;
+}
+.text-wheat {
+  color: wheat !important;
+}
+.bg-purple {
+  background-color: #6f42c1;
+}
+.bg-logo-green {
+  background-color: #03a452;
+}
+.bg-logo-pink {
+  background-color: #eb008b;
+}
+.bg-logo-blue {
+  background-color: #303092;
+}
+.table-striped > tbody > tr:nth-child(2n + 1) > td,
+.table-striped > tbody > tr:nth-child(2n + 1) > th {
+  background-color: #def1e8;
+}
+.table-striped > thead {
+  background-color: #03a452;
+  color: white;
+}
+.thead {
+  background-color: #03a452;
+  color: white;
+}

@@ -1,0 +1,131 @@
+<ng-template #loading><app-spinner></app-spinner></ng-template>
+<ng-container *ngIf="order$ | async as order else loading">
+    <div class="contaZ ciner bg-light">
+        <div class="card">
+            <div class="card-block mx-3 my-3">
+                <h3 class="h3 card-title">Your Order is Confirmed</h3>
+                <p> An email has been sent to your mail address</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card my-3">
+                    <ul class="confirm-page">
+                        <li>
+                            <h5 class="pt-1 text-underline"><u>Books</u> </h5>
+                        </li>
+                        <li *ngFor="let book of order.bookItems" class="product my-3">
+                            <img *ngIf="book.book.images" src="{{book.book.images[0].imageUrl}}">
+                            {{book.book?.description}} @ {{book.price | currency:"INR"}} * {{book.quantity}} =
+                            {{(book.price * book.quantity) | currency:"INR"}}
+                        </li>
+                        <li *ngFor="let orderOfferItem of order.offerItems">
+                            <h5 class="py-3">{{orderOfferItem.offer.description}}</h5>
+
+                            <img src="{{orderOfferItem.offer.imageUrl}}" class="img-thumbnail img-offerItem"
+                                alt="{{orderOfferItem.offer.description}}">
+                            <h6 class="py-3">Books in offer</h6>
+
+                            <ol>
+                                <li *ngFor="let offer of orderOfferItem.offer.offerItems">
+                                    {{offer.book?.description}} @ {{offer.book?.price | currency:"INR"}}
+
+                                </li>
+                            </ol>
+                            <div class="my-4">Offer price after
+                                <strong>{{orderOfferItem.offer.discountPercentage}}%</strong> discount
+                                {{calculateOfferPrices(orderOfferItem.offer) | currency:"INR"}}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card my-3 py-3 px-3">
+                    <strong>Shipped to:</strong>
+                    <address class="py-3">
+                        {{order.firstname}}
+                        {{order.lastname}}
+                        {{order.shippingAddressStreetnumber}}
+                        {{order.shippingAddressStreetname}}
+                        {{order.shippingAddressCity}}
+                        {{order.shippingAddressState}}
+                        {{order.shippingAddressZip}}
+                    </address>
+                </div>
+                <div class="card my-3 py-3 px-3">
+                    <div class="">
+                        <strong class=""> Billed To:</strong>
+                        <section class="py-3">
+                            {{order.payment?.nameOnCard}}<br>
+                            {{order.payment?.cardNumber}}<br>
+                            {{order.payment?.expiration}}<br>
+                        </section>
+                        <address class="bold">
+                            {{order.billingAddressStreetnumber}}
+                            {{order.billingAddressStreetname}}
+                            {{order.billingAddressCity}}
+                            {{order.billingAddressState}}
+                            {{order.billingAddressZip}}
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--div class="row">
+            <div class="col">Shipped to:
+                <address>
+                    {{order.firstname}}
+                    {{order.lastname}}
+                    {{order.shippingAddressStreetnumber}}
+                    {{order.shippingAddressStreetname}}
+                    {{order.shippingAddressCity}}
+                    {{order.shippingAddressState}}
+                    {{order.shippingAddressZip}}
+                </address>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Billed to
+                <section>
+                    {{order.payment?.nameOnCard}}<br>
+                    {{order.payment?.cardNumber}}<br>
+                    {{order.payment?.expiration}}<br>
+                </section>
+                <address class="bold">
+                    {{order.billingAddressStreetnumber}}
+                    {{order.billingAddressStreetname}}
+                    {{order.billingAddressCity}}
+                    {{order.billingAddressState}}
+                    {{order.billingAddressZip}}
+                </address>
+            </div>
+        </div-->
+        <div class="card ">
+            <div class="row px-3 py-2 border-bottom mx-1">
+                <div class="col-md-5">
+                    <h5>Subtotal</h5>
+                </div>
+                <div class="col-md-6 text-end">
+                    <h5>{{order.subtotal | currency:"INR"}}</h5>
+                </div>
+            </div>
+            <div class="row px-3 py-2 border-bottom mx-1">
+                <div class="col-md-5">
+                    <h5>Shipping & Handling</h5>
+                </div>
+                <div class="col-md-6 text-end">
+                    <h5>{{order.shippingCost | currency:"INR"}}</h5>
+                </div>
+            </div>
+            <div class="row px-3 py-2 mx-1 thead">
+                <div class="col-xs-12 col-md-5">
+                    <h5>Total</h5>
+                </div>
+                <div class="col-xs-12 col-md-6 text-end">
+                    <h5>{{order.subtotal + order.shippingCost | currency:"INR"}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

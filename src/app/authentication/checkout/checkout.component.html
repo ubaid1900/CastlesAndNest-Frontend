@@ -1,0 +1,124 @@
+<ng-template #loading><app-spinner></app-spinner></ng-template>
+<div class="container">
+    <div class="row">
+        <div class="container col-md-7 col-lg-8 bg-light">
+            <form class="needs-validation" #checkoutForm="ngForm" (submit)="placeOrder();">
+                <div *ngIf="user$ | async as user; else loading" class="my-3">
+                    <h2 class="mb-3 text-logo-green">{{user.firstname}} {{user.lastname}}</h2>
+                    <h4 class="mb-3">Billing address</h4>
+                    <ng-container *ngFor="let address of user.addresses">
+                        <div class="form-check">
+                            <input name="billingAddressSelection" type="radio" class="form-check-input"
+                            (change)="billingAddressChanged(address.id)" [checked]="checkedBillingAddressId === address.id"
+                            required="">
+                            <label class="form-check-label" for="credit">
+                                {{address.streetnumber}} {{address.streetname}} {{address.city}} {{address.state}}
+                                {{address.zip}}
+                            </label>
+                        </div>
+                    </ng-container>
+                    <hr class="my-4">
+                    <div class="form-check form-switch">
+                        <input type="checkbox" class="form-check-input" id="same-address"
+                        [checked]="sameAsBillingAddress" (change)="sameAsBillingAddressChanged()">
+                        <label class="form-check-label" for="same-address">Shipping address is the same as my billing
+                            address</label>
+                    </div>
+                    <ng-container *ngIf="!sameAsBillingAddress">
+                        <hr class="my-4">
+                        <h4 class="mb-3">Shipping address</h4>
+                        <div class="my-3">
+                            <ng-container *ngFor="let address of user.addresses">
+                                <div class="form-check">
+                                    <input name="shippingAddressSelection" type="radio"
+                                        class="form-check-input" (change)="shippingAddressChanged(address.id)"
+                                        [checked]="checkedShippingAddressId === address.id"
+                                        required="">
+                                    <address class="form-check-label" for="credit">
+                                        {{address.streetnumber}} {{address.streetname}} {{address.city}}
+                                        {{address.state}}
+                                        {{address.zip}}
+                                    </address>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                    <hr class="my-4">
+                    <div class="my-3">
+                        <button class="btn btn-secondary m-1" [routerLink]="['/user/profile']"
+                            [queryParams]="{ returnUrl: '/user/checkout' }">Add/Update Address</button>
+                        <button class="btn btn-secondary m-1" [routerLink]="['/user/profile']"
+                            [queryParams]="{ returnUrl: '/user/checkout' }">Update Profile</button>
+                    </div>
+                </div>
+
+                <h4 class="mb-3">Payment</h4>
+
+                <div class="my-3">
+                    <div class="form-check">
+                        <input name="paymentMethod" type="radio" class="form-check-input" checked=""
+                            required="" (change)="paymentMethodChanged(paymentMethod.CreditCard);">
+                        <label class="form-check-label" for="credit">Credit card</label>
+                    </div>
+                    <div class="form-check">
+                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required=""
+                            (change)="paymentMethodChanged(paymentMethod.DebitCard);">
+                        <label class="form-check-label" for="debit">Debit card</label>
+                    </div>
+                    <div class="form-check">
+                        <input id="upi" name="paymentMethod" type="radio" class="form-check-input" required=""
+                            (change)="paymentMethodChanged(paymentMethod.UPI);">
+                        <label class="form-check-label" for="upi">UPI</label>
+                    </div>
+                </div>
+
+                <div class="row gy-3">
+                    <div class="col-md-6">
+                        <label for="cc-name" class="form-label">Name on card</label>
+                        <input type="text" class="form-control" id="cc-name" name="cc-name" placeholder="" required=""
+                            [(ngModel)]="payment.nameOnCard">
+                        <small class="text-muted">Full name as displayed on card</small>
+                        <div class="invalid-feedback">
+                            Name on card is required
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="cc-number" class="form-label">Credit card number</label>
+                        <input type="text" class="form-control" id="cc-number" name="cc-number" placeholder=""
+                            required="" [(ngModel)]="payment.cardNumber" ccNumber>
+                        <div class="invalid-feedback">
+                            Credit card number is required
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="cc-expiration" class="form-label">Expiration</label>
+                        <input type="text" class="form-control" id="cc-expiration" name="cc-expiration" placeholder=""
+                            required="" [(ngModel)]="payment.expiration" ccExp>
+                        <div class="invalid-feedback">
+                            Expiration date required
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="cc-cvv" class="form-label">CVV</label>
+                        <input type="text" class="form-control" id="cc-cvv" name="cc-cvv" placeholder="" required=""
+                            [(ngModel)]="payment.cVV" ccCVC>
+                        <div class="invalid-feedback">
+                            Security code required
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <button class="w-100 btn btn-primary btn-lg" type="submit"
+                    [disabled]="checkoutForm.invalid || !checkedBillingAddressId || !checkedShippingAddressId 
+                    || checkedBillingAddressId === 0 || checkedShippingAddressId === 0">Place
+                    your Order</button>
+            </form>
+        </div>
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <app-cart-summary [cart$]="cart$"></app-cart-summary>
+        </div>
+    </div>
+</div>

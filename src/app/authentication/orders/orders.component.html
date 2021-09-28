@@ -1,0 +1,74 @@
+<ng-template #loading><app-spinner></app-spinner></ng-template>
+<div class="container bg-light" *ngIf="orders$ | async as orders else loading">
+    <div *ngIf="!orders.length">
+        <div class="p-3 mb-3 bg-warning text-dark">No orders were found for the specified filter</div>
+    </div>
+    <form class="mb-2 pb-2" id="filters" (submit)="applyFilter()">
+        <div class="row py-3">
+            <div *ngIf="authenticationService.isUserAdmin()" class="">
+                <div class="col-md-3">
+                <label for="userSelect" class="col-form-label">Customer Id</label>
+                </div>
+                <div class="col-md-8">
+                <select class="form-select mb-4" style="width:43% ;" name="userSelect" [(ngModel)]="orderFilter.userId" *ngIf="users$ | async as users; else loading">
+                    <option>All</option>
+                    <option *ngFor="let user of users" value="{{user.email}}">{{user.email}}</option>
+                </select>
+                </div>
+            </div>
+            <div class="col-auto">
+                <label for="daterange" class="col-form-label">Date Range</label>
+            </div>
+            <div class="col-auto">
+                <input type="date" class="form-control" name="dateRangeStart" [(ngModel)]="orderFilter.dateRange.start">
+            </div>
+            <div class="col-auto">
+                <label for="daterange " class="col-form-label">To</label>
+            </div>
+            <div class="col-auto">
+            <input type="date" class="form-control " name="dateRangeEnd" [(ngModel)]="orderFilter.dateRange.end">
+            </div>
+            <div class="col-md-2 collapse">
+                <label class="col-form-label">Date Range shortcuts</label>
+                <nav class="nav flex-column">
+                    <a class="btn btn-outline-primary btn-xs">Today</a>
+                    <a class="btn btn-outline-primary btn-xs">Past week</a>
+                    <a class="btn btn-outline-primary btn-xs">Past month</a>
+                    <a class="btn btn-outline-primary btn-xs">Past year</a>
+                </nav>
+            </div>
+        </div>
+        <div class="col my-1">
+            <button type="submit" class="btn btn-secondary">Filter</button>
+        </div>
+    </form>
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="orders">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Description</th>
+                <th>Summary</th>
+                <th>Customer name</th>
+                <th>Placed on</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td>
+                    <!-- <img height="100" width="100" src="{{order.imageUrl}}" /> -->
+                </td>
+                <td> <a href="user/order/{{order.id}}">Order # {{order.bookItems.length ?
+                        order.bookItems[0]?.book?.description : order.offerItems[0]?.offer?.description}}</a>
+                </td>
+                <td>{{order.bookItems.length ? order.bookItems[0]?.book?.description :
+                    order.offerItems[0]?.offer?.description}}
+                    {{order.bookItems.length + order.offerItems.length > 1 ?
+                    'plus ' + (order.bookItems.length + order.offerItems.length - 1) + ' other item(s)' : ''}}</td>
+                <td>{{order.firstname}} {{order.lastname}}</td>
+                <td>{{ order.date | date }}</td>
+                <td>{{ order.subtotal + order.shippingCost | currency:"INR" }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

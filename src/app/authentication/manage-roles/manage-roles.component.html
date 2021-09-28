@@ -1,0 +1,21 @@
+<ng-template #loading><app-spinner></app-spinner></ng-template>
+<div class="container card bg-light" style="width: 36rem;" *ngIf="allUsers$ | async as users; else loading">
+    <p class="text-secondary">Once logged in, the user will appear here to be made admin.</p>
+    <table class='table table-striped' aria-labelledby="tableLabel">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Is Administrator</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users" class="form-switch">
+                <td>{{ user.email }}</td>
+                <td>
+                    <input class="form-check-input" name="{{user.email}}" type="checkbox" [ngModel]="user.isAdmin"
+                        (change)="updateAdminStatus(user.email, $event)">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
