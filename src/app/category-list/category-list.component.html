@@ -1,0 +1,11 @@
+<ng-template #loading>
+    <app-spinner></app-spinner>
+</ng-template>
+<div *ngIf="categories$ | async as categories; else loading" class="container card bg-light" style="width: 36rem;">
+    <div class="row" *ngFor="let category of categories">
+        <div class="col"><a href="category/{{category.id}}">{{category.name}}</a></div>
+        <div *ngIf="authenticationService.isUserAdmin()" class="col"><a href="admin/category/edit/{{category.id}}">Edit</a></div>
+    </div>
+    <br>
+    <a *ngIf="authenticationService.isUserAdmin()" href="admin/category/edit/0">Add a Category</a>
+</div>

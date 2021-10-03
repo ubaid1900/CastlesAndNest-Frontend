@@ -9,16 +9,21 @@ import { ManageRolesComponent } from '../authentication/manage-roles/manage-role
 import { SharedModule } from '../shared/shared.module';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductResolver } from './product.resolver';
+import { CategoryEditComponent } from './category-edit/category-edit.component';
+import { CategoryResolver } from './category.resolver';
+import { SubCategoryEditComponent } from './sub-category-edit/sub-category-edit.component';
+import { SubCategoryResolver } from './subcategory.resolver';
 
 
 
 @NgModule({
-  declarations: [AddressEditComponent, ProductEditComponent],
+  declarations: [AddressEditComponent, ProductEditComponent, CategoryEditComponent, SubCategoryEditComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
-      {path:'product/edit/:id', component: ProductEditComponent, resolve: {book: ProductResolver} },
-      // {path:'product/edit/:id', component: ProductEditComponent, canActivate: [AdminGuard], resolve: {book: ProductResolver} },
+      {path:'subcategory/edit/:id', component: SubCategoryEditComponent, canActivate: [AdminGuard], resolve: {subcategory: SubCategoryResolver} },
+      {path:'category/edit/:id', component: CategoryEditComponent, canActivate: [AdminGuard], resolve: {category: CategoryResolver} },
+      {path:'product/edit/:id', component: ProductEditComponent, canActivate: [AdminGuard], resolve: {product: ProductResolver} },
       {path: 'manageroles', component: ManageRolesComponent, canActivate: [AdminGuard]}
     ]),
     FormsModule,

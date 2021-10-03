@@ -1,0 +1,11 @@
+<ng-template #loading>
+    <app-spinner></app-spinner>
+</ng-template>
+<div *ngIf="subCategories$ | async as subCategories; else loading" class="container card bg-light" style="width: 36rem;">
+    <div class="row" *ngFor="let subcategory of subCategories">
+        <div class="col"><a href="subcategory/{{subcategory.id}}">{{subcategory.name}}</a></div>
+        <div *ngIf="authenticationService.isUserAdmin()" class="col"><a href="admin/subcategory/edit/{{subcategory.id}}">Edit</a></div>
+    </div>
+    <br>
+    <a *ngIf="authenticationService.isUserAdmin()" href="admin/subcategory/edit/0">Add a Category</a>
+</div>

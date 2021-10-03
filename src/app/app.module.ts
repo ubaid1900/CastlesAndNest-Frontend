@@ -18,6 +18,8 @@ import { SortableDirective } from './sortable.directive';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 import { RestInterceptor } from './rest.interceptor';
 import { SharedModule } from './shared/shared.module';
+import { CategoryListComponent } from './category-list/category-list.component';
+import { SubCategoryListComponent } from './sub-category-list/sub-category-list.component';
 
 
 export function tokenGetter() {
@@ -31,7 +33,9 @@ export function tokenGetter() {
     HomeComponent,
     FooterComponent,
     SortableDirective,
-    ToastsContainerComponent
+    ToastsContainerComponent,
+    CategoryListComponent,
+    SubCategoryListComponent
   ],
   imports: [
     BrowserModule,
