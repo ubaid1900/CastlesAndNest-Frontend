@@ -2,11 +2,6 @@ export interface Book {
     id: number;
     title: string;
     description: string;
-    iSBN: string;
-    gradeId: number;
-    grade?: Grade;
-    subjectId: number;
-    subject?: Subject;
     price: number;
     type: string;
     authorId: number;
