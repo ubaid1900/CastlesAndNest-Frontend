@@ -10,13 +10,13 @@ export interface Product {
     reorderLevel: number;
     color: string;
     length: number;
-    lengthUnit: Unit;
+    lengthUnit: string;
     width: number;
-    widthUnit: Unit;
+    widthUnit: string;
     height: number;
-    heightUnit: Unit;
+    heightUnit: string;
     weight: number;
-    weightUnit: Unit;
+    weightUnit: string;
     amazonLink: string;
     flipkartLink: string;
     images: ProductImage[];
@@ -30,12 +30,9 @@ export interface ProductImage {
     productId: number;
     imageUrl: string;
 }
-export enum Unit {
-    Meter,
-    Centimeter,
-    Millimeter,
-    Inch,
-    Feet,
-    Gram,
-    Kilogram
+
+export interface Unit {
+    name: string;
+    displayName: string;
+    type: string;
 }

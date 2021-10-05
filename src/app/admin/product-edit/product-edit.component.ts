@@ -3,29 +3,39 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category, SubCategory } from 'src/app/models/category';
-import { Product } from 'src/app/models/Product';
+import { Product, Unit } from 'src/app/models/Product';
 import { ProductService } from 'src/app/product.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
-
+export enum ConditionalOperator {
+  Equals = "Equals",
+  NEquals = "NEquals",
+  GT = "GT",
+  GTE = "GTE",
+  LT = "LT",
+}
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
-
   product!: Product;
   categories$!: Observable<Category[]>;
   subcategories$!: Observable<SubCategory[]>;
+  lengthUnits$!: Observable<Unit[]>;
+  weigthUnits$!: Observable<Unit[]>;
   formGroup!: FormGroup;
   constructor(private fb: FormBuilder, private userProfileService: UserProfileService, private authenticationService: AuthenticationService,
-    private router: Router, private productService: ProductService, private toastService: ToastService, private categoryService: CategoryService, private route: ActivatedRoute) { }
+    private router: Router, private productService: ProductService, private toastService: ToastService, private categoryService: CategoryService, private route: ActivatedRoute) {
+  }
 
 
   ngOnInit(): void {
+    const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+
     this.formGroup = this.fb.group({
       id: [0],
       name:
@@ -93,18 +103,20 @@ export class ProductEditComponent implements OnInit {
       amazonLink:
         [
           { value: '', disabled: false }
-          , [Validators.required, Validators.minLength(3)]
+          , [Validators.required, Validators.minLength(3), Validators.pattern(reg)]
         ],
       flipkartLink:
         [
           { value: '', disabled: false }
-          , [Validators.minLength(3)]
+          , [Validators.minLength(3), Validators.pattern(reg)]
         ],
       categoryId: [],
       subcategoryId: []
     });
     this.categories$ = this.categoryService.getCategories();
     this.subcategories$ = this.categoryService.getSubCategories();
+    this.lengthUnits$ = this.productService.getLengthUnits();
+    this.weigthUnits$ = this.productService.getWeigthUnits();
 
     // this.formGroup = this.fb.group({
     //   name: 
@@ -127,31 +139,32 @@ export class ProductEditComponent implements OnInit {
     this.formGroup.patchValue(this.product);
   }
   submit() {
-    const subcategory: Product = { ...this.formGroup.value };
-    if (subcategory.id > 0) {
-      this.productService.updateProduct(subcategory).subscribe(
-        () => {
-          this.toastService.showSuccess('Sub Category successfully saved!!!');
-        },
-        (err) => {
-          this.toastService.showError("There was a problem saving the sub category. Please try again.");
-        }
-      );
-    } else {
-      this.productService.addProduct(subcategory).subscribe(
-        (retProduct) => {
-          this.product = retProduct;
-          console.log(retProduct);
+    const product: Product = { ...this.formGroup.value };
+    debugger;
+    // if (product.id > 0) {
+    //   this.productService.updateProduct(product).subscribe(
+    //     () => {
+    //       this.toastService.showSuccess('Sub Category successfully saved!!!');
+    //     },
+    //     (err) => {
+    //       this.toastService.showError("There was a problem saving the sub category. Please try again.");
+    //     }
+    //   );
+    // } else {
+    //   this.productService.addProduct(product).subscribe(
+    //     (retProduct) => {
+    //       this.product = retProduct;
+    //       console.log(retProduct);
 
-          this.toastService.showSuccess('Sub Category successfully added!!!');
+    //       this.toastService.showSuccess('Sub Category successfully added!!!');
 
-        },
-        (err) => {
-          this.toastService.showError("There was a problem saving the sub category. Please try again.");
-        }
-      );
+    //     },
+    //     (err) => {
+    //       this.toastService.showError("There was a problem saving the sub category. Please try again.");
+    //     }
+    //   );
 
-    }
+    // }
   }
   get name() { return this.formGroup.get('name'); }
   get description() { return this.formGroup.get('description'); }

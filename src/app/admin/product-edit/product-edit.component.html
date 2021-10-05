@@ -56,8 +56,7 @@
         <div class="col-md-4">
             <label for="inputPrice" class="col-form-label">Price</label>
             <input type="text" class="form-control" name="inputPrice" formControlName="price">
-            <div *ngIf="price?.invalid && (price?.dirty || price?.touched)"
-                class="alert alert-danger">
+            <div *ngIf="price?.invalid && (price?.dirty || price?.touched)" class="alert alert-danger">
                 <div *ngIf="price?.errors?.required">
                     Price is required.
                 </div>
@@ -95,8 +94,7 @@
         <div class="col-md-4">
             <label for="inputColor" class="col-form-label">Color</label>
             <input type="text" class="form-control" name="inputColor" formControlName="color">
-            <div *ngIf="color?.invalid && (color?.dirty || color?.touched)"
-                class="alert alert-danger">
+            <div *ngIf="color?.invalid && (color?.dirty || color?.touched)" class="alert alert-danger">
                 <div *ngIf="color?.errors?.required">
                     Color is required.
                 </div>
@@ -113,8 +111,8 @@
             <label for="inputHeightUnit" class="col-form-label">Height Unit</label>
             <select class="form-select" name="inputHeightUnit" aria-label="select a unit for height"
                 formControlName="heightUnit">
-                <option *ngFor="let category of categories$ | async" [value]="category.id">
-                    {{category.name}}</option>
+                <option *ngFor="let unit of lengthUnits$ | async" [value]="unit.name">
+                    {{unit.name}}</option>
             </select>
         </div>
         <div class="col-md-4">
@@ -125,8 +123,8 @@
             <label for="inputWidthUnit" class="col-form-label">Width Unit</label>
             <select class="form-select" name="inputWidthUnit" aria-label="select a unit for width"
                 formControlName="widthUnit">
-                <option *ngFor="let category of categories$ | async" [value]="category.id">
-                    {{category.name}}</option>
+                <option *ngFor="let unit of lengthUnits$ | async" [value]="unit.name">
+                    {{unit.name}}</option>
             </select>
         </div>
         <div class="col-md-4">
@@ -137,8 +135,8 @@
             <label for="inputHeightUnit" class="col-form-label">Height Unit</label>
             <select class="form-select" name="inputHeightUnit" aria-label="select a unit for height"
                 formControlName="heightUnit">
-                <option *ngFor="let category of categories$ | async" [value]="category.id">
-                    {{category.name}}</option>
+                <option *ngFor="let unit of lengthUnits$ | async" [value]="unit.name">
+                    {{unit.name}}</option>
             </select>
         </div>
         <div class="col-md-4">
@@ -149,26 +147,36 @@
             <label for="inputWeightUnit" class="col-form-label">Weight Unit</label>
             <select class="form-select" name="inputWeightUnit" aria-label="select a unit for weight"
                 formControlName="weightUnit">
-                <option *ngFor="let category of categories$ | async" [value]="category.id">
-                    {{category.name}}</option>
+                <option *ngFor="let unit of weigthUnits$ | async" [value]="unit.name">
+                    {{unit.name}}</option>
             </select>
         </div>
         <div class="col-md-4">
             <label for="inputAmazonLink" class="col-form-label">Amazon Link</label>
             <input type="text" class="form-control" name="inputAmazonLink" formControlName="amazonLink">
-            <div *ngIf="amazonLink?.invalid && (amazonLink?.dirty || amazonLink?.touched)"
-                class="alert alert-danger">
+            <div *ngIf="amazonLink?.invalid && (amazonLink?.dirty || amazonLink?.touched)" class="alert alert-danger">
                 <div *ngIf="amazonLink?.errors?.required">
                     Amazon Link is required.
                 </div>
                 <div *ngIf="amazonLink?.errors?.minlength">
                     Amazon Link must be at least 3 characters long.
                 </div>
+                <div *ngIf="amazonLink?.errors?.pattern">
+                    Amazon Link must be a valid url.
+                </div>
             </div>
         </div>
         <div class="col-md-4">
             <label for="inputFlipkartLink" class="col-form-label">Flipkart Link</label>
             <input type="text" class="form-control" name="inputFlipkartLink" formControlName="flipkartLink">
+            <div *ngIf="flipkartLink?.invalid && (flipkartLink?.dirty || flipkartLink?.touched)" class="alert alert-danger">
+                <div *ngIf="flipkartLink?.errors?.minlength">
+                    Flipkart Link must be at least 3 characters long.
+                </div>
+                <div *ngIf="flipkartLink?.errors?.pattern">
+                    Flipkart Link must be a valid url.
+                </div>
+            </div>
         </div>
         <div class="col-md-4 form-switch">
             <label for="inputExclude" class="col-form-label form-check-label">Exclude from listing</label>
