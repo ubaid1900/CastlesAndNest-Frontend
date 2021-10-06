@@ -20,6 +20,7 @@ import { RestInterceptor } from './rest.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { SubCategoryListComponent } from './sub-category-list/sub-category-list.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 export function tokenGetter() {
@@ -35,7 +36,8 @@ export function tokenGetter() {
     SortableDirective,
     ToastsContainerComponent,
     CategoryListComponent,
-    SubCategoryListComponent
+    SubCategoryListComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

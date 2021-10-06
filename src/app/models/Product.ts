@@ -22,8 +22,8 @@ export interface Product {
     images: ProductImage[];
     categoryId: number;
     category: Category;
-    subcategoryId: number;
-    subcategory: SubCategory;
+    subCategoryId: number;
+    subCategory: SubCategory;
 }
 export interface ProductImage {
     id: number;
