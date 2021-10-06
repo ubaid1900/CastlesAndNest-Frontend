@@ -9,19 +9,15 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
-export enum ConditionalOperator {
-  Equals = "Equals",
-  NEquals = "NEquals",
-  GT = "GT",
-  GTE = "GTE",
-  LT = "LT",
-}
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
+  public Editor = ClassicEditor;
   product!: Product;
   categories$!: Observable<Category[]>;
   subcategories$!: Observable<SubCategory[]>;

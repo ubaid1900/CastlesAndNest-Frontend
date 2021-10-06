@@ -13,6 +13,7 @@ import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { CategoryResolver } from './category.resolver';
 import { SubCategoryEditComponent } from './sub-category-edit/sub-category-edit.component';
 import { SubCategoryResolver } from './subcategory.resolver';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 
@@ -29,7 +30,8 @@ import { SubCategoryResolver } from './subcategory.resolver';
     FormsModule,
     ReactiveFormsModule,
     NgbModule, //TODO:: instead of importing everything, optimize this to import only what we need.
-    SharedModule
+    SharedModule,
+    CKEditorModule
   ],
   providers: []
 })

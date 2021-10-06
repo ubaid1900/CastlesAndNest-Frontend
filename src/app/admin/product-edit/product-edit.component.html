@@ -40,9 +40,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-12">
             <label for="inputDescription" class="col-form-label">Description</label>
-            <input type="text" class="form-control" name="inputDescription" formControlName="description">
+            <ckeditor [editor]="Editor" data="<ul><li></li></ul>" [config]="{ toolbar: [ 'bulletedList' ] }"  formControlName="description"></ckeditor>
             <div *ngIf="description?.invalid && (description?.dirty || description?.touched)"
                 class="alert alert-danger">
                 <div *ngIf="description?.errors?.required">
@@ -55,39 +55,30 @@
         </div>
         <div class="col-md-4">
             <label for="inputPrice" class="col-form-label">Price</label>
-            <input type="text" class="form-control" name="inputPrice" formControlName="price">
+            <input type="text" [appNumbersOnly]="2" class="form-control" name="inputPrice" formControlName="price">
             <div *ngIf="price?.invalid && (price?.dirty || price?.touched)" class="alert alert-danger">
                 <div *ngIf="price?.errors?.required">
                     Price is required.
-                </div>
-                <div *ngIf="price?.errors?.minlength">
-                    Price must be at least 3 characters long.
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <label for="inputAvailableQuantity" class="col-form-label">Available Quantity</label>
-            <input type="text" class="form-control" name="inputAvailableQuantity" formControlName="availableQuantity">
+            <input type="text" [appNumbersOnly]="0" class="form-control" name="inputAvailableQuantity" formControlName="availableQuantity">
             <div *ngIf="availableQuantity?.invalid && (availableQuantity?.dirty || availableQuantity?.touched)"
                 class="alert alert-danger">
                 <div *ngIf="availableQuantity?.errors?.required">
                     Available Quantity is required.
                 </div>
-                <div *ngIf="availableQuantity?.errors?.minlength">
-                    Available Quantity must be at least 3 characters long.
-                </div>
             </div>
         </div>
         <div class="col-md-4">
             <label for="inputReorderLevel" class="col-form-label">Reorder Level</label>
-            <input type="text" class="form-control" name="inputReorderLevel" formControlName="reorderLevel">
+            <input type="text" [appNumbersOnly]="0" class="form-control" name="inputReorderLevel" formControlName="reorderLevel">
             <div *ngIf="reorderLevel?.invalid && (reorderLevel?.dirty || reorderLevel?.touched)"
                 class="alert alert-danger">
                 <div *ngIf="reorderLevel?.errors?.required">
                     Reorder Level is required.
-                </div>
-                <div *ngIf="reorderLevel?.errors?.minlength">
-                    Reorder Level must be at least 3 characters long.
                 </div>
             </div>
         </div>
@@ -105,7 +96,7 @@
         </div>
         <div class="col-md-4">
             <label for="inputLength" class="col-form-label">Length</label>
-            <input type="text" class="form-control" name="inputLength" formControlName="length">
+            <input type="text" [appNumbersOnly]="2" class="form-control" name="inputLength" formControlName="length">
         </div>
         <div class="col-md-4">
             <label for="inputHeightUnit" class="col-form-label">Height Unit</label>
@@ -117,7 +108,7 @@
         </div>
         <div class="col-md-4">
             <label for="inputWidth" class="col-form-label">Width</label>
-            <input type="text" class="form-control" name="inputWidth" formControlName="width">
+            <input type="text" [appNumbersOnly]="2" class="form-control" name="inputWidth" formControlName="width">
         </div>
         <div class="col-md-4">
             <label for="inputWidthUnit" class="col-form-label">Width Unit</label>
@@ -129,7 +120,7 @@
         </div>
         <div class="col-md-4">
             <label for="inputHeight" class="col-form-label">Height</label>
-            <input type="text" class="form-control" name="inputHeight" formControlName="height">
+            <input type="text" [appNumbersOnly]="2" class="form-control" name="inputHeight" formControlName="height">
         </div>
         <div class="col-md-4">
             <label for="inputHeightUnit" class="col-form-label">Height Unit</label>
@@ -141,7 +132,7 @@
         </div>
         <div class="col-md-4">
             <label for="inputWeight" class="col-form-label">Weight</label>
-            <input type="text" class="form-control" name="inputWeight" formControlName="weight">
+            <input type="text" [appNumbersOnly]="2" class="form-control" name="inputWeight" formControlName="weight">
         </div>
         <div class="col-md-4">
             <label for="inputWeightUnit" class="col-form-label">Weight Unit</label>
