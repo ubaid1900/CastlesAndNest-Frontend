@@ -47,14 +47,15 @@ export class ProductEditComponent implements OnInit {
       price:
         [
           { value: '', disabled: false }
+          , [Validators.required]
         ],
       availableQuantity:
         [
-          { value: '', disabled: false }
+          { value: 0, disabled: false }
         ],
       exclude:
         [
-          { value: '', disabled: false }
+          { value: false, disabled: false }
         ],
       reorderLevel:
         [
@@ -106,7 +107,9 @@ export class ProductEditComponent implements OnInit {
           { value: '', disabled: false }
           , [Validators.minLength(3), Validators.pattern(reg)]
         ],
-      categoryId: [],
+      categoryId: [
+        { value: '', disabled: false }
+      ],
       subcategoryId: []
     });
     this.categories$ = this.categoryService.getCategories();
@@ -131,36 +134,34 @@ export class ProductEditComponent implements OnInit {
   }
   private refresh() {
     this.product = this.route.snapshot.data.product;
-    console.dir(this.product);
     this.formGroup.patchValue(this.product);
   }
   submit() {
     const product: Product = { ...this.formGroup.value };
-    debugger;
-    // if (product.id > 0) {
-    //   this.productService.updateProduct(product).subscribe(
-    //     () => {
-    //       this.toastService.showSuccess('Sub Category successfully saved!!!');
-    //     },
-    //     (err) => {
-    //       this.toastService.showError("There was a problem saving the sub category. Please try again.");
-    //     }
-    //   );
-    // } else {
-    //   this.productService.addProduct(product).subscribe(
-    //     (retProduct) => {
-    //       this.product = retProduct;
-    //       console.log(retProduct);
+    if (product.id > 0) {
+      this.productService.updateProduct(product).subscribe(
+        () => {
+          this.toastService.showSuccess('Product successfully saved!!!');
+        },
+        (err) => {
+          this.toastService.showError("There was a problem saving the product. Please try again.");
+        }
+      );
+    } else {
+      this.productService.addProduct(product).subscribe(
+        (retProduct) => {
+          this.product = retProduct;
+          console.log(retProduct);
 
-    //       this.toastService.showSuccess('Sub Category successfully added!!!');
+          this.toastService.showSuccess('Product successfully added!!!');
 
-    //     },
-    //     (err) => {
-    //       this.toastService.showError("There was a problem saving the sub category. Please try again.");
-    //     }
-    //   );
+        },
+        (err) => {
+          this.toastService.showError("There was a problem saving the product. Please try again.");
+        }
+      );
 
-    // }
+    }
   }
   get name() { return this.formGroup.get('name'); }
   get description() { return this.formGroup.get('description'); }
