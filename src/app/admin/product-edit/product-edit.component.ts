@@ -3,13 +3,15 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category, SubCategory } from 'src/app/models/category';
-import { Product, Unit } from 'src/app/models/Product';
+import { Product, ProductImage, Unit } from 'src/app/models/Product';
 import { ProductService } from 'src/app/product.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { FileService } from 'src/app/services/file.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-edit',
@@ -25,6 +27,7 @@ export class ProductEditComponent implements OnInit {
   weigthUnits$!: Observable<Unit[]>;
   formGroup!: FormGroup;
   constructor(private fb: FormBuilder, private userProfileService: UserProfileService, private authenticationService: AuthenticationService,
+    private fileService: FileService,
     private router: Router, private productService: ProductService, private toastService: ToastService, private categoryService: CategoryService, private route: ActivatedRoute) {
   }
 
@@ -110,7 +113,9 @@ export class ProductEditComponent implements OnInit {
       categoryId: [
         { value: '', disabled: false }
       ],
-      subcategoryId: []
+      subCategoryId: [
+        { value: '', disabled: false }
+      ]
     });
     this.categories$ = this.categoryService.getCategories();
     this.subcategories$ = this.categoryService.getSubCategories();
@@ -138,6 +143,7 @@ export class ProductEditComponent implements OnInit {
   }
   submit() {
     const product: Product = { ...this.formGroup.value };
+    product.images = this.product.images;
     if (product.id > 0) {
       this.productService.updateProduct(product).subscribe(
         () => {
@@ -163,6 +169,52 @@ export class ProductEditComponent implements OnInit {
 
     }
   }
+  
+  onFileSelected(event: any) {
+
+    const formData = new FormData();
+    formData.append("thumbnail", event.target.files[0]);
+
+    const files: File[] = event.target.files;
+    if (files.length === 0)
+      return;
+
+    const file = files[0];
+
+
+    const fileReader: FileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    // fileReader.onload = (event: any) => {
+    //   this.url = event.target.result;
+    // };
+
+    this.fileService.upload(formData)
+      .subscribe((result: string) => {
+        if (!this.product.images) {
+          this.product.images = [];
+        }
+        this.product.images.push({ productId: this.product.id, imageUrl: `${environment.apiUrl}images/${result}` } as ProductImage);
+        this.toastService.showSuccess('Image successfully uploaded. Please click save to save it with the product.');
+
+      },
+        (err => {
+          this.toastService.showSuccess('There was a problem uploading the image. Please try again.');
+          console.error(err);
+        }
+        ));
+  }
+  deleteImage(productImage: ProductImage) {
+    this.fileService.delete(productImage.imageUrl).subscribe(
+      () => {
+        this.toastService.showSuccess('Image successfully removed. Please click save to save it with the product.');
+      },
+      (err) => console.log(err)
+    );
+    this.product.images = this.product.images.filter(
+      bi => bi.imageUrl !== productImage.imageUrl
+      );
+  }
   get name() { return this.formGroup.get('name'); }
   get description() { return this.formGroup.get('description'); }
   get price() { return this.formGroup.get('price'); }
@@ -181,5 +233,5 @@ export class ProductEditComponent implements OnInit {
   get amazonLink() { return this.formGroup.get('amazonLink'); }
   get flipkartLink() { return this.formGroup.get('flipkartLink'); }
   get categoryId() { return this.formGroup.get('categoryId'); }
-  get subcategoryId() { return this.formGroup.get('subcategoryId'); }
+  get subCategoryId() { return this.formGroup.get('subCategoryId'); }
 }

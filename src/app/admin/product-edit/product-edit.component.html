@@ -17,13 +17,13 @@
         <div class="col-md-4">
             <label for="inputSubcategory" class="col-form-label">Sub Category</label>
             <select class="form-select" name="inputSubcategory" aria-label="select a Sub Category"
-                formControlName="subcategoryId">
+                formControlName="subCategoryId">
                 <option *ngFor="let subcategory of subcategories$ | async" [value]="subcategory.id">
                     {{subcategory.name}}</option>
             </select>
-            <div *ngIf="subcategoryId?.invalid && (subcategoryId?.dirty || subcategoryId?.touched)"
+            <div *ngIf="subCategoryId?.invalid && (subCategoryId?.dirty || subCategoryId?.touched)"
                 class="alert alert-danger">
-                <div *ngIf="subcategoryId?.errors?.required">
+                <div *ngIf="subCategoryId?.errors?.required">
                     Sub Category is required.
                 </div>
             </div>
@@ -177,10 +177,35 @@
             </div>
         </div>
     </div>
+    <div class="col-md-4">
+        <label for="formFileLg" class="form-label">Upload the image</label>
+        <form enctype="multipart/form-data">
+            <input class="form-control form-control-lg" id="formFileLg" type="file" name="formFileLg"
+                (change)="onFileSelected($event)">
+        </form>
+    </div>
     <div class="row">
         <div class="col-md-4">
             <button [disabled]="thisForm.invalid" type="submit" class="btn btn-primary">Save</button>
             <a href="/" class="btn btn-secondary">Back to Home</a>
         </div>
     </div>
+    <br>
+    <p *ngIf="!(product?.images && product?.images?.length)" class="text-warning">The product does not have any images associated
+        with it.</p>
+    <ng-container *ngIf="product?.images && product?.images?.length">
+        <div class="position-relative px-2"
+            style="display: inline-block; height: 100px !important; width: 200px !important;"
+            *ngFor="let image of product?.images">
+            <a [href]="image.imageUrl" target="_blank">
+                <img class="img-thumbnail" style="height: 100%; width: 100%;" name="imageUrl" [src]="image.imageUrl"
+                    alt="{{product.name}}" loading="lazy" />
+            </a>
+            <i (click)="deleteImage(image)"
+                class="bi bi-x-circle-fill text-danger position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle"
+                style="cursor: pointer;">
+                <span class="visually-hidden">delete</span>
+            </i>
+        </div>
+    </ng-container>
 </form>
