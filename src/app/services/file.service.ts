@@ -9,24 +9,17 @@ import { environment } from 'src/environments/environment';
 export class FileService {
   delete(imageUrl: string) {
     const lof = imageUrl.lastIndexOf('/');
-    const ss = imageUrl.substring(lof+1);
+    const ss = imageUrl.substring(lof + 1);
 
     return this.http.delete(`${environment.apiUrl}files/${ss}`);
   }
-  upload(formData: FormData): Observable<string> {
+  upload(formData: FormData): Observable<string[]> {
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
     const requestOptions: Object = {
-      ...headers,
-      responseType: 'text'
+      ...headers
     }
-    return this.http.post<string>(environment.apiUrl + 'files', formData
-      // , { headers, responseType: 'text' as 'json' }
-      , requestOptions
-    );
+    return this.http.post<string[]>(environment.apiUrl + 'files', formData, requestOptions);
   }
-  // upload(arg0: File) {
-  //   return this.http.post<string>(environment.apiUrl + 'files', arg0);
-  // }
 
   constructor(private http: HttpClient) {
   }

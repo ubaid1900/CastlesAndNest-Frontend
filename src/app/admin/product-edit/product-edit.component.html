@@ -42,7 +42,8 @@
         </div>
         <div class="col-md-12">
             <label for="inputDescription" class="col-form-label">Description</label>
-            <ckeditor [editor]="Editor" data="<ul><li></li></ul>" [config]="{ toolbar: [ 'bulletedList' ] }"  formControlName="description"></ckeditor>
+            <ckeditor [editor]="Editor" data="<ul><li></li></ul>" [config]="{ toolbar: [ 'bulletedList' ] }"
+                formControlName="description"></ckeditor>
             <div *ngIf="description?.invalid && (description?.dirty || description?.touched)"
                 class="alert alert-danger">
                 <div *ngIf="description?.errors?.required">
@@ -64,7 +65,8 @@
         </div>
         <div class="col-md-4">
             <label for="inputAvailableQuantity" class="col-form-label">Available Quantity</label>
-            <input type="text" [appNumbersOnly]="0" class="form-control" name="inputAvailableQuantity" formControlName="availableQuantity">
+            <input type="text" [appNumbersOnly]="0" class="form-control" name="inputAvailableQuantity"
+                formControlName="availableQuantity">
             <div *ngIf="availableQuantity?.invalid && (availableQuantity?.dirty || availableQuantity?.touched)"
                 class="alert alert-danger">
                 <div *ngIf="availableQuantity?.errors?.required">
@@ -74,7 +76,8 @@
         </div>
         <div class="col-md-4">
             <label for="inputReorderLevel" class="col-form-label">Reorder Level</label>
-            <input type="text" [appNumbersOnly]="0" class="form-control" name="inputReorderLevel" formControlName="reorderLevel">
+            <input type="text" [appNumbersOnly]="0" class="form-control" name="inputReorderLevel"
+                formControlName="reorderLevel">
             <div *ngIf="reorderLevel?.invalid && (reorderLevel?.dirty || reorderLevel?.touched)"
                 class="alert alert-danger">
                 <div *ngIf="reorderLevel?.errors?.required">
@@ -160,7 +163,8 @@
         <div class="col-md-4">
             <label for="inputFlipkartLink" class="col-form-label">Flipkart Link</label>
             <input type="text" class="form-control" name="inputFlipkartLink" formControlName="flipkartLink">
-            <div *ngIf="flipkartLink?.invalid && (flipkartLink?.dirty || flipkartLink?.touched)" class="alert alert-danger">
+            <div *ngIf="flipkartLink?.invalid && (flipkartLink?.dirty || flipkartLink?.touched)"
+                class="alert alert-danger">
                 <div *ngIf="flipkartLink?.errors?.minlength">
                     Flipkart Link must be at least 3 characters long.
                 </div>
@@ -178,10 +182,11 @@
         </div>
     </div>
     <div class="col-md-4">
-        <label for="formFileLg" class="form-label">Upload the image</label>
+        <label for="formFileLg" class="form-label">Upload the image (Minimum {{minImages}}, Maximum
+            {{maxImages}})</label>
         <form enctype="multipart/form-data">
             <input class="form-control form-control-lg" id="formFileLg" type="file" name="formFileLg"
-                (change)="onFileSelected($event)">
+                (change)="onFileSelected($event)" multiple accept="image/*">
         </form>
     </div>
     <div class="row">
@@ -191,8 +196,8 @@
         </div>
     </div>
     <br>
-    <p *ngIf="!(product?.images && product?.images?.length)" class="text-warning">The product does not have any images associated
-        with it.</p>
+    <p *ngIf="!(product?.images && product?.images?.length)" class="text-warning">The product does not have any images
+        associated with it.</p>
     <ng-container *ngIf="product?.images && product?.images?.length">
         <div class="position-relative px-2"
             style="display: inline-block; height: 100px !important; width: 200px !important;"

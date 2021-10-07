@@ -142,6 +142,15 @@ export class ProductEditComponent implements OnInit {
     this.formGroup.patchValue(this.product);
   }
   submit() {
+    let totalFileCount = this.product.images?.length ?? 0;
+    if (totalFileCount < this.minImages) {
+      this.toastService.showError(`Min ${this.minImages} images. Please try again.`);
+      return;
+    }
+    if (totalFileCount > this.maxImages) {
+      this.toastService.showError(`Max ${this.maxImages} images. Please try again.`);
+      return;
+    }
     const product: Product = { ...this.formGroup.value };
     product.images = this.product.images;
     if (product.id > 0) {
@@ -169,37 +178,46 @@ export class ProductEditComponent implements OnInit {
 
     }
   }
-  
+  minImages = 2;
+  maxImages = 10;
   onFileSelected(event: any) {
 
-    const formData = new FormData();
-    formData.append("thumbnail", event.target.files[0]);
-
     const files: File[] = event.target.files;
-    if (files.length === 0)
+    if (files.length === 0) {
+      this.toastService.showError('There was a problem uploading the image(s). Please try again.');
       return;
+    }
+    let totalFileCount = this.product.images?.length ?? 0 + files.length;
+    if (totalFileCount < this.minImages) {
+      this.toastService.showError(`Min ${this.minImages} images. Please try again.`);
+      return;
+    }
+    if (totalFileCount > this.maxImages) {
+      this.toastService.showError(`Max ${this.maxImages} images. Please try again.`);
+      return;
+    }
 
-    const file = files[0];
-
-
-    const fileReader: FileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-
-    // fileReader.onload = (event: any) => {
-    //   this.url = event.target.result;
-    // };
+    const formData = new FormData();
+    for (let index = 0; index < files.length; index++) {
+      const file = files[index];
+      formData.append("thumbnail", file);
+    }
 
     this.fileService.upload(formData)
-      .subscribe((result: string) => {
+      .subscribe((result: string[]) => {
         if (!this.product.images) {
           this.product.images = [];
         }
-        this.product.images.push({ productId: this.product.id, imageUrl: `${environment.apiUrl}images/${result}` } as ProductImage);
-        this.toastService.showSuccess('Image successfully uploaded. Please click save to save it with the product.');
+
+        for (let index = 0; index < result.length; index++) {
+          const pi = result[index];
+          this.product.images.push({ productId: this.product.id, imageUrl: `${environment.apiUrl}images/${pi}` } as ProductImage);
+        }
+        this.toastService.showSuccess('Image(s) successfully uploaded. Please click save to save it with the product.');
 
       },
         (err => {
-          this.toastService.showSuccess('There was a problem uploading the image. Please try again.');
+          this.toastService.showError('There was a problem uploading the image(s). Please try again.');
           console.error(err);
         }
         ));
@@ -213,7 +231,7 @@ export class ProductEditComponent implements OnInit {
     );
     this.product.images = this.product.images.filter(
       bi => bi.imageUrl !== productImage.imageUrl
-      );
+    );
   }
   get name() { return this.formGroup.get('name'); }
   get description() { return this.formGroup.get('description'); }
