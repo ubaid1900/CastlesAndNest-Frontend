@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { Observable, of, OperatorFunction } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
-import { Book } from '../models/book';
+import { Product } from '../models/Product';
 import { AuthenticationService } from '../services/authentication.service';
 import { CartService } from '../services/cart.service';
 import { NotifcationService } from '../services/notifcation-service';
@@ -60,7 +60,7 @@ export class AppNavMenuComponent implements OnInit {
   searching = false;
   searchFailed = false;
 
-  typeaheadSearch: OperatorFunction<string, readonly Book[]> = (text$: Observable<string>) =>
+  typeaheadSearch: OperatorFunction<string, readonly Product[]> = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -76,8 +76,8 @@ export class AppNavMenuComponent implements OnInit {
       tap(() => this.searching = false)
     )
 
-    inputFormatter = (x: { description: string }) => {
-      return x.description;
+    inputFormatter = (x: { name: string }) => {
+      return x.name;
     };
 
 }
