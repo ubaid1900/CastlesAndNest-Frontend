@@ -14,3 +14,13 @@
 <a *ngIf="product.flipkartLink" [href]="product.flipkartLink" target="_blank">Buy on Flipkart</a>
 {{product.category?.name}}<br>
 {{product.subCategory?.name}}<br>
+
+<a href="https://www.facebook.com/sharer/sharer.php?u={{router['location']._platformLocation.location.origin}}/product/{{product.id}}"
+    target="_blank"> Share to facebook </a>
+<br>
+<a href="https://web.whatsapp.com/send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}" data-text="Take a look at this product:"
+    class="wa_btn wa_btn_s" target="_blank">whatsapp web</a>
+
+<br>
+<a href="whatsapp://send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}" data-text="Take a look at this product:"
+    target="_blank">whatsapp app</a>
