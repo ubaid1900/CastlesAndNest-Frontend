@@ -50,9 +50,9 @@ export class AppNavMenuComponent implements OnInit {
     this.router.navigate(["/"]);
   }
   search() {
-    let navPath = ['/'];
-    if (this.router.url.indexOf('home') < 0) {
-      navPath = ['/home'];
+    let navPath = ['/productsearch'];
+    if (this.router.url.indexOf('productSearch') < 0) {
+      navPath = ['/productSearch'];
     }
     this.router.navigate(navPath, { queryParams: { query: this.model } });
   }

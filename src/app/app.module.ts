@@ -21,6 +21,7 @@ import { SharedModule } from './shared/shared.module';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { SubCategoryListComponent } from './sub-category-list/sub-category-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductListingComponent } from './product-listing/product-listing.component';
 
 
 export function tokenGetter() {
@@ -37,7 +38,8 @@ export function tokenGetter() {
     ToastsContainerComponent,
     CategoryListComponent,
     SubCategoryListComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ProductListingComponent
   ],
   imports: [
     BrowserModule,

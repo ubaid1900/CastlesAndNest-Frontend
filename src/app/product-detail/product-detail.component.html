@@ -10,7 +10,7 @@
 {{product.heightUnit}}<br>
 {{product.weight}}<br>
 {{product.weightUnit}}<br>
-{{product.amazonLink}}<br>
-{{product.flipkartLink}}<br>
+<a [href]="product.amazonLink" target="_blank">Buy on Amazon</a>
+<a *ngIf="product.flipkartLink" [href]="product.flipkartLink" target="_blank">Buy on Flipkart</a>
 {{product.category?.name}}<br>
 {{product.subCategory?.name}}<br>
