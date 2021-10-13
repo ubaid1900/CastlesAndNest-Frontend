@@ -22,6 +22,7 @@ import { CategoryListComponent } from './category-list/category-list.component';
 import { SubCategoryListComponent } from './sub-category-list/sub-category-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductListingComponent } from './product-listing/product-listing.component';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 
 export function tokenGetter() {
@@ -61,6 +62,7 @@ export function tokenGetter() {
     }),
     SharedModule
   ], providers: [
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerService,

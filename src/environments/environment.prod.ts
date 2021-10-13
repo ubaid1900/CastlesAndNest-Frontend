@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
-  apiUrl: 'TODO',
+  apiUrl: 'https://castlesandnesttest.elhamd.in/api/',
   carouselInterval: 3000,
   googleAuthSettings: {
-    "clientId": "TODO"
+    "clientId": "71954085878-1sgkrm6ce4bhghfi6tsrd9qevcmkij7n.apps.googleusercontent.com"
   },
   facebookAuthSettings: {
-    "appId": "TODO"
+    "appId": "235134741781480"
   }
 };
