@@ -31,6 +31,22 @@
             </div>
         </div>
     </div>
+    <div class="row">        
+        <div class="col-md-4 my-2">
+            <label for="formFileLg" class="form-label">Upload the image</label>
+            <form enctype="multipart/form-data">
+                <input class="form-control form-control-lg" id="formFileLg" type="file" name="formFileLg"
+                    (change)="onFileSelected($event)" accept="image/*">
+            </form>
+        </div>
+        <div class="col-md-4 my-2">
+            <br>
+            <a *ngIf="subCategory.imageUrl" href="{{subCategory.imageUrl}}" target="_blank">
+                <img width="50px" height="50px" name="imageUrl" [src]="subCategory.imageUrl" alt="{{subcategory.name}"
+                    loading="lazy">
+            </a>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-4">
             <button [disabled]="thisForm.invalid" type="submit" class="btn btn-primary">Save</button>
