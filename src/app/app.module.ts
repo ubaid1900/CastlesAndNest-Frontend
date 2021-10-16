@@ -23,6 +23,9 @@ import { SubCategoryListComponent } from './sub-category-list/sub-category-list.
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductListingComponent } from './product-listing/product-listing.component';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { FlyoutComponent } from './flyout/flyout.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 export function tokenGetter() {
@@ -40,7 +43,8 @@ export function tokenGetter() {
     CategoryListComponent,
     SubCategoryListComponent,
     ProductDetailComponent,
-    ProductListingComponent
+    ProductListingComponent,
+    FlyoutComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,9 @@ export function tokenGetter() {
         disallowedRoutes: []
       }
     }),
-    SharedModule
+    SharedModule,
+    NoopAnimationsModule,
+    MatMenuModule
   ], providers: [
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     {

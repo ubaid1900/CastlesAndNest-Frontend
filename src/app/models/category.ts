@@ -2,6 +2,7 @@ export interface Category {
     id: number;
     name: string;
     imageUrl: string;
+    subCategories: SubCategory[];
 }
 export interface SubCategory {
     id: number;

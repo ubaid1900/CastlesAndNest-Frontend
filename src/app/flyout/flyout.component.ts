@@ -1,18 +1,29 @@
+// https://stackblitz.com/edit/dynamic-nested-menus?file=app%2Fmenu-item%2Fmenu-item.component.html
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { NavItem } from '../flyout/flyout.component';
+import { MatMenu, MatMenuItem } from '@angular/material/menu';
+import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { Category, SubCategory } from '../models/category';
+import { CategoryService } from '../services/category.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-flyout',
+  templateUrl: './flyout.component.html',
+  styleUrls: ['./flyout.component.css']
 })
-export class HomeComponent implements OnInit {
+export class FlyoutComponent implements OnInit {
+  
   @Input() items!: NavItem[];
-  // @ViewChild('childMenu', {static: true}) public childMenu!: any;
+  @ViewChild('childMenu', {static: true}) public childMenu!: any;
+
+  categories$!: Observable<Category[]>;
+  categories!: Category[];
+  constructor(private categoryService: CategoryService, public router: Router) { }
+
   ngOnInit(): void {
-    this.items = this.getSampleItems();
-   }
-  constructor() { }
+    // this.items = this.getSampleItems();
+    this.categories$ = this.categoryService.getCategories();
+  }
   getSampleItems(): NavItem[] {
     const items: NavItem[] = [
       {
@@ -102,4 +113,11 @@ export class HomeComponent implements OnInit {
     ];
     return items;
   }
+
+}
+export interface NavItem {
+  displayName: string;
+  iconName: string;
+  route?: string;
+  children?: NavItem[];
 }
