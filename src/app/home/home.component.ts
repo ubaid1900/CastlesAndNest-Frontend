@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
           const flyoutItem = { id: category.id, displayName: category.name, children: [] } as FlyoutItem;
           category.subCategories.forEach(sc => {
             flyoutItem.children?.push({
-              id: category.id, displayName: category.name
+              id: sc.id, displayName: sc.name, route: `/productSearch`, queryParams:sc.id.toString()
             });
           });
           this.items[0].children?.push(flyoutItem);

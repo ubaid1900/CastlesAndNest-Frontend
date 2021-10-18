@@ -10,7 +10,7 @@
     </span>
     <!-- Handle leaf node menu items -->
     <span *ngIf="!child.children || child.children.length === 0">
-      <button mat-menu-item [routerLink]="child.route">
+      <button mat-menu-item [routerLink]="child.route" [queryParams]="{subcategoryid:child.queryParams}">
         <!-- <mat-icon>{{child.iconName}}</mat-icon> -->
         <span>{{child.displayName}}</span>
       </button>

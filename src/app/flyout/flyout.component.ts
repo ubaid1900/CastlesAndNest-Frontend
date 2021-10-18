@@ -27,5 +27,6 @@ export interface FlyoutItem {
   displayName: string;
   iconName?: string;
   route?: string;
+  queryParams?: string;
   children?: FlyoutItem[];
 }
