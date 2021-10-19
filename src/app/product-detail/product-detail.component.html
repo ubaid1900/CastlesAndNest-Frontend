@@ -1,3 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-sm-12">images</div>
+        <div class="col-md-7 col-sm-12">
+            <h4 class="title">CASTLES AND NEST Bangle box | 2 Rod bangle storage box with transparent lid pink BB2</h4>
+            <ul class="">
+                <li class="lh-base">MADE IN INDIA.</li>
+                <li class="">CASTLES AND NEST Bangles box is made of good quality wood, paperboard and velvet material . so this is very elegant stylish durable and very useful.</li>
+                <li class="lh-base">Package Contents: 1pink Bangle Storage Box with 2 rods</li>
+                <li class="lh-base">Dimensions of Bangle Box 30cm x 16cm x 9cm weight 580gms</li>
+                <li class="lh-base">High quality storage bangle box for organizing your costly and favorite bangles.</li>
+                <li class="lh-base">Best gift for wedding birthday anniversary festivals</li>
+            </ul>
+            <div class="link-Amazon justify-content-end" style="display: flex;">
+                <ul>
+                    <li> <a [href]="product.amazonLink" class="bg-warning text-dark" target="_blank" >Buy on Amazon</a></li>  
+                    <li><a *ngIf="product.flipkartLink" [href]="product.flipkartLink" class="link-facebook bg-warning text-white" 
+                        target="_blank">Buy on Flipkart</a></li>                  
+                </ul>              
+            </div>
+            <hr/>
+            
+            <div class="link-Amazon justify-content-end" style="display: flex;">
+                <ul>
+                    <li class="share-pading"> Share: </li>                    
+                    
+                    <li class="padding-share"><a href="https://www.facebook.com/sharer/sharer.php?u={{router['location']._platformLocation.location.origin}}/product/{{product.id}}"
+                        class="link-facebook bg-primary text-white" target="_blank"> Share to facebook </a> </li>
+                    <li class="web-wats"><a href="https://web.whatsapp.com/send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}" data-text="Take a look at this product:"
+                        class="wa_btn wa_btn_s wts-aap text-white" target="_blank">whatsapp web</a></li>
+                    <li class="app-wats"><a href="whatsapp://send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}" data-text="Take a look at this product:"
+                           class="wts-aap text-white" target="_blank">whatsapp app</a></li>
+                </ul>
+               
+                
+            </div>
+            
+        </div>
+    </div>
+
+
+
 {{product.name}}
 <div [innerHTML]="product.description"></div>
 {{product.price}}<br>
@@ -24,3 +66,4 @@
 <br>
 <a href="whatsapp://send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}" data-text="Take a look at this product:"
     target="_blank">whatsapp app</a>
+</div>
