@@ -23,11 +23,7 @@ export class ProductListingComponent implements OnInit {
   }
 
   private refresh() {
-    let query = '';
-    if (this.route.snapshot.queryParams['query']) {
-      query = this.route.snapshot.queryParams['query'];
-
-    }
+    let query = this.route.snapshot.queryParams['query'] ?? '';
     this.products$ = this.productService.getProducts().pipe(
       // flatMap((data: Product[]) => data),
       map(products =>
@@ -38,6 +34,9 @@ export class ProductListingComponent implements OnInit {
           }
           if (query.length > 0) {
             retValue = product.name.toLocaleLowerCase().includes(query.toLocaleLowerCase());
+          }
+          else {
+            retValue = true;
           }
           return retValue;
         })
