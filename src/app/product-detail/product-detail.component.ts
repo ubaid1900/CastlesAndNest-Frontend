@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/Product';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,16 +13,17 @@ export class ProductDetailComponent implements OnInit {
   product!: Product;
   public carouselInterval = environment.carouselInterval;
 
-  constructor(private route: ActivatedRoute, public router: Router) { }
+  constructor(private route: ActivatedRoute, public router: Router
+    , public authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
-  
+
     this.refresh();
   }
   private refresh() {
     this.product = this.route.snapshot.data.product;
     console.log(this.product.subCategory);
-    
+
   }
 
 }

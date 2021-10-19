@@ -1,4 +1,5 @@
 <div class="container">
+    <div *ngIf="authenticationService.isUserAdmin()" class="row"><a href="admin/product/edit/{{product.id}}">Edit</a></div>
     <div class="row">
         <div class="col-md-5 col-sm-12">
             <p *ngIf="!(product?.images && product?.images?.length)" class="text-warning">The product does not have any
