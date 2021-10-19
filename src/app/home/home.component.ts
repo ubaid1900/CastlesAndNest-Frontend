@@ -12,8 +12,6 @@ export class HomeComponent implements OnInit {
   items!: FlyoutItem[];
   ngOnInit(): void {
     // this.items = this.getSampleItems();
-  }
-  constructor(private categoryService: CategoryService) {
     this.categoryService.getCategories().subscribe(
       (categories: Category[]) => {
         if (!this.items) {
@@ -31,6 +29,8 @@ export class HomeComponent implements OnInit {
       },
       (err) => { console.error(err) }
     );
+  }
+  constructor(private categoryService: CategoryService) {
   }
   getSampleItems(): FlyoutItem[] {
     const items: FlyoutItem[] = [
