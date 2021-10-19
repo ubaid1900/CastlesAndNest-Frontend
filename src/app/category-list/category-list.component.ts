@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Category } from '../models/category';
 import { AuthenticationService } from '../services/authentication.service';
 import { CategoryService } from '../services/category.service';
@@ -10,6 +11,8 @@ import { CategoryService } from '../services/category.service';
   styleUrls: ['./category-list.component.css']
 })
 export class CategoryListComponent implements OnInit {
+  @Input() display = 'list'; // carousel or list
+  public carouselInterval = environment.carouselInterval;
   categories$!: Observable<Category[]>;
   constructor(private categoryService: CategoryService, public authenticationService: AuthenticationService) { }
 

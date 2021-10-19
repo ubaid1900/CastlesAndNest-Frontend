@@ -1,11 +1,42 @@
 <ng-template #loading>
     <app-spinner></app-spinner>
 </ng-template>
-<div *ngIf="subCategories$ | async as subCategories; else loading" class="container card bg-light" style="width: 36rem;">
-    <div class="row" *ngFor="let subcategory of subCategories">
-        <div class="col"><a href="subcategory/{{subcategory.id}}">{{subcategory.name}}</a></div>
-        <div *ngIf="authenticationService.isUserAdmin()" class="col"><a href="admin/subcategory/edit/{{subcategory.id}}">Edit</a></div>
-    </div>
+<h3> Sub Categories </h3>
+<div *ngIf="subCategories$ | async as subCategories; else loading" class="container card bg-light">
+    <ng-container *ngIf="display === 'carousel'">
+        <ngb-carousel class="pb-2 mb-3" *ngIf="subCategories && subCategories.length" [interval]="carouselInterval"
+            [pauseOnHover]="true" [showNavigationArrows]="true" style="margin: 0 auto; width: 60%; text-align: center;">
+            <ng-template ngbSlide *ngFor="let subCategory of subCategories; let index= index;">
+                <div class="carousel-item active">
+                    <a href="subCategory/{{subCategory.id}}">
+                        <img *ngIf="subCategory.imageUrl" [src]="subCategory.imageUrl"
+                            alt="image for {{subCategory.name}}" style="width: 60%; height: 100px;">
+                    </a>
+                    <a href="subCategory/{{subCategory.id}}">
+                        <h3 class="caption">{{subCategory.name}}</h3>
+                    </a>
+
+
+                    <a href="admin/subcategory/edit/{{subCategory.id}}"
+                        *ngIf="authenticationService.isUserAdmin()">Edit</a>
+                </div>
+            </ng-template>
+        </ngb-carousel>
+        <a *ngIf="authenticationService.isUserAdmin()" href="admin/subcategory/edit/0">Add a Sub Category</a>
+    </ng-container>
+
+    <ng-container *ngIf="display === 'list'">
+        <div class="row">
+            <div class="col-3 p-2 border" *ngFor=" let subcategory of subCategories">
+                <img [src]="subcategory.imageUrl" alt="image for {{subcategory.name}}"
+                style="width: 100%; height: 100px;">
+                <a href="subcategory/{{subcategory.id}}">{{subcategory.name}}</a>
+                <div *ngIf="authenticationService.isUserAdmin()" class="col">
+                    <a href="admin/subcategory/edit/{{subcategory.id}}">Edit</a>
+                </div>
+            </div>
+        </div>
+        <a *ngIf="authenticationService.isUserAdmin()" href="admin/subcategory/edit/0">Add a Sub Category</a>
+    </ng-container>
     <br>
-    <a *ngIf="authenticationService.isUserAdmin()" href="admin/subcategory/edit/0">Add a Sub Category</a>
 </div>
