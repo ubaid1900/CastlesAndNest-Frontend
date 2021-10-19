@@ -1,69 +1,77 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-5 col-sm-12">images</div>
+        <div class="col-md-5 col-sm-12">
+            <p *ngIf="!(product?.images && product?.images?.length)" class="text-warning">The product does not have any
+                images associated with it.</p>
+            <ngb-carousel *ngIf="product?.images && product?.images?.length" [interval]="carouselInterval"
+                [pauseOnHover]="true" [showNavigationArrows]="true" style="margin: 0 auto; text-align: center;">
+                <ng-template ngbSlide *ngFor="let image of product?.images; let index= index;">
+                    <div class="carousel-item active">
+                        <img [src]="image.imageUrl" alt="{{product?.name}}%" style="width: 100%; height: 250px;">
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
         <div class="col-md-7 col-sm-12">
-            <h4 class="title">CASTLES AND NEST Bangle box | 2 Rod bangle storage box with transparent lid pink BB2</h4>
-            <ul class="">
-                <li class="lh-base">MADE IN INDIA.</li>
-                <li class="">CASTLES AND NEST Bangles box is made of good quality wood, paperboard and velvet material . so this is very elegant stylish durable and very useful.</li>
-                <li class="lh-base">Package Contents: 1pink Bangle Storage Box with 2 rods</li>
-                <li class="lh-base">Dimensions of Bangle Box 30cm x 16cm x 9cm weight 580gms</li>
-                <li class="lh-base">High quality storage bangle box for organizing your costly and favorite bangles.</li>
-                <li class="lh-base">Best gift for wedding birthday anniversary festivals</li>
-            </ul>
+            <h4 class="title">{{product.name}}</h4>
+            Color: {{product.color}}
+            <div [innerHTML]="product.description"></div>
             <div class="link-Amazon justify-content-end" style="display: flex;">
                 <ul>
-                    <li> <a [href]="product.amazonLink" class="bg-warning text-dark" target="_blank" >Buy on Amazon</a></li>  
-                    <li><a *ngIf="product.flipkartLink" [href]="product.flipkartLink" class="link-facebook bg-warning text-white" 
-                        target="_blank">Buy on Flipkart</a></li>                  
-                </ul>              
-            </div>
-            <hr/>
-            
-            <div class="link-Amazon justify-content-end" style="display: flex;">
-                <ul>
-                    <li class="share-pading"> Share: </li>                    
-                    
-                    <li class="padding-share"><a href="https://www.facebook.com/sharer/sharer.php?u={{router['location']._platformLocation.location.origin}}/product/{{product.id}}"
-                        class="link-facebook bg-primary text-white" target="_blank"> Share to facebook </a> </li>
-                    <li class="web-wats"><a href="https://web.whatsapp.com/send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}" data-text="Take a look at this product:"
-                        class="wa_btn wa_btn_s wts-aap text-white" target="_blank">whatsapp web</a></li>
-                    <li class="app-wats"><a href="whatsapp://send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}" data-text="Take a look at this product:"
-                           class="wts-aap text-white" target="_blank">whatsapp app</a></li>
+                    <li> <a [href]="product.amazonLink" class="bg-warning text-dark" target="_blank">Buy on Amazon</a>
+                    </li>
+                    <li><a *ngIf="product.flipkartLink" [href]="product.flipkartLink"
+                            class="link-facebook bg-warning text-white" target="_blank">Buy on Flipkart</a></li>
                 </ul>
-               
-                
             </div>
-            
+            <hr />
+
+            <div class="link-Amazon justify-content-end" style="display: flex;">
+                <ul>
+                    <li class="share-pading"> Share to: </li>
+
+                    <li class="padding-share"><a
+                            href="https://www.facebook.com/sharer/sharer.php?u={{router['location']._platformLocation.location.origin}}/product/{{product.id}}"
+                            class="link-facebook bg-primary text-white" target="_blank">Facebook</a> </li>
+                    <li class="web-wats"><a
+                            href="https://web.whatsapp.com/send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}"
+                            data-text="Take a look at this product:" class="wa_btn wa_btn_s wts-aap text-white"
+                            target="_blank">Whatsapp</a></li>
+                    <li class="app-wats"><a
+                            href="whatsapp://send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}"
+                            data-text="Take a look at this product:" class="wts-aap text-white"
+                            target="_blank">Whatsapp</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
 
 
-{{product.name}}
-<div [innerHTML]="product.description"></div>
-{{product.price}}<br>
-{{product.color}}<br>
-{{product.length}}<br>
-{{product.lengthUnit}}<br>
-{{product.width}}<br>
-{{product.widthUnit}}<br>
-{{product.height}}<br>
-{{product.heightUnit}}<br>
-{{product.weight}}<br>
-{{product.weightUnit}}<br>
-<a [href]="product.amazonLink" target="_blank">Buy on Amazon</a>
-<a *ngIf="product.flipkartLink" [href]="product.flipkartLink" target="_blank">Buy on Flipkart</a>
-{{product.category?.name}}<br>
-{{product.subCategory?.name}}<br>
+    {{product.name}}
+    <div [innerHTML]="product.description"></div>
+    {{product.price}}<br>
+    {{product.color}}<br>
+    {{product.length}}<br>
+    {{product.lengthUnit}}<br>
+    {{product.width}}<br>
+    {{product.widthUnit}}<br>
+    {{product.height}}<br>
+    {{product.heightUnit}}<br>
+    {{product.weight}}<br>
+    {{product.weightUnit}}<br>
+    <a [href]="product.amazonLink" target="_blank">Buy on Amazon</a>
+    <a *ngIf="product.flipkartLink" [href]="product.flipkartLink" target="_blank">Buy on Flipkart</a>
+    {{product.category?.name}}<br>
+    {{product.subCategory?.name}}<br>
 
-<a href="https://www.facebook.com/sharer/sharer.php?u={{router['location']._platformLocation.location.origin}}/product/{{product.id}}"
-    target="_blank"> Share to facebook </a>
-<br>
-<a href="https://web.whatsapp.com/send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}" data-text="Take a look at this product:"
-    class="wa_btn wa_btn_s" target="_blank">whatsapp web</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{router['location']._platformLocation.location.origin}}/product/{{product.id}}"
+        target="_blank"> Share to facebook </a>
+    <br>
+    <a href="https://web.whatsapp.com/send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}"
+        data-text="Take a look at this product:" class="wa_btn wa_btn_s" target="_blank">whatsapp web</a>
 
-<br>
-<a href="whatsapp://send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}" data-text="Take a look at this product:"
-    target="_blank">whatsapp app</a>
+    <br>
+    <a href="whatsapp://send?text={{router['location']._platformLocation.location.origin}}/product/{{product.id}}"
+        data-text="Take a look at this product:" target="_blank">whatsapp app</a>
 </div>
