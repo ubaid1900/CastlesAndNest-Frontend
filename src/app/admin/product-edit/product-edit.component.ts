@@ -12,6 +12,7 @@ import { UserProfileService } from 'src/app/services/user-profile.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FileService } from 'src/app/services/file.service';
 import { environment } from 'src/environments/environment';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-product-edit',
@@ -55,6 +56,10 @@ export class ProductEditComponent implements OnInit {
       availableQuantity:
         [
           { value: 0, disabled: false }
+        ],
+        dateAvailable:
+        [
+          { value: formatDate(new Date(), 'yyyy-MM-dd', 'en'), disabled: false }
         ],
       exclude:
         [
@@ -129,7 +134,7 @@ export class ProductEditComponent implements OnInit {
     //   [Validators.required, Validators.minLength(3)]
     //   , 
     //   // asyncValidators: 
-    //   // [duplicateCategoryValidator]
+    //   // [duplicateCategoryValidator]  
     //   // ,
     //   // updateOn
     //   'blur']
@@ -140,6 +145,9 @@ export class ProductEditComponent implements OnInit {
   private refresh() {
     this.product = this.route.snapshot.data.product;
     this.formGroup.patchValue(this.product);
+    // yyyy-MM-dd is a must to make the input type=date work
+    // TODO: work on locale rather than default en
+    this.dateAvailable?.setValue(formatDate(this.product.dateAvailable, 'yyyy-MM-dd', 'en'));
   }
   submit() {
     let totalFileCount = this.product.images?.length ?? 0;
@@ -187,15 +195,15 @@ export class ProductEditComponent implements OnInit {
       this.toastService.showError('There was a problem uploading the image(s). Please try again.');
       return;
     }
-    let totalFileCount = this.product.images?.length ?? 0 + files.length;
-    if (totalFileCount < this.minImages) {
-      this.toastService.showError(`Min ${this.minImages} images. Please try again.`);
-      return;
-    }
-    if (totalFileCount > this.maxImages) {
-      this.toastService.showError(`Max ${this.maxImages} images. Please try again.`);
-      return;
-    }
+    // let totalFileCount = this.product.images?.length ?? 0 + files.length;
+    // if (totalFileCount < this.minImages) {
+    //   this.toastService.showError(`Min ${this.minImages} images. Please try again.`);
+    //   return;
+    // }
+    // if (totalFileCount > this.maxImages) {
+    //   this.toastService.showError(`Max ${this.maxImages} images. Please try again.`);
+    //   return;
+    // }
 
     const formData = new FormData();
     for (let index = 0; index < files.length; index++) {
@@ -237,6 +245,7 @@ export class ProductEditComponent implements OnInit {
   get description() { return this.formGroup.get('description'); }
   get price() { return this.formGroup.get('price'); }
   get availableQuantity() { return this.formGroup.get('availableQuantity'); }
+  get dateAvailable() { return this.formGroup.get('dateAvailable'); }
   get exclude() { return this.formGroup.get('exclude'); }
   get reorderLevel() { return this.formGroup.get('reorderLevel'); }
   get color() { return this.formGroup.get('color'); }

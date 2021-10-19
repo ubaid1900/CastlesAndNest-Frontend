@@ -5,19 +5,19 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { SubCategory } from '../models/category';
+import { Category } from '../models/category';
 import { CategoryService } from '../services/category.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryResolver implements Resolve<SubCategory | null> {
+export class CategoryResolver implements Resolve<Category | null> {
   constructor(private categoryService: CategoryService) { }
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SubCategory | null> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Category | null> {
     let id = route.params['id'];
     if (+id <= 0) {
-      return of({} as SubCategory);
+      return of({} as Category);
     }
-    return this.categoryService.getSubCategory(id);
+    return this.categoryService.getCategory(id);
   }
 }

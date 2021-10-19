@@ -5,8 +5,10 @@ import { Observable } from 'rxjs';
 import { SubCategory, Category } from 'src/app/models/category';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
+import { FileService } from 'src/app/services/file.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sub-category-edit',
@@ -19,7 +21,8 @@ export class SubCategoryEditComponent implements OnInit {
   categories$!: Observable<Category[]>;
   formGroup!: FormGroup;
   constructor(private fb: FormBuilder, private userProfileService: UserProfileService, private authenticationService: AuthenticationService,
-    private router: Router, private toastService: ToastService, private categoryService: CategoryService, private route: ActivatedRoute) { }
+    private router: Router, private toastService: ToastService, private categoryService: CategoryService, private route: ActivatedRoute,
+    private fileService: FileService) { }
 
 
   ngOnInit(): void {
@@ -30,7 +33,8 @@ export class SubCategoryEditComponent implements OnInit {
           { value: '', disabled: false }
           , [Validators.required, Validators.minLength(3)]
         ],
-      categoryId: []
+      categoryId: [],
+      imageUrl: ['']
     });
     this.categories$ = this.categoryService.getCategories();
 
@@ -55,6 +59,9 @@ export class SubCategoryEditComponent implements OnInit {
     this.formGroup.patchValue(this.subCategory);
   }
   submit() {
+    if (!this.validateImage(this.imageUrl?.value ? 1 : 0)) {
+      return;
+    }
     const subcategory: SubCategory = { ...this.formGroup.value };
     if (subcategory.id > 0) {
       this.categoryService.updateSubCategory(subcategory).subscribe(
@@ -81,6 +88,55 @@ export class SubCategoryEditComponent implements OnInit {
 
     }
   }
+
+  minImages = 1;
+  maxImages = 1;
+  validateImage(fileCount: number): boolean {
+    let totalFileCount = fileCount;
+    if (totalFileCount < this.minImages) {
+      this.toastService.showError(`Min ${this.minImages} image(s). Please try again.`);
+      return false;
+    }
+    if (totalFileCount > this.maxImages) {
+      this.toastService.showError(`Max ${this.maxImages} images. Please try again.`);
+      return false;
+    }
+    return true;
+  }
+  onFileSelected(event: any) {
+
+    const files: File[] = event.target.files;
+    if (files.length === 0) {
+      this.toastService.showError('There was a problem uploading the image(s). Please try again.');
+      return;
+    }
+    if (!this.validateImage(files.length)) {
+      return;
+    }
+
+    const formData = new FormData();
+    for (let index = 0; index < files.length; index++) {
+      const file = files[index];
+      formData.append("thumbnail", file);
+    }
+
+    this.fileService.upload(formData)
+      .subscribe((result: string[]) => {
+
+        for (let index = 0; index < result.length; index++) {
+          const pi = result[index];
+          this.imageUrl?.setValue(`${environment.apiUrl}images/${pi}`)
+        }
+        this.toastService.showSuccess('Image(s) successfully uploaded. Please click save to save it with the product.');
+
+      },
+        (err => {
+          this.toastService.showError('There was a problem uploading the image(s). Please try again.');
+          console.error(err);
+        }
+        ));
+  }
   get name() { return this.formGroup.get('name'); }
   get categoryId() { return this.formGroup.get('categoryId'); }
+  get imageUrl() { return this.formGroup.get('imageUrl'); }
 }

@@ -74,6 +74,17 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4 my-2">
+            <label for="inputDateAvailable" class="col-form-label">Date Available</label>
+            <input class="form-control" type="date" name="inputDateAvailable"
+                formControlName="dateAvailable">
+                <div *ngIf="dateAvailable?.invalid && (dateAvailable?.dirty || dateAvailable?.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="dateAvailable?.errors?.required">
+                        Reorder Level is required.
+                    </div>
+                </div>
+        </div>
         <div class="col-md-4">
             <label for="inputReorderLevel" class="col-form-label">Reorder Level</label>
             <input type="text" [appNumbersOnly]="0" class="form-control" name="inputReorderLevel"

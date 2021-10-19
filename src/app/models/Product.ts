@@ -6,6 +6,7 @@ export interface Product {
     description: string;
     price: number;
     availableQuantity: number;
+    dateAvailable: Date;
     exclude: boolean;
     reorderLevel: number;
     color: string;

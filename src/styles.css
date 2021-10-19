@@ -49,3 +49,6 @@ carousel-control-prev {
   background-color: #03a452;
   color: white;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

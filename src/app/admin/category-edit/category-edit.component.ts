@@ -4,10 +4,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Category } from 'src/app/models/category';
+import { ProductImage } from 'src/app/models/Product';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
+import { FileService } from 'src/app/services/file.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UserProfileService } from 'src/app/services/user-profile.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-category-edit',
@@ -19,7 +22,8 @@ export class CategoryEditComponent implements OnInit {
   category!: Category;
   formGroup!: FormGroup;
   constructor(private fb: FormBuilder, private userProfileService: UserProfileService, private authenticationService: AuthenticationService,
-    private router: Router, private toastService: ToastService, private categoryService: CategoryService, private route: ActivatedRoute) { }
+    private router: Router, private toastService: ToastService, private categoryService: CategoryService, private route: ActivatedRoute,
+    private fileService: FileService) { }
 
 
   ngOnInit(): void {
@@ -29,7 +33,8 @@ export class CategoryEditComponent implements OnInit {
         [
           { value: '', disabled: false }
           , [Validators.required, Validators.minLength(3)]
-        ]
+        ],
+      imageUrl: ['']
     });
     // this.formGroup = this.fb.group({
     //   name: 
@@ -52,6 +57,9 @@ export class CategoryEditComponent implements OnInit {
     this.formGroup.patchValue(this.category);
   }
   submit() {
+    if (!this.validateImage(this.imageUrl?.value ? 1 : 0)) {
+      return;
+    }
     const category: Category = { ...this.formGroup.value };
     if (category.id > 0) {
       this.categoryService.updateCategory(category).subscribe(
@@ -78,7 +86,57 @@ export class CategoryEditComponent implements OnInit {
 
     }
   }
+
+  minImages = 1;
+  maxImages = 1;
+  validateImage(fileCount: number): boolean {
+    let totalFileCount = fileCount;
+    if (totalFileCount < this.minImages) {
+      this.toastService.showError(`Min ${this.minImages} image(s). Please try again.`);
+      return false;
+    }
+    if (totalFileCount > this.maxImages) {
+      this.toastService.showError(`Max ${this.maxImages} images. Please try again.`);
+      return false;
+    }
+    return true;
+  }
+  onFileSelected(event: any) {
+
+    const files: File[] = event.target.files;
+    if (files.length === 0) {
+      this.toastService.showError('There was a problem uploading the image(s). Please try again.');
+      return;
+    }
+    if (!this.validateImage(files.length)) {
+      return;
+    }
+
+    const formData = new FormData();
+    for (let index = 0; index < files.length; index++) {
+      const file = files[index];
+      formData.append("thumbnail", file);
+    }
+
+    this.fileService.upload(formData)
+      .subscribe((result: string[]) => {
+
+        for (let index = 0; index < result.length; index++) {
+          const pi = result[index];
+          this.imageUrl?.setValue(`${environment.apiUrl}images/${pi}`)
+        }
+        this.toastService.showSuccess('Image(s) successfully uploaded. Please click save to save it with the product.');
+
+      },
+        (err => {
+          this.toastService.showError('There was a problem uploading the image(s). Please try again.');
+          console.error(err);
+        }
+        ));
+  }
+
   get name() { return this.formGroup.get('name'); }
+  get imageUrl() { return this.formGroup.get('imageUrl'); }
 }
 
 @Injectable({ providedIn: 'root' })
