@@ -1,17 +1,21 @@
 <div class="container">
-<ng-template #loading>
-    <app-spinner></app-spinner>
-</ng-template>
-<ng-container *ngIf="products$ | async as products; else loading">
-    <div class="row">
-        <div class="col-lg-3 col-sm-4 product-item" *ngFor="let product of products">
-            <img class="card-img-top" height="100%" width="100%" 
-            src="https://hokipo.in/uploads/2020/09/PVC%20PlaceMat%20Set%20of%204%20with%20Runner-350.jpg" class="" alt=""/>
-            <a class="card-title ">{{product.name}}</a>
-            <h6 class="p-title"><strong> ₹ {{product.price}} </strong></h6>
- </div>
-    </div>    
-    
-</ng-container>
+    <h3> Products </h3>
+    <ng-template #loading>
+        <app-spinner></app-spinner>
+    </ng-template>
+    <ng-container *ngIf="products$ | async as products; else loading">
+        <div class="row">
+            <div class="col-lg-3 col-sm-4" *ngFor="let product of products">
+                <a href="/product/{{product.id}}">
+                    <img height="100px" width="100%" src="{{product.images[0]?.imageUrl}}" class="" alt="" />
+                </a>
+                <section class="pt-3 text-center">
+                    <h3><a class="card-title" href="/product/{{product.id}}">{{product.name}}</a></h3>
+                    <h5 class="fs-6 fw-bolder"> {{product.price | currency: 'INR'}}</h5>
+                </section>
+            </div>
+        </div>
+
+    </ng-container>
 
 </div>

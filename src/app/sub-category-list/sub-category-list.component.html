@@ -1,7 +1,7 @@
+<h3> Sub Categories </h3>
 <ng-template #loading>
     <app-spinner></app-spinner>
 </ng-template>
-<h3> Sub Categories </h3>
 <div *ngIf="subCategories$ | async as subCategories; else loading" class="container card bg-light">
     <ng-container *ngIf="display === 'carousel'">
         <ngb-carousel class="pb-2 mb-3" *ngIf="subCategories && subCategories.length" [interval]="carouselInterval"

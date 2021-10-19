@@ -24,38 +24,28 @@ export class ProductListingComponent implements OnInit {
 
   private refresh() {
     let query = this.route.snapshot.queryParams['query'] ?? '';
+    let sQuery = this.route.snapshot.queryParams['subcategoryid'] ?? '';
+
     this.products$ = this.productService.getProducts().pipe(
-      // flatMap((data: Product[]) => data),
       map(products =>
         products.filter(product => {
           let retValue = false;
           if (!this.authenticationService.isUserAdmin()) {
             retValue = !product.exclude;
           }
+          if (sQuery.length > 0) {
+            const sId = +sQuery;
+            retValue = product.subCategoryId === sId;
+          }
           if (query.length > 0) {
             retValue = product.name.toLocaleLowerCase().includes(query.toLocaleLowerCase());
           }
-          else {
+          if (query.length === 0 && sQuery.length === 0) {
             retValue = true;
           }
           return retValue;
         })
       )
     );
-    // this.productService.getProducts().subscribe(result => {
-    //   this.products = result;
-    //   if (!this.authenticationService.isUserAdmin()) {
-    //     this.products = this.products.filter(b => !b.exclude);
-    //   }
-    //   if (query.length > 0) {
-    //     this.products = this.products.filter(prd => {
-    //       if (prd.name.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
-    //         return prd;
-    //       }
-    //       return null;
-    //     });
-    //   }
-    // },
-    //   error => console.error(error));
   }
 }
