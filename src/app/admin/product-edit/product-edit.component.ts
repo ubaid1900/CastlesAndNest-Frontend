@@ -34,7 +34,7 @@ export class ProductEditComponent implements OnInit {
 
 
   ngOnInit(): void {
-    const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+    const reg = "(http|ftp|https)://[\\w-]+(\.[\\w-]+)+([\\w.,@?^=%&amp;:/~+#-]*[\\w@?^=%&amp;/~+#-])?";
 
     this.formGroup = this.fb.group({
       id: [0],
