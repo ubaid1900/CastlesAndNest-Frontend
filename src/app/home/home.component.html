@@ -6,7 +6,12 @@
       <!-- Handle branch node buttons here -->
       <span *ngIf="item.children && item.children.length > 0">
         <button mat-raised-button color="primary" [matMenuTriggerFor]="menu.childMenu" #topMenuTrigger="matMenuTrigger"
-          (mouseover)="topMenuTrigger.openMenu()">
+          (mouseover)="topMenuTrigger.openMenu()" class="d-none d-md-block">
+          {{item.displayName}}
+          <!-- <mat-icon>expand_more</mat-icon> -->
+        </button>
+        <button mat-raised-button color="primary" [matMenuTriggerFor]="menu.childMenu" #topMenuTrigger="matMenuTrigger"
+          class="d-md-none">
           {{item.displayName}}
           <!-- <mat-icon>expand_more</mat-icon> -->
         </button>
