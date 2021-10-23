@@ -10,17 +10,23 @@ carousel-control-prev {
   filter: invert(1);
 }
 
-.text-logo-green {
+.text-logo-green-bold {
   color: #00651f !important;
   font-weight: 700 !important;
 }
-.text-logo-pink {
-  color: #eb008b !important;
-  font-weight: 700 !important;
+
+.text-logo-green {
+  color: #00651f !important;
 }
 .text-logo-brown {
   color: #4b2c10 !important;
   font-weight: 700 !important;
+}
+.border-logo-brown {
+  border-color: #4b2c10 !important;
+}
+.border-logo-brown:focus { 
+  box-shadow: none;
 }
 .text-wheat {
   color: wheat !important;

@@ -1,18 +1,27 @@
 <!-- https://www.codeply.com/p/LJy7ooFrBP -->
 <header class="mx-3 mb-3 border-bottom header-middle">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="col-md-4 ">
-
-        <a href="/"><img src="assets/logo.jpg" alt="" height="120px"></a>
-
+        <a href="/"><img src="assets/logo.jpg" class="py-2" alt="" width="25%" height=""></a>
       </div>
       <div class="col-md-5">
         <form class="header-search my-4 d-flex align-top" (submit)="search()">
-          <input id="nav-bar-search" name="nav-bar-search" type="search" class="form-control"
-            placeholder="Search ..." aria-label="Search" [(ngModel)]="model" [ngbTypeahead]="typeaheadSearch"
-            [resultTemplate]="rt" [focusFirst]="false" [inputFormatter]="inputFormatter">
-          <button type="button" class="btn btn-primary btn-icn"><i class="bi bi-search"></i></button>
+          <!-- <input id="nav-bar-search" name="nav-bar-search" type="search"
+            class="input-group form-control lh-lg border-2 text-logo-green border-logo-brown" placeholder="Search ..."
+            aria-label="Search" [(ngModel)]="model" [ngbTypeahead]="typeaheadSearch" [resultTemplate]="rt"
+            [focusFirst]="false" [inputFormatter]="inputFormatter">
+          <button type="button" class="btn bg-logo-brown btn-icn px-3"><i class="bi bi-search"></i></button> -->
+
+          <div class="input-group">
+            <input type="text" class="form-control border border-logo-brown rounded-3 border-2 text-logo-green text-muted" placeholder="Search ..." aria-label="Search ..."
+              aria-describedby="basic-addon1" [(ngModel)]="model" [ngbTypeahead]="typeaheadSearch" [resultTemplate]="rt"
+              [focusFirst]="false" [inputFormatter]="inputFormatter">
+
+            <button class="input-group-text bg-logo-brown text-white" id="basic-addon1">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
         </form>
       </div>
       <div class="col-md-3">

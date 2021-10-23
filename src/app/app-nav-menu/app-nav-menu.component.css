@@ -17,8 +17,9 @@ li.nav-item.logo-text a {color:#000; font-size: 22px; font-weight: 600; text-dec
   } */
   .logo-text{color: #000; text-decoration: none; font-size: 25px; font-weight: 600; }
   .search-fld{ border-right:none;}
-  .btn-icn {  display: inline-block;   border: 1px solid #ccc;  background-color: #fff;  color: #666; border-radius: 3px;
-   font-size: 1.2rem;  border-left: none;   margin-left: -4px;}
+  .btn-icn { color: #fff; position: relative; right:40px;}
+  
+  
    .crt-align { /* position: relative; */  top: -77px;  right: -90px;}
    @media (min-width: 300px) and (max-width: 768px) {
 .hd-menu-right{ position:relative; top:-168px; margin-top:2px; }
