@@ -12,7 +12,7 @@ import { ToastService } from '../services/toast.service';
   styleUrls: ['./category-list.component.css']
 })
 export class CategoryListComponent implements OnInit, OnDestroy {
-  @Input() display = 'list'; // carousel or list
+  @Input() display = 'accordion'; // carousel or list or accordion
   @Input() showHeader = false;
   public carouselInterval = environment.carouselInterval;
   categories$!: Observable<Category[]>;
@@ -39,6 +39,17 @@ export class CategoryListComponent implements OnInit, OnDestroy {
     );
     this.subscriptions.push(subscription);
     this.categories$ = this.categoryService.getCategories();
+  }
+
+  deleteSubCategory(id: number) {
+    const subscription = this.categoryService.deleteSubCategory(id).subscribe(
+      () => this.toastService.showSuccess('Category successfully removed!!!'),
+      (err) => {
+        this.toastService.showError("There was a problem removing the category. Please try again.");
+        console.error(err);
+      }
+    );
+    this.subscriptions.push(subscription);
   }
 
 }

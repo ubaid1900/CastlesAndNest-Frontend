@@ -4,6 +4,8 @@
         <app-spinner></app-spinner>
     </ng-template>
     <ng-container *ngIf="products$ | async as products; else loading">
+        <section class="text-info" *ngIf="!products?.length">Currently, there are no products here, check back again!
+        </section>
         <div class="row">
             <div class="col-lg-3 col-sm-4 border" *ngFor="let product of products">
                 <a href="/product/{{product.id}}">
@@ -15,7 +17,5 @@
                 </section>
             </div>
         </div>
-
     </ng-container>
-
 </div>

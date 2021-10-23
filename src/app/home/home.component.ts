@@ -18,10 +18,11 @@ export class HomeComponent implements OnInit {
           this.items = [{ id: 0, displayName: "Explore Categories", children: [] }];
         }
         categories.forEach(category => {
-          const flyoutItem = { id: category.id, displayName: category.name, children: [] } as FlyoutItem;
+          const flyoutItem =
+            { id: category.id, displayName: category.name, children: [], route: `/productSearch`, queryParams: category.id.toString() } as FlyoutItem;
           category.subCategories.forEach(sc => {
             flyoutItem.children?.push({
-              id: sc.id, displayName: sc.name, route: `/productSearch`, queryParams:sc.id.toString()
+              id: sc.id, displayName: sc.name, route: `/productSearch`, queryParams: sc.id.toString()
             });
           });
           this.items[0].children?.push(flyoutItem);
