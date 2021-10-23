@@ -5,9 +5,9 @@
     </ng-template>
     <ng-container *ngIf="products$ | async as products; else loading">
         <div class="row">
-            <div class="col-lg-3 col-sm-4" *ngFor="let product of products">
+            <div class="col-lg-3 col-sm-4 border" *ngFor="let product of products">
                 <a href="/product/{{product.id}}">
-                    <img height="100px" width="100%" src="{{product.images[0]?.imageUrl}}" class="" alt="" />
+                    <img height="200px" width="100%" src="{{product.images[0]?.imageUrl}}" class="" alt="" />
                 </a>
                 <section class="pt-3 text-center">
                     <h3><a class="card-title" href="/product/{{product.id}}">{{product.name}}</a></h3>
