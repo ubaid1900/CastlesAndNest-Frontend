@@ -11,44 +11,45 @@ carousel-control-prev {
 }
 
 .text-logo-green {
-  color: #03a452 !important;
+  color: #00651f !important;
   font-weight: 700 !important;
 }
 .text-logo-pink {
   color: #eb008b !important;
   font-weight: 700 !important;
 }
-.text-logo-blue {
-  color: #303092 !important;
+.text-logo-brown {
+  color: #4b2c10 !important;
   font-weight: 700 !important;
 }
 .text-wheat {
   color: wheat !important;
 }
-.bg-purple {
-  background-color: #6f42c1;
-}
 .bg-logo-green {
-  background-color: #03a452;
+  background-color: #00651f;
 }
-.bg-logo-pink {
-  background-color: #eb008b;
-}
-.bg-logo-blue {
-  background-color: #303092;
+.bg-logo-brown {
+  background-color: #4b2c10;
 }
 .table-striped > tbody > tr:nth-child(2n + 1) > td,
 .table-striped > tbody > tr:nth-child(2n + 1) > th {
   background-color: #def1e8;
 }
 .table-striped > thead {
-  background-color: #03a452;
+  background-color: #00651f;
   color: white;
 }
 .thead {
-  background-color: #03a452;
+  background-color: #00651f;
   color: white;
 }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.cnUL1 ul {
+  list-style-image: url('./assets/list_button1.png');
+}
+.cnUL2 ul {
+  list-style-image: url('./assets/list_button2.PNG');
+}
