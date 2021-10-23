@@ -18,6 +18,9 @@ export class CategoryService {
   updateSubCategory(category: SubCategory) {
     return this.http.put<SubCategory>(environment.apiUrl + 'subcategories/' + category.id, category);
   }
+  deleteSubCategory(id: number) {
+    return this.http.delete<SubCategory>(`${environment.apiUrl}subcategories/${id}`);
+  }
   
   subCategoryExists(value: string) : Observable<boolean> {
     return of(true);
@@ -43,6 +46,9 @@ export class CategoryService {
   }
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${environment.apiUrl}categories/`);
+  }
+  deleteCategory(id: number) {
+    return this.http.delete<Category>(`${environment.apiUrl}categories/${id}`);
   }
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {

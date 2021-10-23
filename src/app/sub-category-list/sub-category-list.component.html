@@ -10,15 +10,11 @@
                 <div class="carousel-item active">
                     <a href="subCategory/{{subCategory.id}}">
                         <img *ngIf="subCategory.imageUrl" [src]="subCategory.imageUrl"
-                            alt="image for {{subCategory.name}}" style="width: 60%; height: 100px;">
+                            alt="{{subCategory.name}}" style="width: 60%; height: 100px;">
                     </a>
                     <a href="subCategory/{{subCategory.id}}">
-                        <h3 class="caption">{{subCategory.name}}</h3>
+                        <h5 class="caption">{{subCategory.name}}</h5>
                     </a>
-
-
-                    <a href="admin/subcategory/edit/{{subCategory.id}}"
-                        *ngIf="authenticationService.isUserAdmin()">Edit</a>
                 </div>
             </ng-template>
         </ngb-carousel>
@@ -28,15 +24,18 @@
     <ng-container *ngIf="display === 'list'">
         <div class="row">
             <div class="col-3 p-2 border" *ngFor=" let subcategory of subCategories">
-                <img [src]="subcategory.imageUrl" alt="image for {{subcategory.name}}"
-                style="width: 100%; height: 100px;">
-                <a href="subcategory/{{subcategory.id}}">{{subcategory.name}}</a>
+                <img [src]="subcategory.imageUrl" alt="{{subcategory.name}}"
+                    style="width: 100%; height: 100px;">
+                <h5><a href="subcategory/{{subcategory.id}}">{{subcategory.name}}</a></h5>
                 <div *ngIf="authenticationService.isUserAdmin()" class="col">
-                    <a href="admin/subcategory/edit/{{subcategory.id}}">Edit</a>
+                    <a class="pe-3" href="admin/subcategory/edit/{{subcategory.id}}">
+                        <span class="text-info"><i class="bi bi-pencil-square"></i>Edit</span></a>
+                    <a class="text-danger" (click)="deleteSubCategory(subcategory.id)">
+                        <i class="bi bi-x-square-fill"></i>Delete</a>
                 </div>
             </div>
         </div>
-        <a *ngIf="authenticationService.isUserAdmin()" href="admin/subcategory/edit/0">Add a Sub Category</a>
+        <a class="py-2" *ngIf="authenticationService.isUserAdmin()" href="admin/subcategory/edit/0">
+            <span class="text-primary"><i class="bi bi-plus-square-fill"></i>&nbsp;Add a Sub Category</span></a>
     </ng-container>
-    <br>
 </div>
