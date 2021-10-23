@@ -13,7 +13,7 @@
                 <input ngbButton name="accordion" type="radio" value="accordion"> Accordion
             </label>
             <label ngbButtonLabel class="btn bg-logo-brown text-white">
-                <input ngbButton name="list" type="radio" value="list"/> List
+                <input ngbButton name="list" type="radio" value="list" /> List
             </label>
         </div>
     </form>
@@ -55,10 +55,11 @@
         </a>
     </ng-container>
     <ng-container *ngIf="display === 'accordion'">
-        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-            <ngb-panel *ngFor="let category of categories" id="ngb-panel-0">
-                <ng-template ngbPanelTitle>
-                    <span>&#9733; {{category.name}} &#9733;</span>
+        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-10">
+            <ngb-panel *ngFor="let category of categories">
+                <ng-template ngbPanelHeader>
+                    <button ngbPanelToggle class="btn btn-link container-fluid text-start pl-0">&#9733; {{category.name}}
+                        &#9733;</button>
                 </ng-template>
                 <ng-template ngbPanelContent>
                     <div *ngIf="!category.subCategories?.length">There are no sub categories, browse
