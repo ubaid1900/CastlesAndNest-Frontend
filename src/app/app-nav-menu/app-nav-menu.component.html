@@ -14,11 +14,11 @@
           <button type="button" class="btn bg-logo-brown btn-icn px-3"><i class="bi bi-search"></i></button> -->
 
           <div class="input-group">
-            <input type="text" class="form-control border border-logo-brown rounded-3 border-2 text-logo-green text-muted" placeholder="Search ..." aria-label="Search ..."
+            <input type="text" class="form-control border border-logo-brown rounded-3 border-2 text-logo-green text-muted lh-lg" placeholder="Search ..." aria-label="Search ..."
               aria-describedby="basic-addon1" [(ngModel)]="model" [ngbTypeahead]="typeaheadSearch" [resultTemplate]="rt"
               [focusFirst]="false" [inputFormatter]="inputFormatter">
 
-            <button class="input-group-text bg-logo-brown text-white" id="basic-addon1">
+            <button class="input-group-text bg-logo-brown text-white px-3" id="basic-addon1">
               <i class="bi bi-search"></i>
             </button>
           </div>
@@ -27,15 +27,15 @@
       <div class="col-md-3">
         <ul class="navbar-nav hd-menu-right float-end mx-5 right-menu-align">
 
-          <li class="nav-item dropdown notification-align right-menu-notification">
+          <!--li class="nav-item dropdown notification-align right-menu-notification">
             <div *ngIf="authenticationService.isUserAdmin()" class="mb-3 notifi-icon">
               <ng-container *ngIf="hasNotifications$ | async as hasNotifications else everythingGreen">
                 <i class="bi bi-bell-fill text-danger"></i>
               </ng-container>
               <ng-template #everythingGreen> <i class="bi bi-bell-fill text-success"></i></ng-template>
             </div>
-          </li>
-          <li class="nav-item dropdown crt-align right-menu-cart">
+          </li-->
+          <!--li class="nav-item dropdown crt-align right-menu-cart">
             <div class="fs-1">
               <a href="/cart">
                 <i class="bi bi-cart4 position-relative">
@@ -47,7 +47,7 @@
                 </i>
               </a>
             </div>
-          </li>
+          </li-->
           <li class="nav-item dropdown my-4 right-menu-login">
             <a *ngIf='!isUserAuthenticated' class="btn btn-outline-primary" [routerLink]="['/user/login']"
               routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Login</a>
@@ -60,8 +60,8 @@
                     width="32" height="32" class="rounded-circle">
                 </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="profile-dropDown">
-                  <a class="btn" ngbDropdownItem href="/user/orders">Orders</a>
-                  <a class="btn" ngbDropdownItem href="/user/profile">Profile</a>
+                  <!--a class="btn" ngbDropdownItem href="/user/orders">Orders</a>
+                  <a class="btn" ngbDropdownItem href="/user/profile">Profile</a-->
                   <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
                     href="/admin/manageroles">Manage admins</a>
                   <button ngbDropdownItem (click)="logout()">Sign out</button>
