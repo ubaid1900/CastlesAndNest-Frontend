@@ -13,6 +13,7 @@ import { ToastService } from '../services/toast.service';
 })
 export class CategoryListComponent implements OnInit, OnDestroy {
   @Input() display = 'list'; // carousel or list
+  @Input() showHeader = false;
   public carouselInterval = environment.carouselInterval;
   categories$!: Observable<Category[]>;
   subscriptions: Subscription[] = [];

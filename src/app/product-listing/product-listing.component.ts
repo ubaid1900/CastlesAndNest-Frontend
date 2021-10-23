@@ -13,15 +13,13 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./product-listing.component.css']
 })
 export class ProductListingComponent implements OnInit {
-  @Input() limit: string = '0';
-  limitNumber = 0;
+  @Input() limit = 0;
   products$!: Observable<Product[]>;
   products!: Product[];
   constructor(private productService: ProductService, public authenticationService: AuthenticationService
     , private socialAuthService: SocialAuthService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.limitNumber = +this.limit;
     this.refresh();
   }
 
@@ -29,7 +27,7 @@ export class ProductListingComponent implements OnInit {
     let query = this.route.snapshot.queryParams['query'] ?? '';
     let sQuery = this.route.snapshot.queryParams['subcategoryid'] ?? '';
 
-    this.products$ = this.productService.getProducts(this.limitNumber, 0).pipe(
+    this.products$ = this.productService.getProducts(this.limit, 0).pipe(
       map(products =>
         products.filter(product => {
           let retValue = false;
