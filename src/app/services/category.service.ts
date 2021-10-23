@@ -9,8 +9,8 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class CategoryService {
-  getSubCategories(): Observable<SubCategory[]> {
-    return this.http.get<SubCategory[]>(`${environment.apiUrl}subcategories/`);
+  getSubCategories(categoryId: number = 0): Observable<SubCategory[]> {
+    return this.http.get<SubCategory[]>(`${environment.apiUrl}subcategories?catId=${categoryId}`);
   }
   addSubCategory(category: SubCategory) {
     return this.http.post<SubCategory>(environment.apiUrl + 'subcategories/', category);

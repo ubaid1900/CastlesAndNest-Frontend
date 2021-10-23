@@ -116,14 +116,14 @@ export class ProductEditComponent implements OnInit {
           , [Validators.minLength(3), Validators.pattern(reg)]
         ],
       categoryId: [
-        { value: '', disabled: false }
+        { value: '', disabled: false }, [Validators.required]
       ],
       subCategoryId: [
         { value: '', disabled: false }
       ]
     });
     this.categories$ = this.categoryService.getCategories();
-    this.subcategories$ = this.categoryService.getSubCategories();
+    // this.subcategories$ = this.categoryService.getSubCategories();
     this.lengthUnits$ = this.productService.getLengthUnits();
     this.weigthUnits$ = this.productService.getWeigthUnits();
 
@@ -141,6 +141,11 @@ export class ProductEditComponent implements OnInit {
     // });
 
     this.refresh();
+  }
+  categoryChanged() {
+    this.subCategoryId?.setValue(null);
+    const catId = this.categoryId?.value;
+    this.subcategories$ = this.categoryService.getSubCategories(catId);
   }
   private refresh() {
     this.product = this.route.snapshot.data.product;
