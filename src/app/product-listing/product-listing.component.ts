@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
-import { Observable, Subject } from 'rxjs';
-import { filter, flatMap, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Product } from '../models/Product';
-import { ProductService } from '../product.service';
+import { ProductService } from '../services/product.service';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({

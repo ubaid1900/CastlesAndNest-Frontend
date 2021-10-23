@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category, SubCategory } from 'src/app/models/category';
 import { Product, ProductImage, Unit } from 'src/app/models/Product';
-import { ProductService } from 'src/app/product.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -13,6 +12,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FileService } from 'src/app/services/file.service';
 import { environment } from 'src/environments/environment';
 import { formatDate } from '@angular/common';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-edit',
