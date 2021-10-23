@@ -13,6 +13,8 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./product-listing.component.css']
 })
 export class ProductListingComponent implements OnInit {
+  @Input() showHeader = false;
+  @Input() headerText = "Products";
   @Input() limit = 0;
   products$!: Observable<Product[]>;
   products!: Product[];

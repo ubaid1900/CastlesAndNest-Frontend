@@ -5,12 +5,12 @@
 <div *ngIf="categories$ | async as categories; else loading" class="container card bg-light">
     <ng-container *ngIf="display === 'carousel'">
         <ngb-carousel class="pb-2 mb-3" *ngIf="categories && categories.length" [interval]="carouselInterval"
-            [pauseOnHover]="true" [showNavigationArrows]="true" style="margin: 0 auto; width: 60%; text-align: center;">
+            [pauseOnHover]="true" [showNavigationArrows]="true" style="margin: 0 auto; text-align: center;">
             <ng-template ngbSlide *ngFor="let category of categories; let index= index;">
                 <div class="carousel-item active">
                     <a href="category/{{category.id}}">
                         <img *ngIf="category.imageUrl" [src]="category.imageUrl" alt="{{category.name}}"
-                            style="width: 60%; height: 100px;">
+                            style="width: 100%;">
                     </a>
                     <a href="category/{{category.id}}">
                         <h5 class="caption">{{category.name}}</h5>

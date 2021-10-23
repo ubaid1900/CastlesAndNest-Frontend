@@ -1,5 +1,5 @@
 <div class="container">
-    <h3> Products </h3>
+<h3 *ngIf="showHeader" class="text-center"><a href="/categories"> {{headerText}} </a></h3>
     <ng-template #loading>
         <app-spinner></app-spinner>
     </ng-template>
