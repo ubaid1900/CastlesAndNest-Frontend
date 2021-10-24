@@ -1,64 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
-  filter: invert(1);
+    filter: invert(1);
 }
 
 carousel-control-next,
 carousel-control-prev {
-  filter: invert(1);
+    filter: invert(1);
 }
 
 .text-logo-green-bold {
-  color: #00651f !important;
-  font-weight: 700 !important;
+    color: #00651f !important;
+    font-weight: 700 !important;
 }
 
 .text-logo-green {
-  color: #00651f !important;
-}
-.text-logo-brown {
-  color: #4b2c10 !important;
-  font-weight: 700 !important;
-}
-.border-logo-brown {
-  border-color: #4b2c10 !important;
-}
-.border-logo-brown:focus { 
-  box-shadow: none;
-}
-.text-wheat {
-  color: wheat !important;
-}
-.bg-logo-green {
-  background-color: #00651f;
-}
-.bg-logo-brown {
-  background-color: #4b2c10;
-}
-.table-striped > tbody > tr:nth-child(2n + 1) > td,
-.table-striped > tbody > tr:nth-child(2n + 1) > th {
-  background-color: #def1e8;
-}
-.table-striped > thead {
-  background-color: #00651f;
-  color: white;
-}
-.thead {
-  background-color: #00651f;
-  color: white;
+    color: #00651f !important;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.text-logo-brown {
+    color: #4b2c10 !important;
+    font-weight: 700 !important;
+}
+
+.border-logo-brown {
+    border-color: #4b2c10 !important;
+}
+
+.border-logo-brown:focus {
+    box-shadow: none;
+}
+
+.text-wheat {
+    color: wheat !important;
+}
+
+.bg-logo-green {
+    background-color: #00651f;
+}
+
+.bg-logo-brown {
+    background-color: #4b2c10;
+}
+
+.table-striped>tbody>tr:nth-child(2n + 1)>td,
+.table-striped>tbody>tr:nth-child(2n + 1)>th {
+    background-color: #def1e8;
+}
+
+.table-striped>thead {
+    background-color: #00651f;
+    color: white;
+}
+
+.thead {
+    background-color: #00651f;
+    color: white;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .cnUL1 ul {
-  list-style-image: url('./assets/list_button1.png');
+    list-style-image: url('./assets/list_button1.png');
 }
+
 .cnUL2 ul {
-  list-style-image: url('./assets/list_button2.PNG');
+    list-style-image: url('./assets/list_button2.PNG');
 }
+
 a {
-  color: #00651f;
+    color: #00651f;
 }
