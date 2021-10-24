@@ -1,13 +1,13 @@
-<h3 *ngIf="showHeader" class="text-center"><a href="/categories"> View All Categories </a></h3>
+<h4 *ngIf="showHeader" class="text-center pb-3"><a href="/categories" class=""> View All Categories </a></h4>
 <ng-template #loading>
     <app-spinner></app-spinner>
 </ng-template>
-<div *ngIf="categories$ | async as categories; else loading" class="container card bg-light">
+<div *ngIf="categories$ | async as categories; else loading" class="container-fluid bg-light pt-3 "> 
     <form class="text-end">
         <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="display"
             [ngModelOptions]="{standalone: true}">
             <label ngbButtonLabel class="btn bg-logo-brown text-white">
-                <input ngbButton name="carousel" type="radio" value="carousel"> Carousel
+                <input ngbButton name="carousel" type="radio" value="carousel">Carousel
             </label>
             <label ngbButtonLabel class="btn bg-logo-brown text-white">
                 <input ngbButton name="accordion" type="radio" value="accordion"> Accordion
@@ -28,7 +28,7 @@
                             style="width: 100%;">
                     </a>
                     <a href="productsearch?catId={{category.id}}">
-                        <h5 class="caption">{{category.name}}</h5>
+                        <h5 class="caption pt-3">{{category.name}}</h5>
                     </a>
                 </div>
             </ng-template>
@@ -85,4 +85,5 @@
             </ngb-panel>
         </ngb-accordion>
     </ng-container>
-</div>
+</div> 
+ 
