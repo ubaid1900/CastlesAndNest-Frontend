@@ -16,6 +16,7 @@ export class ProductListingComponent implements OnInit {
   @Input() showHeader = false;
   @Input() headerText = "Products";
   @Input() limit = 0;
+  @Input() relatedId = 0;
   products$!: Observable<Product[]>;
   products!: Product[];
   constructor(private productService: ProductService, public authenticationService: AuthenticationService
@@ -30,7 +31,7 @@ export class ProductListingComponent implements OnInit {
     let catId = this.route.snapshot.queryParams['catId'] ?? '0';
     let subCatId = this.route.snapshot.queryParams['subCatId'] ?? '0';
 
-    this.products$ = this.productService.getProducts(this.limit, catId, subCatId).pipe(
+    this.products$ = this.productService.getProducts(this.limit, catId, subCatId, this.relatedId).pipe(
       map(products =>
         products.filter(product => {
           let retValue = false;
