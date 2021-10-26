@@ -13,4 +13,7 @@ export class WeatherForecastService {
   getForecasts() {
     return this.http.get<WeatherForecast[]>(environment.apiUrl + 'weatherforecast');
   }
+  post() {
+    return this.http.post(environment.apiUrl + 'weatherforecast', {a:'b'});
+  }
 }
