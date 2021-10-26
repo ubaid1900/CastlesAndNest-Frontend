@@ -15,8 +15,9 @@ export class ProductService {
   addProduct(product: Product) {
     return this.http.post<Product>(environment.apiUrl + 'products/', product);
   }
-  getProducts(limit: number, catId: number = 0, subCatId: number = 0): Observable<Product[]> {
-    return this.http.get<Product[]>(`${environment.apiUrl}products?limit=${limit}&catId=${catId}&subCatId=${subCatId}`);
+  getProducts(limit: number, catId: number = 0, subCatId: number = 0, relatedId = 0): Observable<Product[]> {
+    return this.http.get<Product[]>(
+      `${environment.apiUrl}products?limit=${limit}&catId=${catId}&subCatId=${subCatId}&relatedId=${relatedId}`);
   }
   getProduct(id: number): Observable<Product> {
     return this.http.get<Product>(environment.apiUrl + 'products/' + id);
