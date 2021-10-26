@@ -195,7 +195,7 @@
     </div>
     <div class="col-md-4">
         <label for="formFileLg" class="form-label">Upload the image (Minimum {{minImages}}, Maximum
-            {{maxImages}})</label>
+            {{maxImages}}) (Avoid special characters in file name. _ is fine.)</label>
         <form enctype="multipart/form-data">
             <input class="form-control form-control-lg" id="formFileLg" type="file" name="formFileLg"
                 (change)="onFileSelected($event)" multiple accept="image/*">

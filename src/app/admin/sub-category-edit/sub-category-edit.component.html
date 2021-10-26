@@ -33,7 +33,7 @@
     </div>
     <div class="row">        
         <div class="col-md-4 my-2">
-            <label for="formFileLg" class="form-label">Upload the image</label>
+            <label for="formFileLg" class="form-label">Upload the image (Avoid special characters in file name. _ is fine.)</label>
             <form enctype="multipart/form-data">
                 <input class="form-control form-control-lg" id="formFileLg" type="file" name="formFileLg"
                     (change)="onFileSelected($event)" accept="image/*">
@@ -42,7 +42,7 @@
         <div class="col-md-4 my-2">
             <br>
             <a *ngIf="subCategory.imageUrl" href="{{subCategory.imageUrl}}" target="_blank">
-                <img width="50px" height="50px" name="imageUrl" [src]="subCategory.imageUrl" alt="{{subcategory.name}"
+                <img width="50px" height="50px" name="imageUrl" [src]="subCategory.imageUrl" [alt]="subCategory.name"
                     loading="lazy">
             </a>
         </div>
