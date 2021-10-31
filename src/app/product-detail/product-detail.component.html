@@ -10,14 +10,14 @@
           </nav>
     </div>
     <div class="row my-5">
-        <div class="col-md-5 col-sm-12">
+        <div class="col-md-6 col-sm-12">
             <p *ngIf="!(product?.images && product?.images?.length)" class="text-warning">The product does not have any
                 images associated with it.</p>
             <ngb-carousel #carousel *ngIf="product?.images && product?.images?.length" [interval]="carouselInterval"
                 [pauseOnHover]="false" [showNavigationArrows]="true" style="margin: 0 auto; text-align: center;">
                 <ng-template id="{{image?.id}}" ngbSlide *ngFor="let image of product?.images; let index= index;">
                     <div class="carousel-item active">
-                        <img [src]="image.imageUrl" alt="{{product?.name}}" style="width: 100%; max-height: 500px;">
+                        <img [src]="image.imageUrl" alt="" style="width: 100%; max-height: 500px;">
                     </div>
                 </ng-template>
             </ngb-carousel>
@@ -25,16 +25,15 @@
             <section *ngIf="product?.images && product?.images?.length">
                 <div class="row">
                     <div class="col-2 border" *ngFor="let image of product?.images; let index= index;">
-                        <img id="{{product?.id}}" (click)="setSlide(image.id)" [src]="image.imageUrl" alt="{{product?.name}}" style="width: 100%; max-height: 500px;">
+                        <img id="{{product?.id}}" (click)="setSlide(image.id)" [src]="image.imageUrl" alt="" style="width: 100%; max-height: 500px;">
                     </div>
                 </div>
             </section>
         </div>
-        <div class="col-md-7 col-sm-12">
+        <div class="col-md-6 col-sm-12">
             <h4 class="title">{{product.name}}</h4>
             Color: {{product.color}}
             <div class="cnUL1" [innerHTML]="product.description"></div>
-            <!-- <div class="cnUL2" [innerHTML]="product.description"></div> -->
             <div class="link-Amazon justify-content-end" style="display: flex;">
                 <ul>
                     <li> <a [href]="product.amazonLink" class="bg-dark text-white text-normal" target="_blank">Buy on Amazon</a>
