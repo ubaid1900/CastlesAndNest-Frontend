@@ -1,0 +1,72 @@
+h6.text-algn{text-align:justify !important;}
+.lst-product{box-shadow: 0 6px 25px rgb(12 89 219 / 9%) }
+
+.prdct-img::before, .prdct-img::after {
+    background: rgba(255, 255, 255, 0.41) none repeat scroll 0 0;
+    content: "";
+    height: 0;
+    left: 0;
+    opacity: 1;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transition: all 0.8s ease-in-out 0s;
+    width: 0;
+}
+.lst-product:hover .prdct-img::before,
+.lst-product:hover .prdct-img::after {
+    height: 100%;
+    opacity: 0;
+    width: 100%;
+}
+.prdct-img { position: relative;}
+.prdct-img::before,
+.prdct-img::after {
+    background: rgba(255, 255, 255, 0.41) none repeat scroll 0 0;
+    content: "";
+    height: 0;
+    left: 0;
+    opacity: 1;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transition: all 0.8s ease-in-out 0s;
+    width: 0;
+}
+.prdct-img::after {
+    bottom: 0;
+    left: auto;
+    margin: auto;
+    right: 0;
+    top: auto;
+}
+
+
+/*heading border*/
+.heading a:hover{ color:#4b2c10;}
+.heading .title1::before {
+    content: " ";
+    position: absolute;
+    width: 50px;
+    height: 4px;
+    background-color:green;
+    bottom: -1px ;
+    left: 50%;
+    margin-left: -25px;
+    z-index: 1;
+    border-radius: 9px; }
+
+    .heading .title1::after {
+         content: " ";
+         position: absolute;
+         width: 120px;
+         height: 2px;
+         bottom: 0;
+         left: 50%;
+         margin-left: -60px;
+     }
+     .heading .title1 {
+         position: relative;
+         padding: 0 0 20px 0;
+         margin-bottom: 40px;
+     }

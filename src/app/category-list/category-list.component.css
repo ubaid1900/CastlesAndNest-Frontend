@@ -1,0 +1,29 @@
+.sCategory{box-shadow: 0 6px 25px rgb(12 89 219 / 9%) }
+/*heading border*/
+.heading a:hover{ color:#4b2c10;}
+.heading .title1::before {
+    content: " ";
+    position: absolute;
+    width: 50px;
+    height: 4px;
+    background-color:green;
+    bottom: -1px ;
+    left: 50%;
+    margin-left: -25px;
+    z-index: 1;
+    border-radius: 9px; }
+
+    .heading .title1::after {
+         content: " ";
+         position: absolute;
+         width: 120px;
+         height: 2px;
+         bottom: 0;
+         left: 50%;
+         margin-left: -60px;
+     }
+     .heading .title1 {
+         position: relative;
+         padding: 0 0 20px 0;
+         margin-bottom: 40px;
+     }

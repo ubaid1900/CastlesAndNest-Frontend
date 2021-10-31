@@ -1,5 +1,8 @@
 <div class="container">
-    <h4 *ngIf="showHeader" class="text-center py-3"><a href="/categories"> {{headerText}} </a></h4>
+    <div class="heading">
+        <h3 *ngIf="showHeader" class="text-center py-3 title1"><a href="/categories"
+                class="text-decoration-none text-dark"> {{headerText}} </a></h3>
+    </div>
     <ng-template #loading>
         <app-spinner></app-spinner>
     </ng-template>
@@ -7,18 +10,16 @@
         <section class="text-info" *ngIf="!products?.length">Currently, there are no products here, check back again!
         </section>
         <div class="row">
-            <div class="col-lg-3 col-sm-4 border border-1 my-3 p-1" *ngFor="let product of products">
-                <a href="/product/{{product.id}}">
-                    <img height="240px" width="100%" src="{{product.images[0]?.imageUrl}}" class="" alt="" />
-                </a>
-                <section class="pt-3 text-center">
-                    <h5><a class="text-md-start fw-light lh-xm text-decoration-none text-gray"
-                            href="/product/{{product.id}}">{{product.name}}</a></h5>
-                </section>
+            <div class="col-lg-3 col-sm-4 my-3 p-1 lst-product single-banner" *ngFor="let product of products">
+                <div class="prdct-img">
+                    <a href="/product/{{product.id}}">
+                        <img height="240px" width="100%" src="{{product.images[0]?.imageUrl}}" class="" alt="" />
+                    </a>
+                </div>
                 <section class="pt-3">
-                    <h6><a class="card-title" href="/product/{{product.id}}">{{product.name}}</a></h6>
-
-                    <h5 class="fs-6 fw-bolder"> {{product.price | currency: 'INR'}}</h5>
+                    <h6 class="text-algn px-2"><a class="text-body lh-sm"
+                            href="/product/{{product.id}}">{{product.name}}</a></h6>
+                    <h6 class="text-logo-green py-3 px-2"> {{product.price | currency: 'INR'}}</h6>
                 </section>
             </div>
         </div>

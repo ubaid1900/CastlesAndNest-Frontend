@@ -1,7 +1,15 @@
 <div class="container">
     <div *ngIf="authenticationService.isUserAdmin()" class="row"><a href="admin/product/edit/{{product.id}}" class="text-info"><i class="bi bi-pencil-square"></i>Edit</a>
     </div>
-    <div class="row">
+    <div class="">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+            </ol>
+          </nav>
+    </div>
+    <div class="row my-5">
         <div class="col-md-5 col-sm-12">
             <p *ngIf="!(product?.images && product?.images?.length)" class="text-warning">The product does not have any
                 images associated with it.</p>
@@ -29,9 +37,9 @@
             <!-- <div class="cnUL2" [innerHTML]="product.description"></div> -->
             <div class="link-Amazon justify-content-end" style="display: flex;">
                 <ul>
-                    <li> <a [href]="product.amazonLink" class="bg-warning text-dark" target="_blank">Buy on Amazon</a>
+                    <li> <a [href]="product.amazonLink" class="bg-dark text-white text-normal" target="_blank">Buy on Amazon</a>
                     </li>
-                    <li><a *ngIf="product.flipkartLink" [href]="product.flipkartLink"
+                    <li><a [href]="product.flipkartLink"
                             class="link-facebook bg-warning text-white" target="_blank">Buy on Flipkart</a></li>
                 </ul>
             </div>
@@ -57,7 +65,8 @@
         </div>
     </div>
 </div>
+<br>
 <hr>
 <div class="container">
-    <app-product-listing [relatedId]="product.id" [limit]="8" [showHeader]="true" headerText="You might also like:"></app-product-listing>
+    <app-product-listing [relatedId]="product.id" [limit]="8" [showHeader]="true" headerText="You Might Also Like"></app-product-listing>
 </div> 
