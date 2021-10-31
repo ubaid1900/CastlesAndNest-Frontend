@@ -57,11 +57,15 @@ export class ProductEditComponent implements OnInit {
         [
           { value: 0, disabled: false }
         ],
-        dateAvailable:
+      dateAvailable:
         [
           { value: formatDate(new Date(), 'yyyy-MM-dd', 'en'), disabled: false }
         ],
       exclude:
+        [
+          { value: false, disabled: false }
+        ],
+      featured:
         [
           { value: false, disabled: false }
         ],

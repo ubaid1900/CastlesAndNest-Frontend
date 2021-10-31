@@ -1,9 +1,9 @@
 <!-- https://www.codeply.com/p/LJy7ooFrBP -->
 <header class="mx-3 mb-3 border-bottom header-middle">
-  <div class="container">
+  <div class="px-3">
     <div class="row">
       <div class="col-md-4 ">
-        <a href="/"><img src="assets/logo.jpg" class="py-2" alt="" width="25%" height=""></a>
+        <a routerLink="./"><img src="assets/logo.jpg" class="py-2" alt="" width="25%" height=""></a>
       </div>
       <div class="col-md-5">
         <form class="header-search my-4 d-flex align-top" (submit)="search()">
@@ -14,7 +14,7 @@
           <button type="button" class="btn bg-logo-brown btn-icn px-3"><i class="bi bi-search"></i></button> -->
 
           <div class="input-group">
-            <input type="text" class="form-control border border-logo-brown rounded-3 border-2 text-logo-green text-muted lh-lg" placeholder="Search ..." aria-label="Search ..."
+            <input type="text" role="search" class="form-control border border-logo-brown rounded-3 border-2 text-logo-green text-muted lh-lg" placeholder="Search ..." aria-label="Search ..."
               aria-describedby="basic-addon1" [(ngModel)]="model" [ngbTypeahead]="typeaheadSearch" [resultTemplate]="rt"
               [focusFirst]="false" [inputFormatter]="inputFormatter">
 
@@ -63,7 +63,7 @@
                   <!--a class="btn" ngbDropdownItem href="/user/orders">Orders</a>
                   <a class="btn" ngbDropdownItem href="/user/profile">Profile</a-->
                   <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
-                    href="/admin/manageroles">Manage admins</a>
+                    href="./admin/manageroles">Manage admins</a>
                   <button ngbDropdownItem (click)="logout()">Sign out</button>
                 </div>
               </div>

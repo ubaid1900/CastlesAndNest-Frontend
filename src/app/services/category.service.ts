@@ -22,8 +22,8 @@ export class CategoryService {
     return this.http.delete<SubCategory>(`${environment.apiUrl}subcategories/${id}`);
   }
   
-  subCategoryExists(value: string) : Observable<boolean> {
-    return of(true);
+  subCategoryExists(id: number, categoryId: number, value: string) : Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiUrl}subcategories/nameexists/${id}/${categoryId}/${value}`);
   }
   getSubCategory(id: number): Observable<SubCategory | null> {
     return this.http.get<SubCategory>(`${environment.apiUrl}subcategories/${id}`);
@@ -38,8 +38,8 @@ export class CategoryService {
     return this.http.put<Category>(environment.apiUrl + 'categories/' + category.id, category);
   }
   
-  categoryExists(value: string) : Observable<boolean> {
-    return of(true);
+  categoryExists(id: number, value: string) : Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiUrl}categories/nameexists/${id}/${value}`);
   }
   getCategory(id: number): Observable<Category | null> {
     return this.http.get<Category>(`${environment.apiUrl}categories/${id}`);

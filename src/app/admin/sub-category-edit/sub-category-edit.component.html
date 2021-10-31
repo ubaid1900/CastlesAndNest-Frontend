@@ -26,7 +26,7 @@
                     Name must be at least 3 characters long.
                 </div>
                 <div *ngIf="name?.errors?.isTaken">
-                    Duplicate Category Name
+                    Duplicate Sub Category Name
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
     <div class="row">
         <div class="col-md-4">
             <button [disabled]="thisForm.invalid" type="submit" class="btn btn-primary">Save</button>
-            <a href="/subcategories" class="btn btn-secondary">Back to Sub Categories</a>
+            <a href="./subcategories" class="btn btn-secondary">Back to Sub Categories</a>
         </div>
     </div>
 </form>

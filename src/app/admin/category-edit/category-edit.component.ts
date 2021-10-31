@@ -1,10 +1,9 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidator, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Category } from 'src/app/models/category';
-import { ProductImage } from 'src/app/models/Product';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { FileService } from 'src/app/services/file.service';
@@ -23,7 +22,9 @@ export class CategoryEditComponent implements OnInit {
   formGroup!: FormGroup;
   constructor(private fb: FormBuilder, private userProfileService: UserProfileService, private authenticationService: AuthenticationService,
     private router: Router, private toastService: ToastService, private categoryService: CategoryService, private route: ActivatedRoute,
-    private fileService: FileService) { }
+    private fileService: FileService
+    , private duplicateCategoryValidator: DuplicateCategoryValidatorService
+  ) { }
 
 
   ngOnInit(): void {
@@ -31,29 +32,21 @@ export class CategoryEditComponent implements OnInit {
       id: [0],
       name:
         [
-          { value: '', disabled: false }
-          , [Validators.required, Validators.minLength(3)]
+          { value: '', disabled: false },
+          {
+            validators: [Validators.required, Validators.minLength(3)],
+            asyncValidators: [this.duplicateCategoryValidator.duplicateValidator()],
+            updateOn: 'blur'
+          }
         ],
       imageUrl: ['']
-    });
-    // this.formGroup = this.fb.group({
-    //   name: 
-    //   [{ value: '', disabled: false },
-    //   // validators: 
-    //   [Validators.required, Validators.minLength(3)]
-    //   , 
-    //   // asyncValidators: 
-    //   // [duplicateCategoryValidator]
-    //   // ,
-    //   // updateOn
-    //   'blur']
-    // });
+    }
+    );
 
     this.refresh();
   }
   private refresh() {
     this.category = this.route.snapshot.data.category;
-    console.dir(this.category);
     this.formGroup.patchValue(this.category);
   }
   submit() {
@@ -123,7 +116,8 @@ export class CategoryEditComponent implements OnInit {
 
         for (let index = 0; index < result.length; index++) {
           const pi = result[index];
-          this.imageUrl?.setValue(`${environment.apiUrl}images/${pi}`)
+          this.imageUrl?.setValue(`${environment.apiUrl}images/${pi}`);
+          this.category.imageUrl = `${environment.apiUrl}images/${pi}`;
         }
         this.toastService.showSuccess('Image(s) successfully uploaded. Please click save to save it with the product.');
 
@@ -140,17 +134,18 @@ export class CategoryEditComponent implements OnInit {
 }
 
 @Injectable({ providedIn: 'root' })
-export class duplicateCategoryValidator implements AsyncValidator {
+export class DuplicateCategoryValidatorService {
   constructor(private categoryService: CategoryService) {
-    debugger;
   }
 
-  validate(
-    ctrl: AbstractControl
-  ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
-    return this.categoryService.categoryExists(ctrl.value).pipe(
-      map(isTaken => (isTaken ? { isTaken: true } : null)),
-      catchError(() => of(null))
-    );
+  duplicateValidator(): AsyncValidatorFn {
+    return (ctrl: AbstractControl): Observable<{ [key: string]: any } | null> => {
+
+      const id = ctrl.parent?.get('id')?.value;
+      return this.categoryService.categoryExists(id, ctrl.value).pipe(
+        map(isTaken => (isTaken ? { isTaken: true } : null))
+      );
+    };
+
   }
 }

@@ -8,6 +8,7 @@ export interface Product {
     availableQuantity: number;
     dateAvailable: Date;
     exclude: boolean;
+    featured: boolean;
     reorderLevel: number;
     color: string;
     length: number;

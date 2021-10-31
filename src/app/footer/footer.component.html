@@ -1,21 +1,23 @@
 <ng-template #loading>
     <app-spinner></app-spinner>
 </ng-template>
-<div class="px-2" *ngIf="companyInfo$ | async as companyInfo else loading">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-muted">© {{companyInfo.name}}</p>
-        <p class="col-md-4 mb-0">Designed and Developed by <a href="tel:+917036989524">Elhamd Technologies</a></p>
+<div class="px-3 align-bottom" *ngIf="companyInfo$ | async as companyInfo else loading">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-1 my-2 border-top">
+        <p class="col-md-2 mb-0 border-0 align-bottom">© {{companyInfo.name}}</p>
+        <p class="col-md-4 mb-0 text-muted border-0">Designed and Developed by
+            <strong><em><a href="tel:+917036989524">Elhamd Technologies</a></em></strong>
+        </p>
 
-        <ul class="nav col-md-4 justify-content-end">
-            <li class="nav-item"><a target="_blank" href="http://maps.google.com/?q={{companyInfo.address}}"
-                    class="nav-link px-2 text-logo-brown"><i class="bi bi-geo-alt-fill"> Visit us</i></a></li>
+        <ul class="nav col-md-3 border-0 justify-content-end p-none">
             <li class="nav-item"><a href="tel:{{companyInfo.phonenumber}}" class="nav-link px-2 text-logo-brown"><i
                         class="bi bi-telephone-plus-fill"> Call us</i></a></li>
             <li class="nav-item"><a href="mailto:{{companyInfo.email}}" class="nav-link px-2 text-logo-brown"><i
                         class="bi bi-envelope-fill"> Email us</i></a></li>
-            <li class="nav-item"><a href="/privacypolicy" class="nav-link px-2 text-logo-brown"><i class="bi bi-shield-fill-check">
-                        Privacy</i></a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-logo-brown"><i class="bi bi-building"> About</i></a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-logo-brown"><i class="bi bi-building">
+                        About</i></a></li>
         </ul>
+        <p class="col-md-3 mb-0 border-0 text-end">
+            <app-social-media></app-social-media>
+        </p>
     </footer>
 </div>

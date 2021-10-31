@@ -58,7 +58,7 @@
                 <td>
                     <!-- <img height="100" width="100" src="{{order.imageUrl}}" /> -->
                 </td>
-                <td> <a href="user/order/{{order.id}}">Order # {{order.bookItems.length ?
+                <td> <a href="./user/order/{{order.id}}">Order # {{order.bookItems.length ?
                         order.bookItems[0]?.book?.description : order.offerItems[0]?.offer?.description}}</a>
                 </td>
                 <td>{{order.bookItems.length ? order.bookItems[0]?.book?.description :

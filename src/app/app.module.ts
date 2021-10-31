@@ -26,6 +26,8 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FlyoutComponent } from './flyout/flyout.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
+import { FlyoutWrapperComponent } from './flyout-wrapper/flyout-wrapper.component';
+import { SocialMediaComponent } from './social-media/social-media.component';
 
 
 export function tokenGetter() {
@@ -44,7 +46,9 @@ export function tokenGetter() {
     SubCategoryListComponent,
     ProductDetailComponent,
     ProductListingComponent,
-    FlyoutComponent
+    FlyoutComponent,
+    FlyoutWrapperComponent,
+    SocialMediaComponent
   ],
   imports: [
     BrowserModule,
