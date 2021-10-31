@@ -3,7 +3,7 @@
   <div class="px-3">
     <div class="row">
       <div class="col-md-4 ">
-        <a routerLink="./"><img src="assets/logo.jpg" class="py-2" alt="" width="25%" height=""></a>
+        <a href="./"><img src="assets/logo.jpg" class="py-2" alt="" width="25%" height=""></a>
       </div>
       <div class="col-md-5">
         <form class="header-search my-4 d-flex align-top" (submit)="search()">
@@ -60,8 +60,11 @@
                     width="32" height="32" class="rounded-circle">
                 </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="profile-dropDown">
-                  <!--a class="btn" ngbDropdownItem href="/user/orders">Orders</a>
-                  <a class="btn" ngbDropdownItem href="/user/profile">Profile</a-->
+                  <a class="btn" ngbDropdownItem href="./admin/product/edit/0">Add a Product</a>
+                  <a class="btn" ngbDropdownItem href="./admin/category/edit/0">Add a Category</a>
+                  <a class="btn" ngbDropdownItem href="./admin/subcategory/edit/0">Add a Sub-Category</a>
+                  
+                  <!--a class="btn" ngbDropdownItem href="/user/profile">Profile</a-->
                   <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
                     href="./admin/manageroles">Manage admins</a>
                   <button ngbDropdownItem (click)="logout()">Sign out</button>

@@ -1,5 +1,3 @@
-<!-- <input type="text" class="form-control" required name="inputTitle" [(ngModel)]="category.name" duplicateCategoryNameValidator> -->
-
 <form class="container" (submit)="submit()" [formGroup]="formGroup" #thisForm="ngForm">
     <h1 class="bd-title" id="content">Manage Category</h1>
     <div class="row">
@@ -35,8 +33,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <button [disabled]="thisForm.invalid" type="submit" class="btn btn-primary">Save</button>
+        <div class="col-md-8">
+            <button [disabled]="thisForm.invalid" type="submit" class="btn btn-primary me-3">Save</button>
             <a href="./categories" class="btn btn-secondary">Back to Categories</a>
         </div>
     </div>
