@@ -14,7 +14,7 @@ import { ToastService } from '../services/toast.service';
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryListComponent implements OnInit, OnDestroy {
-  @Input() display = 'menu'; // carousel or list or accordion or menu
+  @Input() display = 'carousel'; // carousel or list or accordion or menu
   @Input() showHeader = false;
   public carouselInterval = environment.carouselInterval;
   categories$!: Observable<Category[]>;

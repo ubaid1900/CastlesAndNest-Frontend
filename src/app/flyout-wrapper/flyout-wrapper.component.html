@@ -2,13 +2,14 @@
   <span *ngFor="let item of items">
     <!-- Handle branch node buttons here -->
     <span *ngIf="item.children && item.children.length > 0">
+      <!-- <button mat-raised-button color="primary">Explore Categories</button> -->
       <button mat-raised-button color="primary" [matMenuTriggerFor]="menu.childMenu" #topMenuTrigger="matMenuTrigger"
-        (mouseover)="topMenuTrigger.openMenu()" class="d-none d-md-block">
+        (mouseover)="topMenuTrigger.openMenu()" class="d-none d-md-block btn bg-logo-brown text-wheat">
         {{item.displayName}}
         <!-- <mat-icon>expand_more</mat-icon> -->
       </button>
       <button mat-raised-button color="primary" [matMenuTriggerFor]="menu.childMenu" #topMenuTrigger="matMenuTrigger"
-        class="d-md-none">
+        class="d-md-none btn bg-logo-brown text-wheat">
         {{item.displayName}}
         <!-- <mat-icon>expand_more</mat-icon> -->
       </button>
@@ -16,7 +17,8 @@
     </span>
     <!-- Leaf node buttons here -->
     <span *ngIf="!item.children || item.children.length === 0">
-      <button mat-button color="primary" [routerLink]="item.route" [queryParams]="item.queryParams">
+      <button mat-button color="primary" [routerLink]="item.route" [queryParams]="item.queryParams"
+        class="btn bg-logo-brown text-wheat">
         {{item.displayName}}
       </button>
     </span>

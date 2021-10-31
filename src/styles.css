@@ -73,3 +73,7 @@ a {
   white-space: nowrap;
   border: 0;
 }
+.mat-menu-item:hover:not([disabled]), .mat-menu-item.cdk-program-focused:not([disabled]), .mat-menu-item.cdk-keyboard-focused:not([disabled]), .mat-menu-item-highlighted:not([disabled]) {
+  background: rgba(0,0,0,.04);
+  color: #4b2c10 !important;
+}
