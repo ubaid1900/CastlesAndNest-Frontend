@@ -49,11 +49,11 @@
             <ng-container *ngIf="groupedProducts$ | async as groupedProducts; else loading">
                 <ngb-carousel class="pb-2 mb-3" *ngIf="groupedProducts && groupedProducts.length"
                     [interval]="carouselInterval" [pauseOnHover]="true" [showNavigationArrows]="true"
-                    style="margin: 0 auto; text-align: center;">
+                    style="margin: 0 auto;">
                     <ng-template ngbSlide *ngFor="let productGroup of groupedProducts; let index= index;">
                         <div class="carousel-item active">
                             <div class="row">
-                                <div class="col-6 border border-1 my-3 p-1" *ngFor="let product of productGroup">
+                                <div class="col-5 border-1 m-3 p-1" *ngFor="let product of productGroup">
                                     <a href="./product/{{product.id}}">
                                         <img height="240px" width="100%" src="{{product.images[0]?.imageUrl}}" class=""
                                             alt="" />
