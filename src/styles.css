@@ -56,9 +56,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .cnUL1 ul {
   list-style-image: url('./assets/list_button1.png');
 }
-.cnUL2 ul {
-  list-style-image: url('./assets/list_button2.PNG');
-}
 a {
   color: #00651f;
 } 
