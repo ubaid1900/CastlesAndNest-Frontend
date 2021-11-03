@@ -1,32 +1,66 @@
-<!-- https://www.codeply.com/p/LJy7ooFrBP -->
-<header class="mx-3 mb-3 border-bottom header-middle">
+<header class="mx-3 mb-3 border-bottom header-middle d-md-none ">
+  <div class="d-flex justify-content-between bd-highlight mb-3">
+    <a href="./" class=""><img src="assets/logo.jpg" class="py-2" alt="Castles and Nest" width="100px"></a>
+
+    <form class="mt-3 ps-1" (submit)="search()">
+      <div class="input-group d-inline-flex flex-nowrap flex-row">
+        <input type="search" role="search" name="nav-bar-search"
+          class="form-control border border-logo-brown rounded-3 border-2 text-logo-green text-muted lh-lg"
+          placeholder="Search ..." aria-label="Search ..." aria-describedby="basic-addon1" [(ngModel)]="model"
+          [ngbTypeahead]="typeaheadSearch" [resultTemplate]="rt" [focusFirst]="false" [inputFormatter]="inputFormatter">
+
+        <button class="input-group-text bg-logo-brown text-white px-3" id="basic-addon1">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </form>
+    <ul class="navbar-nav">
+      <li *ngIf='isUserAuthenticated' class="nav-item dropdown me-3">
+        <ul class="mr-auto mt-2 mt-lg-0 px-0">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary border-0" id="dropdownBasic1" ngbDropdownToggle>
+              <img *ngIf="currentUser?.photoUrl" src="{{currentUser?.photoUrl}}" [alt]="currentUser?.name" width="32"
+                height="32" class="rounded-circle">
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <a class="btn" ngbDropdownItem href="./admin/product/edit/0">Add a Product</a>
+              <a class="btn" ngbDropdownItem href="./admin/category/edit/0">Add a Category</a>
+              <a class="btn" ngbDropdownItem href="./admin/subcategory/edit/0">Add a Sub-Category</a>
+              <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
+                href="./admin/manageroles">Manage admins</a>
+              <button ngbDropdownItem (click)="logout()">Sign out</button>
+            </div>
+          </div>
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+</header>
+
+<header class="mx-3 mb-3 border-bottom header-middle d-none d-md-block ">
   <div class="px-3">
     <div class="row">
       <div class="col-md-3 ">
         <a href="./"><img src="assets/logo.jpg" class="py-2" alt="Castles and Nest" width="70%" height="70%"></a>
       </div>
-      <div class="col-md-8">
+      <div [ngClass]="isUserAuthenticated ? 'col-md-8' : 'col-md-9'">
         <form class="header-search my-4 d-flex align-top" (submit)="search()">
-          <!-- <input id="nav-bar-search" name="nav-bar-search" type="search"
-            class="input-group form-control lh-lg border-2 text-logo-green border-logo-brown" placeholder="Search ..."
-            aria-label="Search" [(ngModel)]="model" [ngbTypeahead]="typeaheadSearch" [resultTemplate]="rt"
-            [focusFirst]="false" [inputFormatter]="inputFormatter">
-          <button type="button" class="btn bg-logo-brown btn-icn px-3"><i class="bi bi-search"></i></button> -->
-
           <div class="input-group">
-            <input type="search" role="search" name="nav-bar-search" class="form-control border border-logo-brown rounded-3 border-2 text-logo-green text-muted lh-lg" placeholder="Search ..." aria-label="Search ..."
-              aria-describedby="basic-addon1" [(ngModel)]="model" [ngbTypeahead]="typeaheadSearch" [resultTemplate]="rt"
-              [focusFirst]="false" [inputFormatter]="inputFormatter">
+            <input type="search" role="search" name="nav-bar-search"
+              class="form-control border border-logo-brown rounded-3 border-2 text-logo-green text-muted lh-lg"
+              placeholder="Search ..." aria-label="Search ..." aria-describedby="basic-addon1" [(ngModel)]="model"
+              [ngbTypeahead]="typeaheadSearch" [resultTemplate]="rt" [focusFirst]="false"
+              [inputFormatter]="inputFormatter">
 
             <button class="input-group-text bg-logo-brown text-white px-3" id="basic-addon1">
               <i class="bi bi-search"></i>
             </button>
           </div>
-        </form>        
+        </form>
         <ngb-carousel class="nav-carousel" *ngIf="aboutUsTexts">
           <ng-template ngbSlide *ngFor="let aboutUsText of aboutUsTexts">
-            <svg class="d-block w-100" height="200"
-              xmlns="http://www.w3.org/2000/svg" role="img" aria-label="about us"
+            <svg class="d-block w-100" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="about us"
               preserveAspectRatio="xMidYMid slice" focusable="false" fill="#4b2c10">
               <title>Placeholder</title>
               <rect x="2%" width="96%" height="100%"></rect>
@@ -35,35 +69,9 @@
           </ng-template>
         </ngb-carousel>
       </div>
-      <div class="col-md-1">
+      <div *ngIf='isUserAuthenticated' class="col-md-1">
         <ul class="navbar-nav hd-menu-right float-end mx-5 right-menu-align">
-
-          <!--li class="nav-item dropdown notification-align right-menu-notification">
-            <div *ngIf="authenticationService.isUserAdmin()" class="mb-3 notifi-icon">
-              <ng-container *ngIf="hasNotifications$ | async as hasNotifications else everythingGreen">
-                <i class="bi bi-bell-fill text-danger"></i>
-              </ng-container>
-              <ng-template #everythingGreen> <i class="bi bi-bell-fill text-success"></i></ng-template>
-            </div>
-          </li-->
-          <!--li class="nav-item dropdown crt-align right-menu-cart">
-            <div class="fs-1">
-              <a href="/cart">
-                <i class="bi bi-cart4 position-relative">
-                  <span *ngIf="cartService.getItems().length > 0"
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
-                    {{cartService.getItems().length}}
-                    <span class="visually-hidden">Number of items in the Cart</span>
-                  </span>
-                </i>
-              </a>
-            </div>
-          </li-->
-          <li class="nav-item dropdown my-4 right-menu-login">
-            <a *ngIf='!isUserAuthenticated' class="btn btn-outline-primary" [routerLink]="['/user/login']"
-              routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Login</a>
-          </li>
-          <li *ngIf='isUserAuthenticated' class="nav-item dropdown profile-list me-3 right-menu-profile">
+          <li class="nav-item dropdown profile-list me-3 right-menu-profile">
             <ul class="mr-auto mt-2 mt-lg-0 ">
               <div ngbDropdown class="d-inline-block user-profile">
                 <button class="btn btn-outline-primary border-0" id="dropdownBasic1" ngbDropdownToggle>
@@ -74,8 +82,6 @@
                   <a class="btn" ngbDropdownItem href="./admin/product/edit/0">Add a Product</a>
                   <a class="btn" ngbDropdownItem href="./admin/category/edit/0">Add a Category</a>
                   <a class="btn" ngbDropdownItem href="./admin/subcategory/edit/0">Add a Sub-Category</a>
-
-                  <!--a class="btn" ngbDropdownItem href="/user/profile">Profile</a-->
                   <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
                     href="./admin/manageroles">Manage admins</a>
                   <button ngbDropdownItem (click)="logout()">Sign out</button>

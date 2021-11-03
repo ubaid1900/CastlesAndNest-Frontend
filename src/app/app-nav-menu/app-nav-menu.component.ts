@@ -20,7 +20,8 @@ export class AppNavMenuComponent implements OnInit {
   hasNotifications$ = of(false);
   hasNotificationsInverse$ = of(false);
   currentUser: any;
-  aboutUsTexts = ["Castles and Nest, A Hashone Creation!", "Improving lives one product at a time."];
+  public isCollapsed = false;
+  aboutUsTexts = ["Castles and Nest, A Hashone Creation!", "Slide 3.", "Improving lives one product at a time."];
   constructor(public authenticationService: AuthenticationService, private router: Router,
     private socialAuthService: SocialAuthService, public cartService: CartService
     , private notifService: NotifcationService, private searchService: SearchService) { }

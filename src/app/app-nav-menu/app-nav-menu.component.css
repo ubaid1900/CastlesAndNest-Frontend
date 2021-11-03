@@ -1,6 +1,12 @@
 #ngb-live { display: none;}
  .collapse:not(.show) { display: block;}
-li.nav-item.logo-text a {color:#000; font-size: 22px; font-weight: 600; text-decoration: none;}
+
+ .pix-100 {width: 100px !important}
+ .pix-200 {width: 200px !important}
+ .min-width-60pc {min-width: 60% !important;}
+ .width-60pc {width: 60% !important;}
+
+ li.nav-item.logo-text a {color:#000; font-size: 22px; font-weight: 600; text-decoration: none;}
 .notifi-icon{line-height:3;}
  .profile-dropDown { left:-101px;} 
 
