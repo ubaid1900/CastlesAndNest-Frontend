@@ -18,8 +18,9 @@ export class ProductListingComponent implements OnInit {
   @Input() showHeader = false;
   @Input() headerText = "Products";
   @Input() limit = 0;
-  @Input() display = 'grouped-carousel'; // carousel or grouped-carousel or list or accordion
+  @Input() display = 'list'; // carousel or grouped-carousel or list or accordion
   @Input() relatedId = 0;
+  @Input() chunkSize = 3;
   public carouselInterval = environment.carouselInterval;
   products$!: Observable<Product[]>;
   groupedProducts$!: Observable<Product[][]>;
@@ -62,9 +63,8 @@ export class ProductListingComponent implements OnInit {
       map(products => {
         let groupedProducts: Product[][] = [];
         let processed = 0;
-        const chunkSize = 2;
         while (processed < products.length) {
-          const chunkPrds = products.slice(processed, processed + chunkSize);
+          const chunkPrds = products.slice(processed, processed + this.chunkSize);
           processed += chunkPrds.length;
           groupedProducts.push(chunkPrds);
         }

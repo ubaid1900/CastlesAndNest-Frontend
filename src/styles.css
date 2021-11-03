@@ -5,9 +5,15 @@
   filter: invert(1);
 }
 
-carousel-control-next,
-carousel-control-prev {
-  filter: invert(1);
+.carousel-control-next,
+.carousel-control-prev {
+  /* filter: invert(1); */
+  width: 2%;
+}
+
+.carousel-control-next:hover,
+.carousel-control-prev:hover {
+  background-color: #4b2c10 !important;
 }
 
 .text-logo-green-bold {

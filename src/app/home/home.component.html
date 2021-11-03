@@ -1,11 +1,15 @@
 <div class="container-fluid">
   <div class="row">
     <!-- <app-sub-category-list display="carousel"></app-sub-category-list> -->
-    <div class="col-md-6 col-sm-12">
-      <app-category-list display="carousel" [showHeader]="true"></app-category-list>
+    <div class="col-md-2 col-sm-12">
+      <app-flyout-wrapper></app-flyout-wrapper>
     </div>
-    <div class="col-md-6 col-sm-12">
-      <app-product-listing [limit]="8" [showHeader]="true" headerText="New Arrivals"></app-product-listing>
+    <div class="col-md-10 col-sm-12">
+      <app-product-listing [limit]="9" [chunkSize]="3" [display]="'grouped-carousel'" [showHeader]="true" headerText="Featured Products"></app-product-listing>
     </div>
+  </div>
+  <div class="row">
+    <app-category-list display="carousel" [showHeader]="true"></app-category-list>
+    <div class="col-12"></div>
   </div>
 </div>
