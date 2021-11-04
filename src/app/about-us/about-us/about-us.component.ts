@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MiscService } from 'src/app/services/misc.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-about-us',
@@ -7,12 +8,26 @@ import { MiscService } from 'src/app/services/misc.service';
   styleUrls: ['./about-us.component.css']
 })
 export class AboutUsComponent implements OnInit {
-  aboutUsTextString!: string;
+  carouselInterval = 0;
+  aboutUsTexts: string[] = [];
+  private _isCollapsed = true;
+  public get isCollapsed() {
+    return this._isCollapsed;
+  }
+  public set isCollapsed(value) {
+    this._isCollapsed = value;
+    if (value) {
+      this.carouselInterval = 0;
+    }
+    else {
+      this.carouselInterval = environment.carouselInterval;
+    }
+  }
 
-  constructor(private ms: MiscService) { }
+  constructor(private miscService: MiscService) { }
 
   ngOnInit(): void {
-    this.aboutUsTextString = this.ms.getAboutUsTextString();
+    this.aboutUsTexts = this.miscService.getAboutUs();
   }
 
 }

@@ -79,9 +79,3 @@ a {
   background: rgba(0,0,0,.04);
   color: #4b2c10 !important;
 }
-.line-clamp {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;  
-}

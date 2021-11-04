@@ -28,6 +28,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
 import { FlyoutWrapperComponent } from './flyout-wrapper/flyout-wrapper.component';
 import { SocialMediaComponent } from './social-media/social-media.component';
+import { AboutUsComponent } from './about-us/about-us/about-us.component';
 
 
 export function tokenGetter() {
@@ -48,7 +49,8 @@ export function tokenGetter() {
     ProductListingComponent,
     FlyoutComponent,
     FlyoutWrapperComponent,
-    SocialMediaComponent
+    SocialMediaComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

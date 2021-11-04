@@ -21,7 +21,6 @@ export class AppNavMenuComponent implements OnInit {
   hasNotifications$ = of(false);
   hasNotificationsInverse$ = of(false);
   currentUser: any;
-  isCollapsed = true;
   aboutUsTexts: string[] = [];
   aboutUsTextString: string = '';
   constructor(public authenticationService: AuthenticationService, private router: Router,
@@ -30,7 +29,6 @@ export class AppNavMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.aboutUsTexts = this.miscService.getAboutUs();
-    this.aboutUsTextString = this.miscService.getAboutUsTextString();
     this.hasNotifications$ = this.notifService.hasNotifications();
     this.hasNotificationsInverse$ = this.hasNotifications$.pipe(tap(v => !v));
     this.isUserAuthenticated = this.authenticationService.isUserAuthenticated();

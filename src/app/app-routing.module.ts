@@ -20,7 +20,6 @@ const routes: Routes = [
   { path: 'user', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: 'information', loadChildren: () => import('./Information/information.module').then(m => m.InformationModule) },
-  { path: 'aboutus', loadChildren: () => import('./about-us/about-us.module').then(m => m.AboutUsModule) },
   { path: 'privacypolicy', loadChildren: () => import('./Information/information.module').then(m => m.InformationModule) }
 ];
 
