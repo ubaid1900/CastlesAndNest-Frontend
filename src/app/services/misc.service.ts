@@ -14,4 +14,11 @@ export class MiscService {
   getCompanyInfo(): Observable<ICompanyInfo> {
     return this.http.get<ICompanyInfo>(environment.apiUrl + 'misc/CompanyInfo');
   }
+  getAboutUs(): string[] {
+    return ["Castles and Nest, A Hashone Creation!", "Slide 3.", "Improving lives one product at a time."];
+  }
+  getAboutUsTextString(): string {
+    return `Castles and Nest, A Hashone Creation! Improving lives one product at a time. Created in 2020, it aims to bring ease to every household 
+    throught its innovative products. Backed with well researched usage habits, it helps in all day to day household activities with less stress.`;
+  }
 }

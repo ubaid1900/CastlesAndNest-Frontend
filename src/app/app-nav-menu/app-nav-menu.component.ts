@@ -6,6 +6,7 @@ import { catchError, debounceTime, distinctUntilChanged, map, switchMap, tap } f
 import { Product } from '../models/Product';
 import { AuthenticationService } from '../services/authentication.service';
 import { CartService } from '../services/cart.service';
+import { MiscService } from '../services/misc.service';
 import { NotifcationService } from '../services/notifcation-service';
 import { SearchService } from '../services/search.service';
 
@@ -20,13 +21,16 @@ export class AppNavMenuComponent implements OnInit {
   hasNotifications$ = of(false);
   hasNotificationsInverse$ = of(false);
   currentUser: any;
-  public isCollapsed = false;
-  aboutUsTexts = ["Castles and Nest, A Hashone Creation!", "Slide 3.", "Improving lives one product at a time."];
+  isCollapsed = true;
+  aboutUsTexts: string[] = [];
+  aboutUsTextString: string = '';
   constructor(public authenticationService: AuthenticationService, private router: Router,
     private socialAuthService: SocialAuthService, public cartService: CartService
-    , private notifService: NotifcationService, private searchService: SearchService) { }
+    , private notifService: NotifcationService, private searchService: SearchService, private miscService: MiscService) { }
 
   ngOnInit(): void {
+    this.aboutUsTexts = this.miscService.getAboutUs();
+    this.aboutUsTextString = this.miscService.getAboutUsTextString();
     this.hasNotifications$ = this.notifService.hasNotifications();
     this.hasNotificationsInverse$ = this.hasNotifications$.pipe(tap(v => !v));
     this.isUserAuthenticated = this.authenticationService.isUserAuthenticated();

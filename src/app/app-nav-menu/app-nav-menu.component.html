@@ -13,6 +13,19 @@
           <i class="bi bi-search"></i>
         </button>
       </div>
+
+      <p>About us &nbsp;
+        <button type="button" class="btn btn-outline-primary" (click)="collapse.toggle()"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+          {{isCollapsed ? "Show" : "Hide"}}
+        </button>
+      </p>
+      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <p class="p-1 bg-logo-brown text-wheat" *ngIf="aboutUsTextString">{{aboutUsTextString}}</p>
+        <p class="p-1 bg-logo-brown text-wheat line-clamp" *ngIf="aboutUsTextString">{{aboutUsTextString}}
+        </p>
+        <a routerLink="./aboutus">more...</a>
+      </div>
     </form>
     <ul class="navbar-nav">
       <li *ngIf='isUserAuthenticated' class="nav-item dropdown me-3">
@@ -42,7 +55,7 @@
   <div class="px-3">
     <div class="row">
       <div class="col-md-3 ">
-        <a href="./"><img src="assets/logo.jpg" class="py-2" alt="Castles and Nest" width="70%" height="70%"></a>
+        <a href="./"><img src="assets/logo.jpg" class="py-2" alt="Castles and Nest"></a>
       </div>
       <div [ngClass]="isUserAuthenticated ? 'col-md-8' : 'col-md-9'">
         <form class="header-search my-4 d-flex align-top" (submit)="search()">
@@ -58,16 +71,24 @@
             </button>
           </div>
         </form>
-        <ngb-carousel class="nav-carousel" *ngIf="aboutUsTexts">
-          <ng-template ngbSlide *ngFor="let aboutUsText of aboutUsTexts">
-            <svg class="d-block w-100" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="about us"
-              preserveAspectRatio="xMidYMid slice" focusable="false" fill="#4b2c10">
-              <title>Placeholder</title>
-              <rect x="2%" width="96%" height="100%"></rect>
-              <text x="25%" y="50%" fill="wheat" dy=".3em">{{aboutUsText}}</text>
-            </svg>
-          </ng-template>
-        </ngb-carousel>
+        <p>About us &nbsp;
+          <button type="button" class="btn btn-outline-primary" (click)="collapse.toggle()"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+            {{isCollapsed ? "Show" : "Hide"}}
+          </button>
+        </p>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+          <ngb-carousel class="nav-carousel" *ngIf="aboutUsTexts">
+            <ng-template ngbSlide *ngFor="let aboutUsText of aboutUsTexts">
+              <svg class="d-block w-100" height="200" xmlns="http://www.w3.org/2000/svg" role="img"
+                aria-label="about us" preserveAspectRatio="xMidYMid slice" focusable="false" fill="#4b2c10">
+                <title>Placeholder</title>
+                <rect x="2%" width="96%" height="100%"></rect>
+                <text x="25%" y="50%" fill="wheat" dy=".3em">{{aboutUsText}}</text>
+              </svg>
+            </ng-template>
+          </ngb-carousel>
+        </div>
       </div>
       <div *ngIf='isUserAuthenticated' class="col-md-1">
         <ul class="navbar-nav hd-menu-right float-end mx-5 right-menu-align">

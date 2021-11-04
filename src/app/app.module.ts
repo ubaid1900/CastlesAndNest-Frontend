@@ -13,7 +13,7 @@ import { ErrorHandlerService } from './services/error-handler.service';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
-import { NgbAccordionModule, NgbButtonsModule, NgbCarouselModule, NgbDropdownModule, NgbToastModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbButtonsModule, NgbCarouselModule, NgbCollapseModule, NgbDropdownModule, NgbToastModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortableDirective } from './sortable.directive';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 import { RestInterceptor } from './rest.interceptor';
@@ -63,6 +63,7 @@ export function tokenGetter() {
     NgbTypeaheadModule,
     NgbAccordionModule,
     NgbButtonsModule,
+    NgbCollapseModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
