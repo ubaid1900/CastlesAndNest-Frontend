@@ -1,12 +1,7 @@
 <div class="container-fluid">
   <div class="row">
-    <!-- <app-sub-category-list display="carousel"></app-sub-category-list> -->
-    <div class="col-md-2 col-sm-12">
-      <app-flyout-wrapper></app-flyout-wrapper>
-    </div>
-    <div class="col-md-10 col-sm-12">
-      <app-product-listing [limit]="9" [chunkSize]="3" [display]="'grouped-carousel'" [showHeader]="true" headerText="Featured Products"></app-product-listing>
-    </div>
+    <app-product-listing [limit]="9" [chunkSize]="3" [display]="'grouped-carousel'" [showHeader]="true"
+      headerText="Featured Products"></app-product-listing>
   </div>
   <div class="row">
     <app-category-list display="carousel" [showHeader]="true"></app-category-list>
