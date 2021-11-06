@@ -11,7 +11,7 @@
         </nav>
     </div>
     <div class="row my-5">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-6 col-sm-12" appSwipe (next)="carousel.next();" (previous)="carousel.prev();">
             <p *ngIf="!(product?.images && product?.images?.length)" class="text-warning">The product does not have any
                 images associated with it.</p>
             <ngb-carousel #carousel *ngIf="product?.images && product?.images?.length" [interval]="carouselInterval"
