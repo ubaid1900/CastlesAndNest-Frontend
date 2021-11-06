@@ -153,6 +153,8 @@ export class ProductEditComponent implements OnInit {
   }
   private refresh() {
     this.product = this.route.snapshot.data.product;
+    this.subcategories$ = this.categoryService.getSubCategories(this.product.categoryId);
+
     this.formGroup.patchValue(this.product);
     // yyyy-MM-dd is a must to make the input type=date work
     // TODO: work on locale rather than default en
