@@ -8,21 +8,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./about-us.component.css']
 })
 export class AboutUsComponent implements OnInit {
-  carouselInterval = 0;
   aboutUsTexts: string[] = [];
-  private _isCollapsed = true;
-  public get isCollapsed() {
-    return this._isCollapsed;
-  }
-  public set isCollapsed(value) {
-    this._isCollapsed = value;
-    if (value) {
-      this.carouselInterval = 0;
-    }
-    else {
-      this.carouselInterval = environment.carouselInterval;
-    }
-  }
+  isCollapsed = true;
 
   constructor(private miscService: MiscService) { }
 

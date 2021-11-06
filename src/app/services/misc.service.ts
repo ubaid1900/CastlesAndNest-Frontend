@@ -19,11 +19,11 @@ export class MiscService {
 
 
     <p>Founded in [2020] by group of friends, castles AND Nest has come a long way from its beginnings in Hyderabad. When we first started out, our passion for storage and eco-friendly products drove us to innovate, try some fusions, invent and discover so that castles AND Nest can offer you best range of storage products meeting every single need.</p>`,
-      `<p>Our Motto: Deliver Quality and meet the expectations of our customers</p>
-
-      <p>Our Vision: To be the synonym of storage every time you think about storage it should be Castles and Nest Products.</p>
-      
-      <p>Our Mission: Innovations, fusion and providing the best solutions for storage.</p>`,
+      `<ul class="list-group">
+      <li class="list-group-item"><strong>Our Motto</strong>: Deliver Quality and meet the expectations of our customers</li>
+      <li class="list-group-item"><strong>Our Vision</strong>: To be the synonym of storage every time you think about storage it should be Castles and Nest Products.</li>
+      <li class="list-group-item"><strong>Our Mission</strong>: Innovations, fusion and providing the best solutions for storage.</li>
+      </ul>`,
       `<p>We now serve customers all over, and are thrilled that we're able to turn our passion into our Business. WE hope you enjoy OUR products as much as WE enjoy offering them to you. If you have any questions or comments, please don't hesitate to contact with our team</p>`];
   }
 }

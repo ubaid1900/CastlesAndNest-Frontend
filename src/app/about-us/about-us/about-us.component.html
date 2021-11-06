@@ -1,16 +1,16 @@
-<p>About us &nbsp;
-    <button type="button" class="btn btn-outline-primary" (click)="collapse.toggle()"
-        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-        {{isCollapsed ? "Show" : "Hide"}}
-    </button>
-</p>
-<div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="border">
-    <ngb-carousel class="nav-carousel" *ngIf="aboutUsTexts" [interval]="carouselInterval">
-        <ng-template ngbSlide *ngFor="let aboutUsText of aboutUsTexts">
-            <section class="lead lh-lg fst-italic d-md-none" style="height: 1000px !important;" *ngIf="aboutUsText"
-                [innerHtml]="aboutUsText"></section>
-            <section class="lead lh-lg fst-italic d-none d-md-block" style="height: 250px !important;"
-                *ngIf="aboutUsText" [innerHtml]="aboutUsText"></section>
-        </ng-template>
-    </ngb-carousel>
-</div>
+<ng-container *ngIf="aboutUsTexts">
+    <p>About us &nbsp;
+        <button type="button" class="btn btn-outline-primary" (click)="collapse.toggle()"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+            {{isCollapsed ? "Show" : "Hide"}}
+        </button>
+    </p>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="border">
+        <p class="ps-1 fst-italic" *ngIf="aboutUsTexts">
+            <ng-container *ngFor="let aboutUsText of aboutUsTexts">
+                <span class="d-md-none" *ngIf="aboutUsText" [innerHtml]="aboutUsText"></span>
+                <span class="d-none d-md-block" *ngIf="aboutUsText" [innerHtml]="aboutUsText"></span>
+            </ng-container>
+        </p>
+    </div>
+</ng-container>
