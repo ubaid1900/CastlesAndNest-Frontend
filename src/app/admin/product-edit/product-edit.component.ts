@@ -127,22 +127,8 @@ export class ProductEditComponent implements OnInit {
       ]
     });
     this.categories$ = this.categoryService.getCategories();
-    // this.subcategories$ = this.categoryService.getSubCategories();
     this.lengthUnits$ = this.productService.getLengthUnits();
     this.weigthUnits$ = this.productService.getWeigthUnits();
-
-    // this.formGroup = this.fb.group({
-    //   name: 
-    //   [{ value: '', disabled: false },
-    //   // validators: 
-    //   [Validators.required, Validators.minLength(3)]
-    //   , 
-    //   // asyncValidators: 
-    //   // [duplicateCategoryValidator]  
-    //   // ,
-    //   // updateOn
-    //   'blur']
-    // });
 
     this.refresh();
   }
@@ -156,7 +142,7 @@ export class ProductEditComponent implements OnInit {
     this.subcategories$ = this.categoryService.getSubCategories(this.product.categoryId);
 
     this.formGroup.patchValue(this.product);
-    // yyyy-MM-dd is a must to make the input type=date work
+    // NOTE: yyyy-MM-dd is a must to make the input type=date work
     // TODO: work on locale rather than default en
     this.dateAvailable?.setValue(formatDate(this.product.dateAvailable, 'yyyy-MM-dd', 'en'));
   }

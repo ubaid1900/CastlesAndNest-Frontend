@@ -53,16 +53,16 @@
                     <ng-template ngbSlide *ngFor="let productGroup of groupedProducts; let index= index;">
                         <div class="carousel-item active">
                             <div class="row">
-                                <div class="col-4" *ngFor="let product of productGroup">
+                                <div class="col-md-4 col-sm-6" *ngFor="let product of productGroup">
                                     <a href="./product/{{product.id}}">
                                         <img height="240px" width="100%" src="{{product.images[0]?.imageUrl}}" class="d-none d-md-block"
                                             alt="" />
                                         <img height="140px" width="100%" src="{{product.images[0]?.imageUrl}}" class="d-md-none"
                                             alt="" />
                                     </a>
-                                    <section class="pt-3">
-                                        <h6><a class="card-title" href="./product/{{product.id}}">{{product.name}}</a>
-                                        </h6>
+                                    <section class="pt-3 text-truncate">
+                                        <a class="card-title" href="./product/{{product.id}}" [title]="product.name">{{product.name}}</a>
+                                        
                                         <h5 class="fs-6 fw-bolder"> {{product.price | currency: 'INR'}}</h5>
                                     </section>
                                 </div>
