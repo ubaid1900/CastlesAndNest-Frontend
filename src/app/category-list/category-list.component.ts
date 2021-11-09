@@ -11,7 +11,7 @@ import { ToastService } from '../services/toast.service';
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush // menu option will need triggering with onpush
 })
 export class CategoryListComponent implements OnInit, OnDestroy {
   @Input() display = 'carousel'; // carousel or list or accordion or menu

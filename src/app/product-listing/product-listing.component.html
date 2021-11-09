@@ -6,71 +6,75 @@
     <ng-template #loading>
         <app-spinner></app-spinner>
     </ng-template>
-    <ng-container *ngIf="products$ | async as products; else loading">
-        <section class="text-info" *ngIf="!products?.length">Currently, there are no products here, check back again!
-        </section>
-        <ng-container *ngIf="display === 'list'">
-            <div class="row">
-                <div class="col-lg-3 col-sm-4 my-3 p-1 lst-product single-banner" *ngFor="let product of products">
-                    <div class="prdct-img">
-                        <a href="./product/{{product.id}}">
-                            <img height="240px" width="100%" src="{{product.images[0]?.imageUrl}}" class="" alt="" />
-                        </a>
-                    </div>
-                    <section class="pt-3">
-                        <h6 class="text-algn px-2"><a class="text-body lh-sm"
-                                href="./product/{{product.id}}">{{product.name}}</a></h6>
-                        <h6 class="text-logo-green py-3 px-2"> {{product.price | currency: 'INR'}}</h6>
-                    </section>
-                </div>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="display === 'carousel'">
-            <ngb-carousel class="pb-2 mb-3" *ngIf="products && products.length" [interval]="carouselInterval"
-                [pauseOnHover]="true" [showNavigationArrows]="true" style="margin: 0 auto; text-align: center;">
-                <ng-template ngbSlide *ngFor="let product of products; let index= index;">
-                    <div class="carousel-item active">
-                        <a href="./product/{{product.id}}">
-                            <img height="240px" width="100%" src="{{product.images[0]?.imageUrl}}" class="" alt="" />
-                        </a>
-                        <section class="pt-3 text-center">
-                            <h5><a class="text-md-start fw-light lh-xm text-decoration-none text-gray"
-                                    href="./product/{{product.id}}">{{product.name}}</a></h5>
-                        </section>
+    <ng-container *ngIf="display !== 'grouped-carousel'">
+        <ng-container *ngIf="products$ | async as products; else loading">
+            <section class="text-info" *ngIf="!products?.length">Currently, there are no products here, check back
+                again!
+            </section>
+            <ng-container *ngIf="display === 'list'">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-4 my-3 p-1 lst-product single-banner" *ngFor="let product of products">
+                        <div class="prdct-img">
+                            <a href="./product/{{product.id}}">
+                                <img width="100%" src="{{product.images[0]?.imageUrl}}" class=""
+                                    alt="" />
+                            </a>
+                        </div>
                         <section class="pt-3">
-                            <h6><a class="card-title" href="./product/{{product.id}}">{{product.name}}</a></h6>
-                            <h5 class="fs-6 fw-bolder"> {{product.price | currency: 'INR'}}</h5>
+                            <h6 class="text-algn px-2"><a class="text-body lh-sm"
+                                    href="./product/{{product.id}}">{{product.name}}</a></h6>
+                            <h6 class="text-logo-green py-3 px-2"> {{product.price | currency: 'INR'}}</h6>
                         </section>
                     </div>
-                </ng-template>
-            </ngb-carousel>
-        </ng-container>
-        <ng-container *ngIf="display === 'grouped-carousel'">
-            <ng-container *ngIf="groupedProducts$ | async as groupedProducts; else loading">
-                <ngb-carousel class="pb-2 mb-3" *ngIf="groupedProducts && groupedProducts.length"
-                    [interval]="carouselInterval" [pauseOnHover]="true" [showNavigationArrows]="true"
-                    style="margin: 0 auto;">
-                    <ng-template ngbSlide *ngFor="let productGroup of groupedProducts; let index= index;">
+                </div>
+            </ng-container>
+            <ng-container *ngIf="display === 'carousel'">
+                <ngb-carousel class="pb-2 mb-3" *ngIf="products && products.length" [interval]="carouselInterval"
+                    [pauseOnHover]="true" [showNavigationArrows]="true" style="margin: 0 auto; text-align: center;">
+                    <ng-template ngbSlide *ngFor="let product of products; let index= index;">
                         <div class="carousel-item active">
-                            <div class="row">
-                                <div class="col-md-4 col-sm-6" *ngFor="let product of productGroup">
-                                    <a href="./product/{{product.id}}">
-                                        <img height="240px" width="100%" src="{{product.images[0]?.imageUrl}}" class="d-none d-md-block"
-                                            alt="" />
-                                        <img height="140px" width="100%" src="{{product.images[0]?.imageUrl}}" class="d-md-none"
-                                            alt="" />
-                                    </a>
-                                    <section class="pt-3">
-                                        <a class="card-title  text-truncate-two-lines" href="./product/{{product.id}}" [title]="product.name">{{product.name}}</a>
-                                        
-                                        <h5 class="fs-6 fw-bolder"> {{product.price | currency: 'INR'}}</h5>
-                                    </section>
-                                </div>
-                            </div>
+                            <a href="./product/{{product.id}}">
+                                <img width="100%" src="{{product.images[0]?.imageUrl}}" class=""
+                                    alt="" />
+                            </a>
+                            <section class="pt-3 text-center">
+                                <h5><a class="text-md-start fw-light lh-xm text-decoration-none text-gray"
+                                        href="./product/{{product.id}}">{{product.name}}</a></h5>
+                            </section>
+                            <section class="pt-3">
+                                <h6><a class="card-title" href="./product/{{product.id}}">{{product.name}}</a></h6>
+                                <h5 class="fs-6 fw-bolder"> {{product.price | currency: 'INR'}}</h5>
+                            </section>
                         </div>
                     </ng-template>
                 </ngb-carousel>
             </ng-container>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="display === 'grouped-carousel'">
+        <ng-container *ngIf="groupedProducts$ | async as groupedProducts; else loading">
+            <ngb-carousel class="pb-2 mb-3" *ngIf="groupedProducts && groupedProducts.length"
+                [interval]="carouselInterval" [pauseOnHover]="true" [showNavigationArrows]="true"
+                style="margin: 0 auto;">
+                <ng-template ngbSlide *ngFor="let productGroup of groupedProducts; let index= index;">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6" *ngFor="let product of productGroup">
+                                <a href="./product/{{product.id}}" class="">
+                                    <img width="100%" src="{{product.images[0]?.imageUrl}}"
+                                        alt="" />
+                                </a>
+                                <section class="pt-3">
+                                    <a class="card-title  text-truncate-two-lines" href="./product/{{product.id}}"
+                                        [title]="product.name">{{product.name}}</a>
+
+                                    <h5 class="fs-6 fw-bolder"> {{product.price | currency: 'INR'}}</h5>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
         </ng-container>
     </ng-container>
 </div>
