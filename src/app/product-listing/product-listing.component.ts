@@ -43,6 +43,7 @@ export class ProductListingComponent implements OnInit {
           let retValue = false;
           if (!this.authenticationService.isUserAdmin()) {
             retValue = !product.exclude;
+            return retValue;
           }
           // if (sQuery.length > 0) {
           //   const sId = +sQuery;
