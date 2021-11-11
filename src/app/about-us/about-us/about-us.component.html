@@ -7,9 +7,9 @@
         </button>
     </p>
     <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="border">
-        <p class="ps-1 pt-2 fst-italic" *ngIf="aboutUsTexts">
+        <p class="ps-1 pt-2 font-monospace fst-italic fs-5" *ngIf="aboutUsTexts">
             <ng-container *ngFor="let aboutUsText of aboutUsTexts">
-                <span *ngIf="aboutUsText" [innerHtml]="aboutUsText"></span>
+                <span class="cnUL1" *ngIf="aboutUsText" [innerHtml]="aboutUsText"></span>
             </ng-container>
         </p>
     </div>
