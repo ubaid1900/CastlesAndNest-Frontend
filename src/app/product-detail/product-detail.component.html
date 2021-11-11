@@ -1,14 +1,14 @@
-<div class="container">
+<div class="px-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+        </ol>
+    </nav>
+</div>
+<div class="px-3">
     <div *ngIf="authenticationService.isUserAdmin()" class="row"><a href="admin/product/edit/{{product.id}}"
             class="text-info"><i class="bi bi-pencil-square"></i>Edit</a>
-    </div>
-    <div class="">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Product Details</li>
-            </ol>
-        </nav>
     </div>
     <div class="row my-5">
         <div class="col-md-6 col-sm-12" appSwipe (next)="carousel.next();" (previous)="carousel.prev();">

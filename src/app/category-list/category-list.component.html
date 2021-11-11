@@ -1,141 +1,150 @@
+<div *ngIf="!showHeader" class="px-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Categories</li>
+        </ol>
+    </nav>
+</div>
 <div class="heading">
     <h4 *ngIf="showHeader" class="text-center py-3 title1"><a href="./categories"
             class="text-decoration-none text-logo-brown"> View All Categories </a></h4>
-    <ng-template #loading>
-        <app-spinner></app-spinner>
-    </ng-template>
-    <div *ngIf="categories$ | async as categories; else loading" class="container-fluid pt-3">
-        <form class="text-end">
-            <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="display"
-                [ngModelOptions]="{standalone: true}">
-                <label ngbButtonLabel class="btn bg-logo-brown text-white">
-                    <input ngbButton name="carousel" type="radio" value="carousel"> HD View
-                </label>
-                <label ngbButtonLabel class="btn bg-logo-brown text-white">
-                    <input ngbButton name="accordion" type="radio" value="accordion"> Basic View
-                </label>
-                <label ngbButtonLabel class="btn bg-logo-brown text-white d-none">
-                    <input ngbButton name="list" type="radio" value="list" /> List
-                </label>
-                <label ngbButtonLabel class="btn bg-logo-brown text-white d-none">
-                    <input ngbButton name="menu" type="radio" value="menu" /> Menu
-                </label>
-            </div>
-        </form>
-        <hr>
-        <ng-container *ngIf="display === 'carousel'">
-            <ngb-carousel class="pb-2 mb-3" *ngIf="categories && categories.length" [interval]="carouselInterval"
-                [pauseOnHover]="true" [showNavigationArrows]="true" style="margin: 0 auto; text-align: center;">
-                <ng-template ngbSlide *ngFor="let category of categories; let index= index;">
-                    <div class="carousel-item active">
-                        <a href="./productsearch?catId={{category.id}}">
-                            <img *ngIf="category.imageUrl" [src]="category.imageUrl" alt="{{category.name}}"
-                                style="width: 100%;">
-                        </a>
-                        <a href="./productsearch?catId={{category.id}}">
-                            <h4 class="caption pt-3 my-3">{{category.name}}</h4>
-                        </a>
-                        <div class="row mt-2" *ngIf="category.subCategories?.length">
-                            <div class="col-6 p-3" *ngFor=" let subcategory of category.subCategories">
-                                <div>
-                                    <img [src]="subcategory.imageUrl" class="" alt="{{subcategory.name}}"
-                                        style="width: 99%; height: 200px;">
-                                    <h5 class="my-3"><a
-                                            href="./productsearch?subCatId={{subcategory.id}}">{{subcategory.name}}</a>
-                                    </h5>
-                                </div>
-                                <div *ngIf="authenticationService.isUserAdmin()" class="col">
-                                    <a class="pe-3" href="./admin/subcategory/edit/{{subcategory.id}}">
-                                        <span class="text-info"><i class="bi bi-pencil-square"></i>Edit</span></a>
-                                    <a class="btn text-danger"
-                                        (click)="openConfirmation(content, subcategory.id, 'Sub Category')">
-                                        <i class="bi bi-x-square-fill"></i>Delete</a>
-                                </div>
+</div>
+<ng-template #loading>
+    <app-spinner></app-spinner>
+</ng-template>
+<div *ngIf="categories$ | async as categories; else loading" class="container-fluid pt-3">
+    <form class="text-end">
+        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="display"
+            [ngModelOptions]="{standalone: true}">
+            <label ngbButtonLabel class="btn bg-logo-brown text-white">
+                <input ngbButton name="carousel" type="radio" value="carousel"> HD View
+            </label>
+            <label ngbButtonLabel class="btn bg-logo-brown text-white">
+                <input ngbButton name="accordion" type="radio" value="accordion"> Basic View
+            </label>
+            <label ngbButtonLabel class="btn bg-logo-brown text-white d-none">
+                <input ngbButton name="list" type="radio" value="list" /> List
+            </label>
+            <label ngbButtonLabel class="btn bg-logo-brown text-white d-none">
+                <input ngbButton name="menu" type="radio" value="menu" /> Menu
+            </label>
+        </div>
+    </form>
+    <hr>
+    <ng-container *ngIf="display === 'carousel'">
+        <ngb-carousel class="pb-2 mb-3" *ngIf="categories && categories.length" [interval]="carouselInterval"
+            [pauseOnHover]="true" [showNavigationArrows]="true" style="margin: 0 auto; text-align: center;">
+            <ng-template ngbSlide *ngFor="let category of categories; let index= index;">
+                <div class="carousel-item active">
+                    <a href="./productsearch?catId={{category.id}}">
+                        <img *ngIf="category.imageUrl" [src]="category.imageUrl" alt="{{category.name}}"
+                            style="width: 100%;">
+                    </a>
+                    <a href="./productsearch?catId={{category.id}}">
+                        <h4 class="caption pt-3 my-3">{{category.name}}</h4>
+                    </a>
+                    <div class="row mt-2" *ngIf="category.subCategories?.length">
+                        <div class="col-6 p-3" *ngFor=" let subcategory of category.subCategories">
+                            <div>
+                                <img [src]="subcategory.imageUrl" class="" alt="{{subcategory.name}}"
+                                    style="width: 99%; height: 200px;">
+                                <h5 class="my-3"><a
+                                        href="./productsearch?subCatId={{subcategory.id}}">{{subcategory.name}}</a>
+                                </h5>
+                            </div>
+                            <div *ngIf="authenticationService.isUserAdmin()" class="col">
+                                <a class="pe-3" href="./admin/subcategory/edit/{{subcategory.id}}">
+                                    <span class="text-info"><i class="bi bi-pencil-square"></i>Edit</span></a>
+                                <a class="btn text-danger"
+                                    (click)="openConfirmation(content, subcategory.id, 'Sub Category')">
+                                    <i class="bi bi-x-square-fill"></i>Delete</a>
                             </div>
                         </div>
-                    </div>
-                </ng-template>
-            </ngb-carousel>
-            <a *ngIf="authenticationService.isUserAdmin()" href="./admin/category/edit/0">Add a Category</a>
-        </ng-container>
-
-        <ng-container *ngIf="display === 'list'">
-            <div class="row">
-                <div class="col-3 p-2 border" *ngFor="let category of categories">
-                    <img [src]="category.imageUrl" alt="{{category.name}}" style="width: 100%; height: 100px;">
-                    <h5><a href="./productsearch?catId={{category.id}}">{{category.name}}</a></h5>
-                    <div *ngIf="authenticationService.isUserAdmin()">
-                        <a class="pe-3" href="./admin/category/edit/{{category.id}}">
-                            <span class="text-info"><i class="bi bi-pencil-square"></i>Edit</span>
-                        </a>
-                        <a class="btn text-danger" (click)="openConfirmation(content, category.id, 'Category')">
-                            <i class="bi bi-x-square-fill"></i>Delete</a>
                     </div>
                 </div>
+            </ng-template>
+        </ngb-carousel>
+        <a *ngIf="authenticationService.isUserAdmin()" href="./admin/category/edit/0">Add a Category</a>
+    </ng-container>
+
+    <ng-container *ngIf="display === 'list'">
+        <div class="row">
+            <div class="col-3 p-2 border" *ngFor="let category of categories">
+                <img [src]="category.imageUrl" alt="{{category.name}}" style="width: 100%; height: 100px;">
+                <h5><a href="./productsearch?catId={{category.id}}">{{category.name}}</a></h5>
+                <div *ngIf="authenticationService.isUserAdmin()">
+                    <a class="pe-3" href="./admin/category/edit/{{category.id}}">
+                        <span class="text-info"><i class="bi bi-pencil-square"></i>Edit</span>
+                    </a>
+                    <a class="btn text-danger" (click)="openConfirmation(content, category.id, 'Category')">
+                        <i class="bi bi-x-square-fill"></i>Delete</a>
+                </div>
             </div>
-            <a class="py-2" *ngIf="authenticationService.isUserAdmin()" href="./admin/category/edit/0">
-                <span class="text-primary"><i class="bi bi-plus-square-fill"></i>&nbsp;Add a Category</span>
-            </a>
-        </ng-container>
-        <ng-container *ngIf="display === 'accordion'">
-            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-10">
-                <ngb-panel *ngFor="let category of categories">
-                    <ng-template ngbPanelHeader let-opened="opened">
-                        <button ngbPanelToggle class="btn d-flex flex-column justify-content-between shadow-none w-100">
-                            <button class="btn d-flex justify-content-between shadow-none w-100 text-logo-brown">
-                                <div class="p-2"><img class="align-top" src="../../assets/list_button1.png" alt=""> {{category.name}} </div>
-                                <div class="p-2">
-                                    <i *ngIf="opened" title="collapse" class="bi bi-dash fs-5"></i>
-                                    <i *ngIf="!opened" title="expand" class="bi bi-fullscreen fs-5"></i>
-                                </div>
-                            </button>
-                            <img *ngIf="!opened" class="w-100" [src]="category.imageUrl" alt="{{category.name}}">
+        </div>
+        <a class="py-2" *ngIf="authenticationService.isUserAdmin()" href="./admin/category/edit/0">
+            <span class="text-primary"><i class="bi bi-plus-square-fill"></i>&nbsp;Add a Category</span>
+        </a>
+    </ng-container>
+    <ng-container *ngIf="display === 'accordion'">
+        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-10">
+            <ngb-panel *ngFor="let category of categories">
+                <ng-template ngbPanelHeader let-opened="opened">
+                    <button ngbPanelToggle class="btn d-flex flex-column justify-content-between shadow-none w-100">
+                        <button class="btn d-flex justify-content-between shadow-none w-100 text-logo-brown">
+                            <div class="p-2"><img class="align-top" src="../../assets/list_button1.png" alt="">
+                                {{category.name}} </div>
+                            <div class="p-2">
+                                <i *ngIf="opened" title="collapse" class="bi bi-dash fs-5"></i>
+                                <i *ngIf="!opened" title="expand" class="bi bi-fullscreen fs-5"></i>
+                            </div>
                         </button>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div *ngIf="!category.subCategories?.length">There are no sub categories, browse
-                            <a href="./productsearch?catId={{category.id}}">Products</a>
-                        </div>
-                        <div *ngIf="category.subCategories?.length">Browse Products under 
-                            <a href="./productsearch?catId={{category.id}}">{{category.name}}</a>
-                        </div>
-                        <h6 *ngIf="category.subCategories?.length">Sub categories</h6>
-                        <div class="row">
-                            <div class="col-md-3 col-sm-6 p-2 border" *ngFor=" let subcategory of category.subCategories">
-                                <img [src]="subcategory.imageUrl" alt="{{subcategory.name}}"
-                                    style="width: 100%; height: 100px;">
-                                <h5><a href="./productsearch?subCatId={{subcategory.id}}">{{subcategory.name}}</a></h5>
-                                <div *ngIf="authenticationService.isUserAdmin()" class="col">
-                                    <a class="pe-3" href="./admin/subcategory/edit/{{subcategory.id}}">
-                                        <span class="text-info"><i class="bi bi-pencil-square"></i>Edit</span></a>
-                                    <a class="btn text-danger"
-                                        (click)="openConfirmation(content, subcategory.id, 'Sub Category')">
-                                        <i class="bi bi-x-square-fill"></i>Delete</a>
-                                </div>
+                        <img *ngIf="!opened" class="w-100" [src]="category.imageUrl" alt="{{category.name}}">
+                    </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    <div *ngIf="!category.subCategories?.length">There are no sub categories, browse
+                        <a href="./productsearch?catId={{category.id}}">Products</a>
+                    </div>
+                    <div *ngIf="category.subCategories?.length">Browse Products under
+                        <a href="./productsearch?catId={{category.id}}">{{category.name}}</a>
+                    </div>
+                    <h6 *ngIf="category.subCategories?.length">Sub categories</h6>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 p-2 border" *ngFor=" let subcategory of category.subCategories">
+                            <img [src]="subcategory.imageUrl" alt="{{subcategory.name}}"
+                                style="width: 100%; height: 100px;">
+                            <h5><a href="./productsearch?subCatId={{subcategory.id}}">{{subcategory.name}}</a></h5>
+                            <div *ngIf="authenticationService.isUserAdmin()" class="col">
+                                <a class="pe-3" href="./admin/subcategory/edit/{{subcategory.id}}">
+                                    <span class="text-info"><i class="bi bi-pencil-square"></i>Edit</span></a>
+                                <a class="btn text-danger"
+                                    (click)="openConfirmation(content, subcategory.id, 'Sub Category')">
+                                    <i class="bi bi-x-square-fill"></i>Delete</a>
                             </div>
                         </div>
-                        <a class="py-2" *ngIf="authenticationService.isUserAdmin()" href="./admin/subcategory/edit/0">
-                            <span class="text-primary"><i class="bi bi-plus-square-fill"></i>&nbsp;Add a Sub
-                                Category</span></a>
-                    </ng-template>
-                </ngb-panel>
-            </ngb-accordion>
-        </ng-container>
-        <ng-container *ngIf="display === 'menu'">
-            <app-flyout-wrapper></app-flyout-wrapper>
-        </ng-container>
+                    </div>
+                    <a class="py-2" *ngIf="authenticationService.isUserAdmin()" href="./admin/subcategory/edit/0">
+                        <span class="text-primary"><i class="bi bi-plus-square-fill"></i>&nbsp;Add a Sub
+                            Category</span></a>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+    </ng-container>
+    <ng-container *ngIf="display === 'menu'">
+        <app-flyout-wrapper></app-flyout-wrapper>
+    </ng-container>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
     </div>
-    <ng-template #content let-modal>
-        <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
-        </div>
-        <div class="modal-body">
-            <p>Are you sure you want to delete the {{deleteType}}?</p>
-            <span class="text-danger">This operation can not be undone.</span>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary"
-                (click)="modal.dismiss('cancel click')">Cancel</button>
-            <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
-        </div>
-    </ng-template>
+    <div class="modal-body">
+        <p>Are you sure you want to delete the {{deleteType}}?</p>
+        <span class="text-danger">This operation can not be undone.</span>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
+    </div>
+</ng-template>
