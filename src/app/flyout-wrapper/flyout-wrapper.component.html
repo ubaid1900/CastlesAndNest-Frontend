@@ -17,10 +17,10 @@
     </span>
     <!-- Leaf node buttons here -->
     <span *ngIf="!item.children || item.children.length === 0">
-      <button mat-button color="primary" [routerLink]="item.route" [queryParams]="item.queryParams"
+      <a href="{{item.route}}?{{item.queryParams}}"
         class="btn bg-logo-brown text-wheat">
         {{item.displayName}}
-      </button>
+    </a>
     </span>
   </span>
 </ng-container>
