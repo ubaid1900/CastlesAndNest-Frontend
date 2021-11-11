@@ -1,6 +1,6 @@
 <div class="heading">
     <h4 *ngIf="showHeader" class="text-center py-3 title1"><a href="./categories"
-            class="text-decoration-none text-dark"> View All Categories </a></h4>
+            class="text-decoration-none text-logo-brown"> View All Categories </a></h4>
     <ng-template #loading>
         <app-spinner></app-spinner>
     </ng-template>
@@ -83,7 +83,7 @@
                     <ng-template ngbPanelHeader let-opened="opened">
                         <button ngbPanelToggle class="btn d-flex flex-column justify-content-between shadow-none w-100">
                             <button class="btn d-flex justify-content-between shadow-none w-100 text-logo-brown">
-                                <div class="p-2">&#9733; {{category.name}} &#9733;</div>
+                                <div class="p-2"><img class="align-top" src="../../assets/list_button1.png" alt=""> {{category.name}} </div>
                                 <div class="p-2">
                                     <i *ngIf="opened" title="collapse" class="bi bi-dash fs-5"></i>
                                     <i *ngIf="!opened" title="expand" class="bi bi-fullscreen fs-5"></i>

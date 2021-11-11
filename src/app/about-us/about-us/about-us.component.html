@@ -1,15 +1,15 @@
 <ng-container *ngIf="aboutUsTexts">
-    <p>About us &nbsp;
-        <button type="button" class="btn btn-outline-primary" (click)="collapse.toggle()"
+    <p class="pt-1">About us
+        <button type="button" class="btn" (click)="collapse.toggle()"
             [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-            {{isCollapsed ? "Show" : "Hide"}}
+            <i *ngIf="!isCollapsed" title="collapse" class="bi bi-dash"></i>
+            <i *ngIf="isCollapsed" title="expand" class="bi bi-fullscreen"></i>
         </button>
     </p>
     <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="border">
-        <p class="ps-1 fst-italic" *ngIf="aboutUsTexts">
+        <p class="ps-1 pt-2 fst-italic" *ngIf="aboutUsTexts">
             <ng-container *ngFor="let aboutUsText of aboutUsTexts">
-                <span class="d-md-none" *ngIf="aboutUsText" [innerHtml]="aboutUsText"></span>
-                <span class="d-none d-md-block" *ngIf="aboutUsText" [innerHtml]="aboutUsText"></span>
+                <span *ngIf="aboutUsText" [innerHtml]="aboutUsText"></span>
             </ng-container>
         </p>
     </div>
