@@ -1,7 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FlyoutItem } from '../flyout/flyout.component';
-import { Category } from '../models/category';
-import { CategoryService } from '../services/category.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +8,6 @@ import { CategoryService } from '../services/category.service';
 export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
-  constructor(private categoryService: CategoryService) {
+  constructor() {
   }
 }
