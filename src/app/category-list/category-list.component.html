@@ -45,7 +45,7 @@
                         <h4 class="caption pt-3 my-3">{{category.name}}</h4>
                     </a>
                     <div class="row mt-2" *ngIf="category.subCategories?.length">
-                        <div class="col-6 p-3" *ngFor=" let subcategory of category.subCategories">
+                        <div class="col-md-3 col-sm-6 p-2 border p-3" *ngFor=" let subcategory of category.subCategories">
                             <div>
                                 <img [src]="subcategory.imageUrl" class="" alt="{{subcategory.name}}"
                                     style="width: 99%; height: 200px;">
@@ -65,7 +65,9 @@
                 </div>
             </ng-template>
         </ngb-carousel>
-        <a *ngIf="authenticationService.isUserAdmin()" href="./admin/category/edit/0">Add a Category</a>
+        <a class="py-2" *ngIf="authenticationService.isUserAdmin()" href="./admin/category/edit/0">
+            <span class="text-primary"><i class="bi bi-plus-square-fill"></i>&nbsp;Add a Category</span>
+        </a>
     </ng-container>
 
     <ng-container *ngIf="display === 'list'">
@@ -103,14 +105,10 @@
                     </button>
                 </ng-template>
                 <ng-template ngbPanelContent>
-                    <div *ngIf="!category.subCategories?.length">There are no sub categories, browse
-                        <a href="./productsearch?catId={{category.id}}">Products</a>
-                    </div>
-                    <div *ngIf="category.subCategories?.length">Browse Products under
+                    <div >Browse
                         <a href="./productsearch?catId={{category.id}}">{{category.name}}</a>
                     </div>
-                    <h6 *ngIf="category.subCategories?.length">Sub categories</h6>
-                    <div class="row">
+                    <div class="row mt-2">
                         <div class="col-md-3 col-sm-6 p-2 border" *ngFor=" let subcategory of category.subCategories">
                             <img [src]="subcategory.imageUrl" alt="{{subcategory.name}}"
                                 style="width: 100%; height: 100px;">
