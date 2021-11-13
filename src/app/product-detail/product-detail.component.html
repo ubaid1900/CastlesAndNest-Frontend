@@ -18,7 +18,7 @@
                 [pauseOnHover]="false" [showNavigationArrows]="true" style="margin: 0 auto; text-align: center;">
                 <ng-template id="{{image?.id}}" ngbSlide *ngFor="let image of product?.images; let index= index;">
                     <div class="carousel-item active">
-                        <img [src]="image.imageUrl" alt="" style="width: 100%; max-height: 500px;">
+                        <img [src]="image.imageUrl" alt="" style="max-width: 400px;">
                     </div>
                 </ng-template>
             </ngb-carousel>
