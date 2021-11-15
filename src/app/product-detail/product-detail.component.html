@@ -1,16 +1,13 @@
-<div class="px-5">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="./home">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Product Details</li>
-        </ol>
-    </nav>
+<div class="">
+    <button class="btn text-muted" (click)="location.back();"><i class="bi bi-arrow-left-circle-fill text-logo-brown"></i>Back</button>
+    &nbsp; 
+    <span><a href="./home">Home</a> > Product Details </span>
 </div>
 <div class="px-3">
     <div *ngIf="authenticationService.isUserAdmin()" class="row"><a href="admin/product/edit/{{product.id}}"
             class="text-info"><i class="bi bi-pencil-square"></i>Edit</a>
     </div>
-    <div class="row my-5">
+    <div class="row my-2">
         <div class="col-md-6 col-sm-12" appSwipe (next)="carousel.next();" (previous)="carousel.prev();">
             <p *ngIf="!(product?.images && product?.images?.length)" class="text-warning">The product does not have any
                 images associated with it.</p>
@@ -18,7 +15,7 @@
                 [pauseOnHover]="false" [showNavigationArrows]="true" style="margin: 0 auto; text-align: center;">
                 <ng-template id="{{image?.id}}" ngbSlide *ngFor="let image of product?.images; let index= index;">
                     <div class="carousel-item active">
-                        <img [src]="image.imageUrl" alt="" style="max-width: 400px;">
+                        <img [src]="image.imageUrl" alt="" style="max-width: 300px;">
                     </div>
                 </ng-template>
             </ngb-carousel>

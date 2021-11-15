@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
@@ -15,7 +16,7 @@ export class ProductDetailComponent implements OnInit {
   @ViewChild('carousel', { static: false }) carousel!: NgbCarousel;
 
   constructor(private route: ActivatedRoute, public router: Router
-    , public authenticationService: AuthenticationService) { }
+    , public authenticationService: AuthenticationService, public location: Location) { }
 
   setSlide(slideId: number) {
     this.carousel?.select(slideId.toString());
