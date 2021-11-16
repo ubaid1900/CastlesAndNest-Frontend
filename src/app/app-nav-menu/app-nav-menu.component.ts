@@ -23,6 +23,7 @@ export class AppNavMenuComponent implements OnInit {
   currentUser: any;
   aboutUsTexts: string[] = [];
   aboutUsTextString: string = '';
+  isCollapsed = true;
   constructor(public authenticationService: AuthenticationService, private router: Router,
     private socialAuthService: SocialAuthService, public cartService: CartService
     , private notifService: NotifcationService, private searchService: SearchService, private miscService: MiscService) { }

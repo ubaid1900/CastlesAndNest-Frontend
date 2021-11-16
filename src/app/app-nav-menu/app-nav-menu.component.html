@@ -1,5 +1,5 @@
-<header class="mx-3 mb-3 border-bottom header-middle d-md-none ">
-  <div class="d-flex justify-content-between bd-highlight mb-3">
+<header class="mx-3 d-md-none " [ngClass]="isCollapsed ? 'border-bottom' : ''">
+  <div class="d-flex justify-content-between bd-highlight">
     <a href="./" class=""><img src="assets/logo.jpg" class="py-2" alt="Castles and Nest" width="100px"></a>
 
     <form class="mt-3 ps-1" (submit)="search()">
@@ -13,7 +13,14 @@
           <i class="bi bi-search"></i>
         </button>
       </div>
-      <app-about-us></app-about-us>
+      <p class="pt-1 text-end text-logo-brown"><i class="bi bi-building">
+          About us</i>
+        <button type="button" class="btn shadow-none" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapseExample">
+          <i *ngIf="!isCollapsed" title="collapse" class="bi bi-dash"></i>
+          <i *ngIf="isCollapsed" title="expand" class="bi bi-fullscreen"></i>
+        </button>
+      </p>
     </form>
     <ul class="navbar-nav">
       <li *ngIf='isUserAuthenticated' class="nav-item dropdown me-3">
@@ -24,9 +31,12 @@
                 height="32" class="rounded-circle">
             </button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem href="./admin/product/edit/0">Add a Product</a>
-              <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem href="./admin/category/edit/0">Add a Category</a>
-              <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem href="./admin/subcategory/edit/0">Add a Sub-Category</a>
+              <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
+                href="./admin/product/edit/0">Add a Product</a>
+              <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
+                href="./admin/category/edit/0">Add a Category</a>
+              <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
+                href="./admin/subcategory/edit/0">Add a Sub-Category</a>
               <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
                 href="./admin/manageroles">Manage admins</a>
               <button ngbDropdownItem (click)="logout()">Sign out</button>
@@ -39,7 +49,7 @@
   </div>
 </header>
 
-<header class="mx-3 mb-3 border-bottom header-middle d-none d-md-block ">
+<header class="mx-3 mb-3 d-none d-md-block " [ngClass]="isCollapsed ? 'border-bottom' : ''">
   <div class="px-3">
     <div class="row">
       <div class="col-md-3 ">
@@ -59,7 +69,14 @@
             </button>
           </div>
         </form>
-        <app-about-us></app-about-us>
+        <p class="pt-1 text-end text-logo-brown"><i class="bi bi-building">
+            About us</i>
+          <button type="button" class="btn shadow-none" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
+            aria-controls="collapseExample">
+            <i *ngIf="!isCollapsed" title="collapse" class="bi bi-dash"></i>
+            <i *ngIf="isCollapsed" title="expand" class="bi bi-fullscreen"></i>
+          </button>
+        </p>
       </div>
       <div *ngIf='isUserAuthenticated' class="col-md-1">
         <ul class="navbar-nav hd-menu-right float-end mx-5 right-menu-align">
@@ -86,6 +103,9 @@
     </div>
   </div>
 </header>
+<div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="border border-2 border-success rounded-pill p-5 text-logo-brown">
+  <app-about-us></app-about-us>
+</div>
 <div class="m-3">
   <app-flyout-wrapper></app-flyout-wrapper>
 </div>
