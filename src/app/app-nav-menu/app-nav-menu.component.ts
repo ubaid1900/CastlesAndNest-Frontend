@@ -1,3 +1,4 @@
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
@@ -13,7 +14,20 @@ import { SearchService } from '../services/search.service';
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './app-nav-menu.component.html',
-  styleUrls: ['./app-nav-menu.component.css']
+  styleUrls: ['./app-nav-menu.component.css'],
+  animations: [
+    trigger('expandCollapse', [
+      state('open', style({ height: '100%', opacity: 1 })),
+      state('closed', style({ height: 0, opacity: 0.5 })),
+      // transition('* => *', [animate('10000ms')]),
+      transition('open => closed', [
+        animate('1s ease-out')
+      ]),
+      transition('closed => open', [
+        animate('1s ease-out')
+      ])
+    ]),
+  ]
 })
 export class AppNavMenuComponent implements OnInit {
   public isUserAuthenticated: boolean = false;
@@ -80,8 +94,8 @@ export class AppNavMenuComponent implements OnInit {
       tap(() => this.searching = false)
     )
 
-    inputFormatter = (x: { name: string }) => {
-      return x.name;
-    };
+  inputFormatter = (x: { name: string }) => {
+    return x.name;
+  };
 
 }
