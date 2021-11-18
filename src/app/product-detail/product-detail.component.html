@@ -1,7 +1,7 @@
 <div class="">
-    <button class="btn text-muted" (click)="location.back();"><i class="bi bi-arrow-left-circle-fill text-logo-brown"></i>Back</button>
-    &nbsp; 
     <span><a href="./home">Home</a> > Product Details </span>
+    &nbsp; 
+    <button class="btn text-muted" (click)="location.back();"><i class="bi bi-arrow-left-circle-fill text-logo-brown"></i> Back</button>
 </div>
 <div class="px-3">
     <div *ngIf="authenticationService.isUserAdmin()" class="row"><a href="admin/product/edit/{{product.id}}"
