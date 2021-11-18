@@ -15,7 +15,8 @@
                 [pauseOnHover]="false" [showNavigationArrows]="true" style="margin: 0 auto; text-align: center;">
                 <ng-template id="{{image?.id}}" ngbSlide *ngFor="let image of product?.images; let index= index;">
                     <div class="carousel-item active">
-                        <img [src]="image.imageUrl" alt="" style="max-width: 300px;">
+                        <img class="mx-auto d-md-none" [src]="image.imageUrl" alt="" style="max-width: 300px;">
+                        <img class="mx-auto d-none d-md-block" [src]="image.imageUrl" alt="" style="max-width: 500px;">
                     </div>
                 </ng-template>
             </ngb-carousel>
@@ -48,8 +49,6 @@
                             class="link-facebook bg-warning text-white" target="_blank">Buy on Flipkart</a></li>
                 </ul>
             </div>
-            <hr />
-
             <div class="link-Amazon justify-content-end" style="display: flex;">
                 <ul>
                     <li class="share-pading"> Share to: </li>
