@@ -87,3 +87,6 @@ a {
   line-clamp: 2;
  -webkit-box-orient: vertical;
 }
+.fl-200 p::first-letter {
+  font-size: 200%;
+}

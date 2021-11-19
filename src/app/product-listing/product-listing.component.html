@@ -20,7 +20,7 @@
         </section>
         <ng-container *ngIf="display === 'list'">
             <div class="row">
-                <div class="col-lg-3 col-sm-4 my-3 p-1 lst-product single-banner" *ngFor="let product of products">
+                <div class="col-lg-3 col-sm-4 my-3 p-1 lst-product single-banner mt-auto" *ngFor="let product of products">
                     <div class="prdct-img">
                         <a href="./product/{{product.id}}">
                             <img width="100%" src="{{product.images[0]?.imageUrl}}" class="" alt="" />
@@ -63,7 +63,7 @@
             <ng-template ngbSlide *ngFor="let productGroup of groupedProducts; let index= index;">
                 <div class="carousel-item active">
                     <div class="row">
-                        <div class="col-md-4 col-sm-6" *ngFor="let product of productGroup">
+                        <div class="col-md-4 col-sm-6 mt-auto" *ngFor="let product of productGroup">
                             <a href="./product/{{product.id}}" class="">
                                 <img width="100%" src="{{product.images[0]?.imageUrl}}" alt="" />
                             </a>
