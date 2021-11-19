@@ -3,17 +3,17 @@
     <!-- Handle branch node menu items -->
     <span *ngIf="child.children && child.children.length > 0">
       <a mat-menu-item [matMenuTriggerFor]="menu.childMenu" *ngIf="child.level === 1"
-        href="{{child.route}}?catId={{child.id}}" class="btn bg-logo-brown text-wheat">
+        href="{{child.route}}?catId={{child.id}}" class="btn bg-logo-brown text-white">
         <!-- <mat-icon>{{child.iconName}}</mat-icon> -->
         <span>{{child.displayName}}</span>
       </a>
       <a mat-menu-item [matMenuTriggerFor]="menu.childMenu" *ngIf="child.level === 2"
-        href="{{child.route}}?subCatId={{child.id}}" class="btn bg-logo-brown text-wheat">
+        href="{{child.route}}?subCatId={{child.id}}" class="btn bg-logo-brown text-white">
         <!-- <mat-icon>{{child.iconName}}</mat-icon> -->
         <span>{{child.displayName}}</span>
       </a>
       <a mat-menu-item [matMenuTriggerFor]="menu.childMenu" *ngIf="child.level === 2"
-        href="{{child.route}}?subCatId={{child.id}}" class="btn bg-logo-brown text-wheat">
+        href="{{child.route}}?subCatId={{child.id}}" class="btn bg-logo-brown text-white">
         <!-- <mat-icon>{{child.iconName}}</mat-icon> -->
         <span>{{child.displayName}}</span>
       </a>
@@ -21,13 +21,11 @@
     </span>
     <!-- Handle leaf node menu items -->
     <span *ngIf="!child.children || child.children.length === 0">
-      <a mat-menu-item *ngIf="child.level === 1" href="{{child.route}}?catId={{child.id}}"
-        class="btn bg-logo-brown text-wheat">
+      <a mat-menu-item *ngIf="child.level === 1" href="{{child.route}}?catId={{child.id}}" class="btn bg-logo-brown text-white">
         <!-- <mat-icon>{{child.iconName}}</mat-icon> -->
         <span>{{child.displayName}}</span>
       </a>
-      <a *ngIf="child.level === 2" mat-menu-item href="{{child.route}}?subCatId={{child.id}}"
-        class="btn bg-logo-brown text-wheat">
+      <a *ngIf="child.level === 2" mat-menu-item href="{{child.route}}?subCatId={{child.id}}" class="btn bg-logo-brown text-white">
         <!-- <mat-icon>{{child.iconName}}</mat-icon> -->
         <span>{{child.displayName}}</span>
       </a>

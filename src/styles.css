@@ -33,9 +33,6 @@
 .border-logo-brown:focus { 
   box-shadow: none;
 }
-.text-wheat {
-  color: wheat !important;
-}
 .bg-logo-green {
   background-color: #00651f;
 }
