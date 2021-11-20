@@ -23,8 +23,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     CommonModule,
     RouterModule.forChild([
       {path:'subcategory/edit/:id', component: SubCategoryEditComponent, canActivate: [AdminGuard], resolve: {subcategory: SubCategoryResolver} },
+      {path:'subcat/edit/:id', component: SubCategoryEditComponent, canActivate: [AdminGuard], resolve: {subcategory: SubCategoryResolver} },
       {path:'category/edit/:id', component: CategoryEditComponent, canActivate: [AdminGuard], resolve: {category: CategoryResolver} },
+      {path:'cat/edit/:id', component: CategoryEditComponent, canActivate: [AdminGuard], resolve: {category: CategoryResolver} },
       {path:'product/edit/:id', component: ProductEditComponent, canActivate: [AdminGuard], resolve: {product: ProductResolver} },
+      {path:'products/edit/:id', component: ProductEditComponent, canActivate: [AdminGuard], resolve: {product: ProductResolver} },
       {path: 'manageroles', component: ManageRolesComponent, canActivate: [AdminGuard]}
     ]),
     FormsModule,

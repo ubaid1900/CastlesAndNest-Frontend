@@ -171,10 +171,13 @@ export class ProductEditComponent implements OnInit {
       this.productService.addProduct(product).subscribe(
         (retProduct) => {
           this.product = retProduct;
-          console.log(retProduct);
-
           this.toastService.showSuccess('Product successfully added!!!');
-
+          
+          let navPath = [`admin/product/edit/${this.product.id}`];
+          if (this.router.url.indexOf('products') < 0) {
+            navPath = [`admin/products/edit/${this.product.id}`];
+          }
+          this.router.navigate(navPath);          
         },
         (err) => {
           this.toastService.showError("There was a problem saving the product. Please try again.");

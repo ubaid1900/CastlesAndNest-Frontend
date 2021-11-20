@@ -67,9 +67,12 @@ export class CategoryEditComponent implements OnInit {
       this.categoryService.addCategory(category).subscribe(
         (retCategory) => {
           this.category = retCategory;
-          console.log(retCategory);
-
           this.toastService.showSuccess('Category successfully added!!!');
+          let navPath = [`admin/cat/edit/${this.category.id}`];
+          if (this.router.url.indexOf('category') < 0) {
+            navPath = [`admin/category/edit/${this.category.id}`];
+          }
+          this.router.navigate(navPath);
 
         },
         (err) => {

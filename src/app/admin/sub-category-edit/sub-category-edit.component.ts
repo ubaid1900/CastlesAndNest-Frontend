@@ -67,10 +67,12 @@ export class SubCategoryEditComponent implements OnInit {
       this.categoryService.addSubCategory(subcategory).subscribe(
         (retSubCategory) => {
           this.subCategory = retSubCategory;
-          console.log(retSubCategory);
-
           this.toastService.showSuccess('Sub Category successfully added!!!');
-
+          let navPath = [`admin/subcat/edit/${this.subCategory.id}`];
+          if (this.router.url.indexOf('subcategory') < 0) {
+            navPath = [`admin/subcategory/edit/${this.subCategory.id}`];
+          }
+          this.router.navigate(navPath);
         },
         (err) => {
           this.toastService.showError("There was a problem saving the sub category. Please try again.");
