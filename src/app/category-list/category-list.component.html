@@ -43,7 +43,9 @@
                     </a>
                     <a href="./productsearch?catId={{category.id}}">
                         <h4 class="caption pt-3 my-3">{{category.name}}</h4>
-                    </a>
+                    </a>                    
+                    <a class="pe-3 ps-1" href="./admin/category/edit/{{category.id}}">
+                        <span class="text-info"><i class="bi bi-pencil-square"></i>Edit</span></a>
                     <div class="row mt-2" *ngIf="category.subCategories?.length">
                         <div class="col-md-3 col-sm-6 p-2 border p-3" *ngFor=" let subcategory of category.subCategories">
                             <div>
@@ -107,6 +109,8 @@
                 <ng-template ngbPanelContent>
                     <div >Browse
                         <a href="./productsearch?catId={{category.id}}">{{category.name}}</a>
+                        <a class="pe-3 ps-1" href="./admin/category/edit/{{category.id}}">
+                            <span class="text-info"><i class="bi bi-pencil-square"></i>Edit</span></a>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-3 col-sm-6 p-2 border" *ngFor=" let subcategory of category.subCategories">
