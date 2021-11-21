@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -26,12 +26,16 @@ export class ProductListingComponent implements OnInit {
   groupedProducts$!: Observable<Product[][]>;
   products!: Product[];
   constructor(private productService: ProductService, public authenticationService: AuthenticationService
-    , private socialAuthService: SocialAuthService, private route: ActivatedRoute) { }
+    , private socialAuthService: SocialAuthService, private route: ActivatedRoute, private router: Router) {
+    // override the route reuse strategy
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    }
+  }
 
   ngOnInit(): void {
     this.refresh();
   }
-
   private refresh() {
     let query = this.route.snapshot.queryParams['query'] ?? '';
     let catId = this.route.snapshot.queryParams['catId'] ?? '0';

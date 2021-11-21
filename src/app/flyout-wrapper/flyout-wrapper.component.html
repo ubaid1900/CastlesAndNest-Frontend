@@ -3,25 +3,26 @@
     <!-- Handle branch node buttons here -->
     <span *ngIf="item.children && item.children.length > 0">
       <!-- <button mat-raised-button color="primary">Explore Categories</button> -->
-      <a mat-raised-button [matMenuTriggerFor]="menu.childMenu" #topMenuTrigger="matMenuTrigger"
+      <button mat-raised-button [matMenuTriggerFor]="menu.childMenu" #topMenuTrigger="matMenuTrigger"
         (mouseover)="topMenuTrigger.openMenu()" class="d-none d-md-inline btn bg-logo-brown text-white">
         {{item.displayName}}
         <!-- <mat-icon>expand_more</mat-icon> -->
         <i class="bi bi-caret-down-fill text-black"></i>
-      </a>
-      <a mat-raised-button [matMenuTriggerFor]="menu.childMenu" #topMenuTrigger="matMenuTrigger"
+      </button>
+      <!-- Note: mouseover based on device breakpoints, it wasn't behaving well on mobile devices -->
+      <button mat-raised-button [matMenuTriggerFor]="menu.childMenu" #topMenuTrigger="matMenuTrigger"
         class="d-md-none btn bg-logo-brown text-white">
         {{item.displayName}}
         <!-- <mat-icon>expand_more</mat-icon> -->
         <i class="bi bi-caret-down-fill text-black"></i>
-      </a>
+      </button>
       <app-flyout #menu [items]="item.children"></app-flyout>
     </span>
     <!-- Leaf node buttons here -->
     <span *ngIf="!item.children || item.children.length === 0">
-      <a href="{{item.route}}?{{item.queryParams}}" class="btn bg-logo-brown text-white">
+      <button [routerLink]="item.route" [queryParams]="item.queryParams" class="btn bg-logo-brown text-white">
         {{item.displayName}}
-      </a>
+      </button>
     </span>
   </span>
 </ng-container>

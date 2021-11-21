@@ -32,6 +32,11 @@ export class FlyoutWrapperComponent implements OnInit, OnDestroy {
         categories.forEach(category => {
           const flyoutItem =
             { id: category.id, displayName: category.name, children: [], route: `./productSearch`, queryParams: { catId: category.id.toString() }, level: 1 } as FlyoutItem;
+            if (category.subCategories && category.subCategories.length > 0) {
+              flyoutItem.children?.push(
+                { id: category.id, displayName: 'Browse all', children: [], route: `./productSearch`, queryParams: { catId: category.id.toString() }, level: 1 } as FlyoutItem
+              );
+            }
           category.subCategories.forEach(sc => {
             flyoutItem.children?.push({
               id: sc.id, displayName: sc.name, route: `./productSearch`, queryParams: { subCatId: sc.id.toString() }, level: 2
