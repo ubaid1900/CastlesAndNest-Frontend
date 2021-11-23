@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SocialAuthService } from 'angularx-social-login';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../models/Product';
 import { ProductService } from '../services/product.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { environment } from 'src/environments/environment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-product-listing',
@@ -14,7 +15,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./product-listing.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductListingComponent implements OnInit {
+export class ProductListingComponent implements OnInit, OnDestroy {
   @Input() showHeader = false;
   @Input() headerText = "Products";
   @Input() limit = 0;
@@ -24,9 +25,11 @@ export class ProductListingComponent implements OnInit {
   public carouselInterval = environment.carouselInterval;
   products$!: Observable<Product[]>;
   groupedProducts$!: Observable<Product[][]>;
+  subscriptions: Subscription[] = [];
   products!: Product[];
   constructor(private productService: ProductService, public authenticationService: AuthenticationService
-    , private socialAuthService: SocialAuthService, private route: ActivatedRoute, private router: Router) {
+    , private modalService: NgbModal, private toastService: ToastService, private route: ActivatedRoute
+    , private router: Router, private changeDetectorRef: ChangeDetectorRef) {
     // override the route reuse strategy
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -35,6 +38,12 @@ export class ProductListingComponent implements OnInit {
 
   ngOnInit(): void {
     this.refresh();
+  }
+  ngOnDestroy(): void {
+    for (let index = 0; index < this.subscriptions.length; index++) {
+      const element = this.subscriptions[index];
+      element.unsubscribe();
+    }
   }
   private refresh() {
     let query = this.route.snapshot.queryParams['query'] ?? '';
@@ -76,5 +85,27 @@ export class ProductListingComponent implements OnInit {
         return groupedProducts;
       })
     );
+  }
+
+  openConfirmation(content: any, id: number) {
+    const modalRef = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
+    modalRef.result.then((result) => {
+      if (result == 'Ok click') {
+        const subscription = this.productService.deleteProduct(id).subscribe(
+          () => {
+            this.toastService.showSuccess('Product successfully removed!!!');
+            this.refresh();
+            this.changeDetectorRef.detectChanges();
+          },
+          (err) => {
+            this.toastService.showError("There was a problem removing the category. Please try again.");
+            console.error(err);
+          }
+        );
+        this.subscriptions.push(subscription);
+      }
+    }, (reason) => {
+      // this.closeResult = `${this.getDismissReason(reason)}`;
+    });
   }
 }

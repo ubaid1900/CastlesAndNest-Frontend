@@ -43,11 +43,15 @@
                     </a>
                     <a href="./productsearch?catId={{category.id}}">
                         <h4 class="caption pt-3 my-3">{{category.name}}</h4>
-                    </a>                    
-                    <a *ngIf="authenticationService.isUserAdmin()" class="pe-3 ps-1" href="./admin/category/edit/{{category.id}}">
+                    </a>
+                    <a *ngIf="authenticationService.isUserAdmin()" class="pe-3 ps-1"
+                        href="./admin/category/edit/{{category.id}}">
                         <span class="text-info"><i class="bi bi-pencil-square"></i>Edit</span></a>
+                    <a *ngIf="authenticationService.isUserAdmin()" class="btn text-danger" (click)="openConfirmation(content, category.id, 'Category')">
+                        <i class="bi bi-x-square-fill"></i>Delete</a>
                     <div class="row mt-2" *ngIf="category.subCategories?.length">
-                        <div class="col-md-3 col-sm-6 p-2 border p-3" *ngFor=" let subcategory of category.subCategories">
+                        <div class="col-md-3 col-sm-6 p-2 border p-3"
+                            *ngFor=" let subcategory of category.subCategories">
                             <div>
                                 <img [src]="subcategory.imageUrl" class="" alt="{{subcategory.name}}"
                                     style="width: 99%;">
@@ -107,15 +111,17 @@
                     </button>
                 </ng-template>
                 <ng-template ngbPanelContent>
-                    <div >Browse
+                    <div>Browse
                         <a href="./productsearch?catId={{category.id}}">{{category.name}}</a>
-                        <a *ngIf="authenticationService.isUserAdmin()" class="pe-3 ps-1" href="./admin/category/edit/{{category.id}}">
+                        <a *ngIf="authenticationService.isUserAdmin()" class="pe-3 ps-1"
+                            href="./admin/category/edit/{{category.id}}">
                             <span class="text-info"><i class="bi bi-pencil-square"></i>Edit</span></a>
+                        <a *ngIf="authenticationService.isUserAdmin()" class="btn text-danger" (click)="openConfirmation(content, category.id, 'Category')">
+                            <i class="bi bi-x-square-fill"></i>Delete</a>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-3 col-sm-6 p-2 border" *ngFor=" let subcategory of category.subCategories">
-                            <img [src]="subcategory.imageUrl" alt="{{subcategory.name}}"
-                                style="max-width: 100%;">
+                            <img [src]="subcategory.imageUrl" alt="{{subcategory.name}}" style="max-width: 100%;">
                             <h5><a href="./productsearch?subCatId={{subcategory.id}}">{{subcategory.name}}</a></h5>
                             <div *ngIf="authenticationService.isUserAdmin()" class="col">
                                 <a class="pe-3" href="./admin/subcategory/edit/{{subcategory.id}}">

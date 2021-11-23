@@ -9,6 +9,9 @@ import { Product, Unit } from '../models/Product';
 })
 export class ProductService {
 
+  deleteProduct(id: number) {
+    return this.http.delete<Product>(`${environment.apiUrl}products/${id}`);
+  }
   updateProduct(product: Product) {
     return this.http.put<Product>(environment.apiUrl + 'products/' + product.id, product);
   }
