@@ -88,9 +88,9 @@
                     width="32" height="32" class="rounded-circle">
                 </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="profile-dropDown">
-                  <a class="btn" ngbDropdownItem href="./admin/product/edit/0">Add a Product</a>
-                  <a class="btn" ngbDropdownItem href="./admin/category/edit/0">Add a Category</a>
-                  <a class="btn" ngbDropdownItem href="./admin/subcategory/edit/0">Add a Sub-Category</a>
+                  <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem href="./admin/product/edit/0">Add a Product</a>
+                  <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem href="./admin/category/edit/0">Add a Category</a>
+                  <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem href="./admin/subcategory/edit/0">Add a Sub-Category</a>
                   <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
                     href="./admin/manageroles">Manage admins</a>
                   <button ngbDropdownItem (click)="logout()">Sign out</button>
