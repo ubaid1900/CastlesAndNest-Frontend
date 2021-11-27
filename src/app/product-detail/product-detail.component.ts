@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from '../models/Product';
@@ -18,7 +18,7 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, public router: Router
     , public authenticationService: AuthenticationService, public location: Location,
-    private dom: DomSanitizer) { }
+    private title: Title, private meta: Meta) { }
 
   setSlide(slideId: number) {
     this.carousel?.select(slideId.toString());
@@ -28,6 +28,14 @@ export class ProductDetailComponent implements OnInit {
   }
   private refresh() {
     this.product = this.route.snapshot.data.product;
+    this.title.setTitle(this.product.name);
+    this.meta.addTags([
+      { property: "og:title", content: `${this.product.name}` },
+      { property: "og:type", content: "Product" },
+      { property: "og:url", content: `${this.router['location']._platformLocation.location.href}` },
+      { property: "og:image", content: `${this.product.images[0]?.imageUrl}` },
+      // { property: "og:description", content: `${this.product.name}` },
+    ]);
   }
   onShare() {
     // https://stackoverflow.com/a/68082077/9811833
