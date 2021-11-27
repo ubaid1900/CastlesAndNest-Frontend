@@ -18,7 +18,7 @@ import { ToastService } from '../services/toast.service';
 export class ProductListingComponent implements OnInit, OnDestroy {
   @Input() showHeader = false;
   @Input() headerText = "Products";
-  @Input() limit = 0;
+  @Input() limit = 60; // 54 is the largest number of products. setting 60 as limit 
   @Input() display = 'list'; // carousel or grouped-carousel or list or accordion
   @Input() relatedId = 0;
   @Input() chunkSize = 3;
