@@ -13,7 +13,6 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class ProductDetailComponent implements OnInit {
   product!: Product;
-  safeUrl!: SafeUrl
   public carouselInterval = 0;
   @ViewChild('carousel', { static: false }) carousel!: NgbCarousel;
 
@@ -25,11 +24,26 @@ export class ProductDetailComponent implements OnInit {
     this.carousel?.select(slideId.toString());
   }
   ngOnInit(): void {
-    this.safeUrl = this.dom.bypassSecurityTrustUrl(`whatsapp://send?text=${this.router['location']._platformLocation.location.href}`);
     this.refresh();
   }
   private refresh() {
     this.product = this.route.snapshot.data.product;
   }
+  onShare() {
+    // https://stackoverflow.com/a/68082077/9811833
+    const title = 'Share';
+    const url = `${this.router['location']._platformLocation.location.href}`;
+    const text = `${this.product.name}`;
+    if (navigator.share) {
+      navigator
+        .share({ title: `${title}`, url: `${url}`, text: `${text}` })
+        .then(() => {
+          console.log('Shared');
+        })
+        .catch(console.error);
+    } else {
+      window.open(`https://www.facebook.com/sharer.php?u=${url.trim()}&quote=${text}`);
+    }
+  } //onShare ends here
 
 }

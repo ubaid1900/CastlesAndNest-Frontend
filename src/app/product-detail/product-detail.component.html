@@ -41,29 +41,25 @@
             </div>
 
             <div class="cnUL1" [innerHTML]="product.description"></div>
-            <div class="link-Amazon justify-content-end" style="display: flex;">
-                <ul>
-                    <li> <a [href]="product.amazonLink" class="bg-dark text-white text-normal" target="_blank">Buy on
-                            Amazon</a>
-                    </li>
-                    <li><a *ngIf="product.flipkartLink" [href]="product.flipkartLink"
-                            class="link-facebook bg-warning text-white" target="_blank">Buy on Flipkart</a></li>
-                </ul>
-            </div>
-            <div class="link-Amazon justify-content-end" style="display: flex;">
-                <ul>
-                    <li class="share-pading"> Share to: </li>
 
-                    <li class="padding-share"><a
-                        href="https://www.facebook.com/sharer/sharer.php?u={{router['location']._platformLocation.location.href}}"
-                        class="link-facebook bg-primary text-white" target="_blank">Facebook</a> </li>
-                    <li class="web-wats"><a
-                            href="https://web.whatsapp.com/send?text={{router['location']._platformLocation.location.href}}"
-                            data-text="Take a look at this product:" class="wa_btn wa_btn_s wts-aap text-white"
-                            target="_blank">Whatsapp</a></li>
-                    <li class="app-wats"><a [href]="safeUrl" data-text="Take a look at this product:"
-                            class="wts-aap text-white" target="_blank">Whatsapp</a></li>
-                </ul>
+            <div class="d-flex justify-content-end pb-2">
+                <div class="btn-group d-none d-md-block" role="group" aria-label="Buying Options">
+                    <a *ngIf="product.amazonLink" [href]="product.amazonLink" class="btn btn-dark rounded me-2" target="_blank">Buy on
+                        Amazon</a>
+                    <a *ngIf="product.flipkartLink" rounded[href]="product.flipkartLink" class="btn bg-warning rounded text-white me-2"
+                        target="_blank">Buy on Flipkart</a>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <a (click)="onShare()" class="btn btn-primary d-md-none" target="_blank">Share</a>
+                <div class="btn-group d-none d-md-block" role="group" aria-label="Share Options">
+                    <span class="pe-2">Share to:</span>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{router['location']._platformLocation.location.href}}"
+                        class="btn btn-primary rounded me-2" target="_blank">Facebook</a>
+                    <a href="https://web.whatsapp.com/send?text={{router['location']._platformLocation.location.href}}"
+                        data-text="Take a look at this product:" class="btn btn-success rounded me-2"
+                        target="_blank">Whatsapp</a>
+                </div>
             </div>
         </div>
     </div>

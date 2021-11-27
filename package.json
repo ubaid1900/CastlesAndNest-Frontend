@@ -11,7 +11,8 @@
     "build:stats": "ng build --stats-json",
     "analyze": "webpack-bundle-analyzer dist/Frontend/stats.json",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "how to deploy to firebase": "run for prod using the above script. In the terminal 'firebase deploy'"
   },
   "private": true,
   "dependencies": {
