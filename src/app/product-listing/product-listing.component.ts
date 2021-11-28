@@ -50,28 +50,37 @@ export class ProductListingComponent implements OnInit, OnDestroy {
     let catId = this.route.snapshot.queryParams['catId'] ?? '0';
     let subCatId = this.route.snapshot.queryParams['subCatId'] ?? '0';
 
-    this.products$ = this.productService.getProducts(this.limit, catId, subCatId, this.relatedId).pipe(
-      map(products =>
-        products.filter(product => {
-          let retValue = false;
-          if (!this.authenticationService.isUserAdmin()) {
-            retValue = !product.exclude;
+    
+    if (query.length > 0) {
+      this.products$ = this.productService.getProducts(this.limit, 0, 0, 0, query).pipe(
+        map(products =>
+          products.filter(product => {
+            let retValue = false;
+            if (!this.authenticationService.isUserAdmin()) {
+              retValue = !product.exclude;
+              return retValue;
+            }
             return retValue;
-          }
-          // if (sQuery.length > 0) {
-          //   const sId = +sQuery;
-          //   retValue = product.subCategoryId === sId;
-          // }
-          if (query.length > 0) {
-            retValue = product.name.toLocaleLowerCase().includes(query.toLocaleLowerCase());
-          }
-          if (query.length === 0) {
-            retValue = true;
-          }
-          return retValue;
-        })
-      )
-    );
+          })
+        )
+      );
+    } else {
+      this.products$ = this.productService.getProducts(this.limit, catId, subCatId, this.relatedId).pipe(
+        map(products =>
+          products.filter(product => {
+            let retValue = false;
+            if (!this.authenticationService.isUserAdmin()) {
+              retValue = !product.exclude;
+              return retValue;
+            }
+            return retValue;
+          })
+        )
+      );
+    }
+
+
+    
 
     this.groupedProducts$ = this.products$.pipe(
       map(products => {
