@@ -42,22 +42,22 @@
 
             <div class="cnUL1" [innerHTML]="product.description"></div>
 
-            <div class="d-flex justify-content-end pb-2">
-                <div class="btn-group d-none d-md-block" role="group" aria-label="Buying Options">
-                    <a *ngIf="product.amazonLink" [href]="product.amazonLink" class="btn btn-dark rounded me-2" target="_blank">Buy on
+            <div class="d-flex justify-content-end pb-2 me-2">
+                <div class="btn-group" role="group" aria-label="Buying Options">
+                    <a *ngIf="product.amazonLink" [href]="product.amazonLink" class="btn btn-dark rounded" target="_blank">Buy on
                         Amazon</a>
-                    <a *ngIf="product.flipkartLink" rounded [href]="product.flipkartLink" class="btn bg-warning rounded text-white me-2"
+                    <a *ngIf="product.flipkartLink" rounded [href]="product.flipkartLink" class="btn bg-warning rounded text-white ms-2"
                         target="_blank">Buy on Flipkart</a>
                 </div>
             </div>
-            <div class="d-flex justify-content-end">
-                <a (click)="onShare()" class="btn btn-primary d-md-none" target="_blank">Share</a>
+            <div class="d-flex justify-content-end me-2">
+                <a (click)="onShare()" class="btn btn-primary d-md-none" target="_blank"><i class="bi bi-share"></i> Share</a>
                 <div class="btn-group d-none d-md-block" role="group" aria-label="Share Options">
-                    <span class="pe-2">Share to:</span>
+                    <span class="pe-2"><i class="bi bi-share"></i> Share to:</span>
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{router['location']._platformLocation.location.href}}"
                         class="btn btn-primary rounded me-2" target="_blank">Facebook</a>
                     <a href="https://web.whatsapp.com/send?text={{router['location']._platformLocation.location.href}}"
-                        data-text="Take a look at this product:" class="btn btn-success rounded me-2"
+                        data-text="Take a look at this product:" class="btn btn-success rounded"
                         target="_blank">Whatsapp</a>
                 </div>
             </div>
