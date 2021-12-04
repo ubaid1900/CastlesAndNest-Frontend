@@ -55,12 +55,10 @@ export class ProductListingComponent implements OnInit, OnDestroy {
       this.products$ = this.productService.getProducts(this.limit, 0, 0, 0, query).pipe(
         map(products =>
           products.filter(product => {
-            let retValue = false;
             if (!this.authenticationService.isUserAdmin()) {
-              retValue = !product.exclude;
-              return retValue;
+              return !product.exclude;
             }
-            return retValue;
+            return true;
           })
         )
       );
@@ -68,12 +66,10 @@ export class ProductListingComponent implements OnInit, OnDestroy {
       this.products$ = this.productService.getProducts(this.limit, catId, subCatId, this.relatedId).pipe(
         map(products =>
           products.filter(product => {
-            let retValue = false;
             if (!this.authenticationService.isUserAdmin()) {
-              retValue = !product.exclude;
-              return retValue;
+              return !product.exclude;
             }
-            return retValue;
+            return true;
           })
         )
       );
