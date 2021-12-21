@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://localhost:44333/api/', /* this should end with slash */
-  carouselInterval: 3000,
+  carouselInterval: 6000,
   googleAuthSettings: {
     "clientId": "71954085878-1sgkrm6ce4bhghfi6tsrd9qevcmkij7n.apps.googleusercontent.com"
   },
