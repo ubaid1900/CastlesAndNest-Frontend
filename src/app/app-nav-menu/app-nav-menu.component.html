@@ -1,11 +1,13 @@
 <header class="mx-3 d-md-none " [ngClass]="isCollapsed ? 'border-bottom' : ''">
+  <img src="../../assets/banner.jpg" width="100%">
+
   <div class="d-flex justify-content-between bd-highlight">
     <a href="./" class=""><img src="assets/logo.jpg" class="py-2" alt="Castles and Nest" width="100px"></a>
 
     <form class="mt-3 ps-1" (submit)="search()">
       <div class="input-group d-inline-flex flex-nowrap flex-row">
         <input type="search" role="search" name="nav-bar-search"
-          class="form-control border border-logo-brown rounded-3 border-2 text-logo-green text-muted lh-lg"
+          class="form-control-sm border border-logo-brown rounded-3 border-2 text-logo-green text-muted lh-lg"
           placeholder="Search ..." aria-label="Search ..." aria-describedby="basic-addon1" [(ngModel)]="model"
           [ngbTypeahead]="typeaheadSearch" [resultTemplate]="rt" [focusFirst]="false" [inputFormatter]="inputFormatter">
 
@@ -56,19 +58,24 @@
         <a href="./"><img src="assets/logo.jpg" class="py-2" alt="Castles and Nest"></a>
       </div>
       <div [ngClass]="isUserAuthenticated ? 'col-md-8' : 'col-md-9'">
-        <form class="header-search my-4 d-flex align-top" (submit)="search()">
-          <div class="input-group">
-            <input type="search" role="search" name="nav-bar-search"
-              class="form-control border border-logo-brown rounded-3 border-2 text-logo-green text-muted lh-lg"
-              placeholder="Search ..." aria-label="Search ..." aria-describedby="basic-addon1" [(ngModel)]="model"
-              [ngbTypeahead]="typeaheadSearch" [resultTemplate]="rt" [focusFirst]="false"
-              [inputFormatter]="inputFormatter">
-
-            <button class="input-group-text bg-logo-brown text-white px-3" id="basic-addon1">
-              <i class="bi bi-search"></i>
-            </button>
-          </div>
-        </form>
+        <img src="../../assets/banner.jpg" width="100%">
+        <div class="row">
+          <div class="col"></div><!-- This is the filler column -->
+          <div class="col-auto">
+            <form class="header-search mt-1 d-flex align-top" (submit)="search()">
+              <div class="input-group">
+                <input type="search" role="search" name="nav-bar-search"
+                  class="form-control-sm border border-logo-brown rounded-3 border-2 text-logo-green text-muted lh-lg"
+                  placeholder="Search ..." aria-label="Search ..." aria-describedby="basic-addon1" [(ngModel)]="model"
+                  [ngbTypeahead]="typeaheadSearch" [resultTemplate]="rt" [focusFirst]="false"
+                  [inputFormatter]="inputFormatter">
+    
+                <button class="input-group-text bg-logo-brown text-white px-3" id="basic-addon1">
+                  <i class="bi bi-search"></i>
+                </button>
+              </div>
+            </form></div>
+        </div>
         <p class="pt-1 text-end text-logo-brown">
           <button type="button" class="btn shadow-none" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
             aria-controls="collapseExample">
@@ -88,9 +95,12 @@
                     width="32" height="32" class="rounded-circle">
                 </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="profile-dropDown">
-                  <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem href="./admin/product/edit/0">Add a Product</a>
-                  <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem href="./admin/category/edit/0">Add a Category</a>
-                  <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem href="./admin/subcategory/edit/0">Add a Sub-Category</a>
+                  <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
+                    href="./admin/product/edit/0">Add a Product</a>
+                  <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
+                    href="./admin/category/edit/0">Add a Category</a>
+                  <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
+                    href="./admin/subcategory/edit/0">Add a Sub-Category</a>
                   <a class="btn" *ngIf="authenticationService.isUserAdmin()" ngbDropdownItem
                     href="./admin/manageroles">Manage admins</a>
                   <button ngbDropdownItem (click)="logout()">Sign out</button>
